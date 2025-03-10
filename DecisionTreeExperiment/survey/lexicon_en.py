@@ -1,5 +1,32 @@
 class Lexicon:
     welcome_title = "Welcome to the Experiment"
+    # Section Titles
+    profile_info_title = "Profile Information"
+    # Profile Fields
+    loan_amount = "Loan Amount"
+    loan_duration = "Loan Duration"
+    credit_history = "Credit History"
+    employment_status = "Employment"
+    income = "Income"
+    marital_status = "Marital Status"
+    # Levels
+    credit_history_bad = "Bad"
+    credit_history_good = "Good"
+    credit_history_excellent = "Excellent"
+    employment_unemployed = "Unemployed"
+    employment_stable = "Stable"
+    marital_single = "Single"
+    marital_married = "Married"
+    marital_divorced = "Divorced"
+    # Comparative Terms
+    above = "Above"
+    below = "Below"
+    between = "Between"
+    at_least = "At least"
+    at_most = "At most"
+    approved = "Approved"
+    denied = "Denied"
+    #Decision Tree Question
     decision_tree_title = "Understanding Decision Trees"
     familiarity_with_decision_trees_label = "How familiar are you with decision trees?"
     familiarity_with_decision_trees_1 = "Not familiar at all"

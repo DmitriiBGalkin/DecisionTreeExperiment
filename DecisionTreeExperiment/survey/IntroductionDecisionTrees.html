@@ -36,41 +36,22 @@ p {
     padding: 15px;
     background-color: #f9f9f9;
 }
-
-/* Decision Tree Styling */
-.tree {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin: 20px 0;
-}
-.node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f2f2f2;
-    width: 150px;
-    border-radius: 5px;
-}
-.branch {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-.connector {
-    width: 2px;
-    height: 20px;
-    background-color: #000;
-    margin: auto;
-}
-.branch-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 20px;
-}
+.form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 20px;
+    }
+.form-box {
+        width: 75%;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
 </style>
 {{ endblock }}
 
@@ -83,115 +64,151 @@ p {
     <div class="text-box">
         {{ if en }}
             <p>
-                In the era of artificial intelligence, decisions impacting individuals—such as loan approvals—are often made by complex "black-box" AI models. 
-                While these models can be highly accurate, their decision-making processes are not easily interpretable by humans. To address this challenge, 
+                In the era of artificial intelligence, decisions impacting individuals—such as loan approvals—are often made by complex "black-box" AI models.
+                While these models can be highly accurate, their decision-making processes are not easily interpretable by humans. To address this challenge,
                 transparency laws have been introduced, granting individuals the right to understand how such decisions are made.
             </p>
 
             <p>
-                One way to represent such decision-making processes is through <b>decision trees</b>. 
-                A decision tree is a structured model that breaks down decisions step by step. 
-                Each internal node represents a decision rule, and each branch represents an outcome based on that rule. 
+                One way to represent such decision-making processes is through <b>decision trees</b>.
+                A decision tree is a structured model that breaks down decisions step by step.
+                Each internal node represents a decision rule, and each branch represents an outcome based on that rule.
                 The process continues until reaching a final decision (leaf node).
             </p>
 
         {{ else }}
 
             <p>
-                In der Ära der künstlichen Intelligenz werden Entscheidungen, die Einzelpersonen betreffen – wie beispielsweise Kreditgenehmigungen –, 
-                häufig von komplexen „Black-Box“-KI-Modellen getroffen. 
-                Diese Modelle können zwar sehr genau sein, jedoch ist ihr Entscheidungsprozess für Menschen schwer nachvollziehbar. 
+                In der Ära der künstlichen Intelligenz werden Entscheidungen, die Einzelpersonen betreffen – wie beispielsweise Kreditgenehmigungen –,
+                häufig von komplexen „Black-Box“-KI-Modellen getroffen.
+                Diese Modelle können zwar sehr genau sein, jedoch ist ihr Entscheidungsprozess für Menschen schwer nachvollziehbar.
                 Um diesem Problem entgegenzuwirken, wurden Transparenzgesetze eingeführt, die Einzelpersonen das Recht einräumen, zu verstehen, wie solche Entscheidungen getroffen werden.
             </p>
 
             <p>
-                Eine Möglichkeit, solche Entscheidungsprozesse darzustellen, sind <b>Entscheidungsbäume</b>. 
-                Ein Entscheidungsbaum ist ein strukturiertes Modell, das Entscheidungen Schritt für Schritt aufschlüsselt. 
-                Jeder innere Knoten repräsentiert eine Entscheidungsregel, und jeder Zweig stellt ein Ergebnis basierend auf dieser Regel dar. 
+                Eine Möglichkeit, solche Entscheidungsprozesse darzustellen, sind <b>Entscheidungsbäume</b>.
+                Ein Entscheidungsbaum ist ein strukturiertes Modell, das Entscheidungen Schritt für Schritt aufschlüsselt.
+                Jeder innere Knoten repräsentiert eine Entscheidungsregel, und jeder Zweig stellt ein Ergebnis basierend auf dieser Regel dar.
                 Der Prozess setzt sich fort, bis eine endgültige Entscheidung (Blattknoten) erreicht wird.
             </p>
 
         {{ endif }}
     </div>
 
-    <svg width="700" height="450" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+    <svg width="800" height="400"  xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
 
-    <!-- Edges / Branches -->
-    <line x1="350" y1="50" x2="225" y2="150" stroke="black" stroke-width="2"/>
-    <line x1="350" y1="50" x2="475" y2="150" stroke="black" stroke-width="2"/>
-    <line x1="225" y1="150" x2="150" y2="270" stroke="black" stroke-width="2"/>
-    <line x1="225" y1="150" x2="300" y2="270" stroke="black" stroke-width="2"/>
-    <line x1="475" y1="150" x2="400" y2="270" stroke="black" stroke-width="2"/>
-    <line x1="475" y1="150" x2="550" y2="270" stroke="black" stroke-width="2"/>
+    <!-- Edges / Branches (Longer and Wider Angles) -->
+    <line x1="400" y1="50" x2="200" y2="150" stroke="black" stroke-width="2"/>
+    <line x1="400" y1="50" x2="600" y2="150" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="150" x2="150" y2="250" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="150" x2="250" y2="250" stroke="black" stroke-width="2"/>
+    <line x1="600" y1="150" x2="550" y2="250" stroke="black" stroke-width="2"/>
+    <line x1="600" y1="150" x2="650" y2="250" stroke="black" stroke-width="2"/>
 
-    <!-- Root Node (Ellipse - Feature 1) -->
-    <ellipse cx="350" cy="50" rx="90" ry="35" fill="#cce5ff" stroke="black" stroke-width="2"/>
-    <text x="350" y="55" font-size="16" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Loan Amount</text>
+    <!-- Condition Text on Branches -->
+    <text x="250" y="100" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.below }} 5,000 </text>
+    <text x="565" y="100" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.at_least }} 5,000</text>
+    <text x="135" y="220" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.credit_history_bad }} </text>
+    <text x="265" y="220" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.credit_history_good }}</text>
+    <text x="570" y="220" font-size="14" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.below }} 100,000</text>
+    <text x="630" y="220" font-size="14" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.at_least }} 100,000</text>
 
-    <!-- Decision Nodes (Ellipses - Features) -->
-    <ellipse cx="225" cy="150" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
-    <text x="225" y="155" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Credit History</text>
+    <!-- Root Node -->
+    <ellipse cx="400" cy="50" rx="100" ry="40" fill="#cce5ff" stroke="black" stroke-width="2"/>
+    <text x="400" y="55" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.loan_amount }} </text>
 
-    <rect x="425" y="130" width="100" height="40" fill="#ffcccc" stroke="black" stroke-width="2"/>
-    <text x="475" y="150" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Deny</text>
+    <!-- Level 2 Decision Nodes -->
+    <ellipse cx="200" cy="150" rx="90" ry="35" fill="#fff4cc" stroke="black" stroke-width="2"/>
+    <text x="200" y="155" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.credit_history }}</text>
+
+    <ellipse cx="600" cy="150" rx="90" ry="35" fill="#fff4cc" stroke="black" stroke-width="2"/>
+    <text x="600" y="155" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle"> {{Lexicon.income }}</text>
 
     <!-- Outcome (Leaf) Nodes -->
     <rect x="100" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
-    <text x="150" y="275" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Deny</text>
+    <text x="150" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle"> {{ Lexicon.denied }}</text>
 
-    <rect x="275" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
-    <text x="325" y="275" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Approve</text>
+    <rect x="225" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+    <text x="275" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.approved }}</text>
 
-    <rect x="375" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
-    <text x="425" y="275" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Deny</text>
+    <rect x="500" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+    <text x="550" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle"> {{ Lexicon.denied }}</text>
 
-    <rect x="525" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
-    <text x="575" y="275" font-size="14" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">Deny</text>
-
-    <!-- Branch Labels -->
-    <text x="270" y="110" font-size="12" font-family="Arial" fill="black" text-anchor="middle">Below 10k</text>
-    <text x="470" y="110" font-size="12" font-family="Arial" fill="black" text-anchor="middle">10k and Above</text>
-    <text x="180" y="200" font-size="12" font-family="Arial" fill="black" text-anchor="middle">Bad</text>
-    <text x="280" y="200" font-size="12" font-family="Arial" fill="black" text-anchor="middle">Good</text>
+    <rect x="625" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+    <text x="675" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle"> {{ Lexicon.approved }} </text>
 
 </svg>
 
-
-
     <div class="text-box">
-        {{ if en }}
-            <p>
-                For example, consider the decision tree shown above. If a bank wants to decide whether to approve a loan application, 
-                it might use a decision tree where the first rule checks the applicant's income. 
-                If the income is higher than $50,000, it checks the credit score. 
-                If both conditions are met, the loan is approved. Otherwise, it is denied.
-            </p>
+    {{ if en }}
+        <p>
+            Suppose a bank provides you with the following decision tree as an explanation for their loan approval process.
+            According to this tree, the bank first evaluates the loan amount, which is represented at the highest node.
+        </p>
 
-            <p>
-                Since the decision-making process of black-box models cannot be fully understood by humans, one potential solution is to use interpretable models, 
-                such as decision trees, to represent the underlying logic. 
-                This experiment examines how effectively people can understand decision-making processes when presented with a transparent model like a decision tree.
-            </p>
+        <ul>
+            <li>
+                <b>If the requested loan amount is below $5,000</b> (left branch), the bank then considers the applicant’s credit history.
+                <ul>
+                    <li>If the credit history is rated as <b>good</b>, the loan is <b>approved</b>.</li>
+                    <li>Otherwise, it is <b>denied</b>.</li>
+                </ul>
+            </li>
+            <li>
+                <b>If the loan amount is $5,000 or more</b> (right branch), the bank proceeds to assess the applicant’s income.
+                <ul>
+                    <li>If the income exceeds <b>$100,000</b>, the loan is <b>approved</b>.</li>
+                    <li>Otherwise, the application is <b>denied</b>.</li>
+                </ul>
+            </li>
+        </ul>
 
-        {{ else }}
+        <p>
+            This decision tree provides a structured and transparent way to understand how the bank evaluates loan applications.
+            Instead of relying on complex, black-box models, interpretable models like decision trees offer a clear,
+            step-by-step reasoning process. This experiment aims to explore how effectively people can interpret
+            decision-making processes when presented with a transparent model like a decision tree.
+        </p>
 
-            <p>
-                Zum Beispiel könnte eine Bank bei der Entscheidung über die Genehmigung eines Kreditantrags einen Entscheidungsbaum verwenden, 
-                bei dem die erste Regel das Einkommen des Antragstellers überprüft. 
-                Wenn das Einkommen über 50.000 € liegt, wird die Kreditwürdigkeit überprüft. 
-                Wenn beide Bedingungen erfüllt sind, wird der Kredit genehmigt, andernfalls abgelehnt.
-            </p>
+    {{ else }}
 
-            <p>
-                Da der Entscheidungsprozess von Black-Box-Modellen für Menschen nicht vollständig nachvollziehbar ist, besteht eine mögliche Lösung darin, interpretierbare Modelle wie Entscheidungsbäume zu verwenden, 
-                um die zugrunde liegende Logik darzustellen. 
-                Dieses Experiment untersucht, wie effektiv Menschen Entscheidungsprozesse verstehen können, wenn sie mit einem transparenten Modell wie einem Entscheidungsbaum präsentiert werden.
-            </p>
+        <p>
+            Angenommen, eine Bank stellt Ihnen den folgenden Entscheidungsbaum als Erklärung für ihren Kreditvergabeprozess bereit.
+            Laut diesem Baum bewertet die Bank zunächst die Kreditsumme, die im obersten Knoten dargestellt wird.
+        </p>
 
-        {{ endif }}
+        <ul>
+            <li>
+                <b>Wenn der beantragte Kreditbetrag unter 5.000 € liegt</b> (linker Zweig), betrachtet die Bank anschließend die Kreditwürdigkeit des Antragstellers.
+                <ul>
+                    <li>Wenn die Kreditwürdigkeit als <b>gut</b> eingestuft wird, wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Andernfalls wird er <b>abgelehnt</b>.</li>
+                </ul>
+            </li>
+            <li>
+                <b>Wenn der Kreditbetrag 5.000 € oder mehr beträgt</b> (rechter Zweig), bewertet die Bank als nächsten Schritt das Einkommen des Antragstellers.
+                <ul>
+                    <li>Wenn das Einkommen <b>über 100.000 €</b> liegt, wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Andernfalls wird die Anfrage <b>abgelehnt</b>.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>
+            Dieser Entscheidungsbaum bietet eine strukturierte und transparente Möglichkeit, nachzuvollziehen, wie die Bank
+            Kreditentscheidungen trifft. Anstelle komplexer, nicht nachvollziehbarer Modelle ermöglichen interpretierbare Modelle
+            wie Entscheidungsbäume eine klare, schrittweise Entscheidungsfindung. Dieses Experiment untersucht,
+            wie gut Menschen Entscheidungsprozesse verstehen können, wenn sie mit einem transparenten Modell wie einem Entscheidungsbaum präsentiert werden.
+        </p>
+
+    {{ endif }}
+</div>
+
+    <div class="form-container">
+    <div class="form-box">
+        {{ formfields }}
     </div>
-
-    {{ formfields }}
+</div>
 
     <div class="btn-container">
         {{ next_button }}
