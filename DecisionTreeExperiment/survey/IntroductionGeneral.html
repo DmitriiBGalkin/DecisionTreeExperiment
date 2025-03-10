@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{{ block style }}
+<style>
+.otree-body {
+    max-width: 95%;
+    margin: 0 auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+p {
+    margin-bottom: 10px;
+}
+.main-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.text-box {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.table-box {
+    flex-basis: 60%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    align-items: center;
+}
+.table-box h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+</style>
+{{ endblock }}
 
-</body>
-</html>
+{{ block title }}
+    <h1>{{ Lexicon.welcome_title }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="table-box">
+    {{ if en }}
+        <h3 style="font-size: 20px;"><b>Welcome to the Experiment</b></h3>
+        <p>
+            This study is part of the <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> project, conducted by
+            <b>Zeppelin University</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
+        </p>
+        <p>
+            This experiment focuses on understanding decision trees and consists of the following phases:
+            <ul>
+                <li><b>Introduction:</b> A brief explanation of decision trees and how they work.</li>
+                <li><b>Practice Session:</b> You will be presented with sample questions to familiarize yourself with the task.</li>
+                <li><b>Main Study:</b> You will answer questions based on different decision trees.</li>
+                <li><b>Demographics & Feedback:</b> A short survey where you can provide feedback.</li>
+            </ul>
+        </p>
+        <p>
+            You will receive a <b>base payment</b> for your participation. Additionally, you will earn
+            <b>€0.10 for each correct answer</b> in the main part of the study.
+        </p>
+        <p>
+            Your responses will remain <b>anonymous</b> and will be used <b>exclusively for research purposes</b>.
+            All collected data will be stored and processed in accordance with <b>GDPR regulations</b>.
+        </p>
+        <p><b>By clicking "Next," you consent to participate in this study.</b></p>
+
+    {{ else }}
+        <h3 style="font-size: 20px;"><b>Willkommen zum Experiment</b></h3>
+        <p>
+            Diese Studie ist Teil des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>,
+            durchgeführt von der <b>Zeppelin Universität</b> und dem <b>Deutschen Forschungszentrum für Künstliche Intelligenz (DFKI)</b>.
+        </p>
+        <p>
+            Dieses Experiment befasst sich mit dem Verständnis von Entscheidungsbäumen und besteht aus folgenden Phasen:
+            <ul>
+                <li><b>Einführung:</b> Eine kurze Erklärung zu Entscheidungsbäumen und ihrer Funktionsweise.</li>
+                <li><b>Übungssession:</b> Sie erhalten Beispielaufgaben, um sich mit dem Ablauf vertraut zu machen.</li>
+                <li><b>Hauptstudie:</b> Sie beantworten Fragen zu verschiedenen Entscheidungsbäumen.</li>
+                <li><b>Demografie & Feedback:</b> Eine kurze Umfrage zur Erhebung einiger demografischer Informationen sowie die Möglichkeit, Feedback zu geben.</li>
+            </ul>
+        </p>
+        <p>
+            Sie erhalten eine <b>Grundvergütung</b> für Ihre Teilnahme. Zusätzlich verdienen Sie
+            <b>0,10 € für jede richtige Antwort</b> im Hauptteil der Studie.
+        </p>
+        <p>
+            Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für Forschungszwecke</b> verwendet.
+            Alle erhobenen Daten werden gemäß der <b>DSGVO</b> verarbeitet und gespeichert.
+        </p>
+        <p><b>Durch Klicken auf "Weiter" erklären Sie sich mit der Teilnahme an dieser Studie einverstanden.</b></p>
+    {{ endif }}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+{{ endblock }}

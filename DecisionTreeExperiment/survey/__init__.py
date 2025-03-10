@@ -1,8 +1,15 @@
 from otree.api import *
+from settings import LANGUAGE_CODE, SESSION_CONFIGS
+if LANGUAGE_CODE == 'de':
+    from .lexicon_de import Lexicon
+else:
+    from .lexicon_en import Lexicon
+which_language = {'en': False, 'de': False}  # noqa
+which_language[LANGUAGE_CODE[:2]] = True
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'survey'
+    NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
@@ -16,36 +23,35 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    age = models.IntegerField(label='What is your age?', min=13, max=125)
-    gender = models.StringField(
-        choices=[['Male', 'Male'], ['Female', 'Female']],
-        label='What is your gender?',
-        widget=widgets.RadioSelect,
-    )
-    crt_bat = models.IntegerField(
-        label='''
-        A bat and a ball cost 22 dollars in total.
-        The bat costs 20 dollars more than the ball.
-        How many dollars does the ball cost?'''
-    )
-    crt_widget = models.IntegerField(
-        label='''
-        If it takes 5 machines 5 minutes to make 5 widgets,
-        how many minutes would it take 100 machines to make 100 widgets?
-        '''
-    )
-    crt_lake = models.IntegerField(
-        label='''
-        In a lake, there is a patch of lily pads.
-        Every day, the patch doubles in size.
-        If it takes 48 days for the patch to cover the entire lake,
-        how many days would it take for the patch to cover half of the lake?
-        '''
-    )
+        familiarity_with_decision_trees = models.IntegerField(
+            choices=[
+                (1, Lexicon.familiarity_with_decision_trees_1),
+                (2, Lexicon.familiarity_with_decision_trees_2),
+                (3, Lexicon.familiarity_with_decision_trees_3),
+                (4, Lexicon.familiarity_with_decision_trees_4),
+                (5, Lexicon.familiarity_with_decision_trees_5),
+            ],
+            label=Lexicon.familiarity_with_decision_trees_label,
+            widget=widgets.RadioSelectHorizontal,
+        )
 
 
 # FUNCTIONS
 # PAGES
+class IntroductionGeneral(Page):
+    def vars_for_template(player: Player):
+        return dict(
+            Lexicon=Lexicon,
+            **which_language)
+
+class IntroductionDecisionTrees(Page):
+    form_model = 'player'
+    form_fields = ['familiarity_with_decision_trees']
+    def vars_for_template(player: Player):
+        return dict(
+            Lexicon=Lexicon,
+            **which_language)
+
 class Demographics(Page):
     form_model = 'player'
     form_fields = ['age', 'gender']
@@ -56,4 +62,4 @@ class CognitiveReflectionTest(Page):
     form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
 
 
-page_sequence = [IntroductionGeneral, Demographics, CognitiveReflectionTest]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, Demographics, CognitiveReflectionTest]
