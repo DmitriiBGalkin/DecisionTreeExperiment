@@ -1,0 +1,106 @@
+{{ block style }}
+<style>
+.otree-body {
+    max-width: 95%;
+    margin: 0 auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+p {
+    margin-bottom: 10px;
+}
+.main-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.form-box {
+    width: 60%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: left;
+    margin-bottom: 15px;
+}
+</style>
+{{ endblock }}
+
+{{ block title }}
+    <h1>{% if en %}Survey{% else %}Umfrage{% endif %}</h1>
+{{ endblock }}
+
+{{ block content }}
+
+<div class="form-container">
+    <!-- Welcome Message -->
+    <div class="form-box">
+        <p>
+        {% if en %}
+            Thank you for completing the main part of the study. Please complete this final questionnaire.
+            If you encountered any issues during the experiment, you may provide feedback in the designated section.
+        {% else %}
+            Vielen Dank, dass Sie den Hauptteil der Studie abgeschlossen haben. Bitte füllen Sie nun den abschließenden Fragebogen aus.
+            Falls Sie während des Experiments auf Probleme gestoßen sind, können Sie diese im entsprechenden Abschnitt mitteilen.
+        {% endif %}
+        </p>
+    </div>
+
+    <!-- Gender Question -->
+    <div class="form-box">
+        {{ formfield 'gender' }}
+    </div>
+
+    <!-- Age Question -->
+    <div class="form-box">
+        {{ formfield 'age' }}
+    </div>
+
+    <!-- Education Level -->
+    <div class="form-box">
+        {{ formfield 'education_level' }}
+        {{ formfield 'education_level_other' }}
+    </div>
+
+    <!-- Bundesland Question -->
+    <div class="form-box">
+        {{ formfield 'bundesland' }}
+    </div>
+
+    <!-- Serious Participation -->
+    <div class="form-box">
+        {{ formfield 'serious_participation' }}
+    </div>
+
+    <!-- Open Feedback -->
+    <div class="form-box">
+        {{ formfield 'feedback' }}
+    </div>
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+
+{{ endblock }}

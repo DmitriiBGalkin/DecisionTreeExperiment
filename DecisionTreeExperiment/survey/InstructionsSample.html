@@ -1,0 +1,109 @@
+{{ block style }}
+<style>
+.otree-body {
+    max-width: 95%;
+    margin: 0 auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+p {
+    margin-bottom: 10px;
+}
+.main-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.text-box {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.table-box {
+    flex-basis: 60%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    align-items: center;
+}
+.table-box h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+</style>
+{{ endblock }}
+
+{{ block title }}
+    <h1>{% if en %}Overview of the Experiment{% else %}Übersicht über das Experiment{% endif %}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="table-box">
+    {% if en %}
+        <h3 style="font-size: 20px;"><b>Your Role in the Experiment</b></h3>
+        <p>
+            In the main part of the experiment, you will be asked questions about decision trees in a certain scenario.
+            More specifically, throughout this experiment, you will assume the role of a loan applicant with hypothetical
+            profile information about your loan application.
+        </p>
+        <p>
+            You will be presented with several decision trees, each representing different bank loan approval processes.
+            While the profile information about your loan application will remain constant, the structure and content of
+            the decision trees will vary.
+        </p>
+
+        <h3 style="font-size: 20px;"><b>Your Tasks:</b></h3>
+        <ul>
+            <li>Answer questions about your understanding of the decision trees.</li>
+            <li>Respond to both single-answer and multiple-selection questions.</li>
+            <li>Rate your confidence in each answer on a scale from 0 to 100.</li>
+        </ul>
+
+        <p>
+            You will be paid for answering correctly in the main part of the experiment.
+            Before you start, you will also have 2 practice questions (not paid).
+        </p>
+
+    {% else %}
+        <h3 style="font-size: 20px;"><b>Ihre Rolle im Experiment</b></h3>
+        <p>
+            Im Hauptteil des Experiments werden Ihnen Fragen zu Entscheidungsbäumen in einem bestimmten Szenario gestellt.
+            Konkret übernehmen Sie in diesem Experiment die Rolle eines Kreditantragstellers mit hypothetischen Profildaten
+            zu Ihrem Kreditantrag.
+        </p>
+        <p>
+            Sie werden mehrere Entscheidungsbäume sehen, die unterschiedliche Genehmigungsprozesse von Banken darstellen.
+            Während die Profildaten zu Ihrem Kreditantrag gleich bleiben, werden sich die Struktur und der Inhalt der Entscheidungsbäume ändern.
+        </p>
+
+        <h3 style="font-size: 20px;"><b>Ihre Aufgaben:</b></h3>
+        <ul>
+            <li>Beantworten Sie Fragen zu Ihrem Verständnis der Entscheidungsbäume.</li>
+            <li>Beantworten Sie sowohl Einzelauswahl- als auch Mehrfachauswahlfragen.</li>
+            <li>Bewerten Sie Ihr Vertrauen in jede Antwort auf einer Skala von 0 bis 100.</li>
+        </ul>
+
+        <p>
+            Sie werden für korrekte Antworten im Hauptteil des Experiments bezahlt.
+            Bevor Sie beginnen, gibt es zwei Übungsfragen (ohne Bezahlung).
+        </p>
+    {% endif %}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+{{ endblock }}
