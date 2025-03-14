@@ -44,6 +44,12 @@ p {
         width: 100%;
         margin-top: 20px;
     }
+.responsive-svg-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
 .form-box {
         width: 75%;
         padding: 20px;
@@ -95,7 +101,8 @@ p {
         {{ endif }}
     </div>
 
-    <svg width="800" height="400"  xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
+<div class="responsive-svg-container">
+    <svg width="60%" height="auto" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
 
     <!-- Edges / Branches (Longer and Wider Angles) -->
     <line x1="400" y1="50" x2="200" y2="150" stroke="black" stroke-width="2"/>
@@ -138,7 +145,7 @@ p {
     <text x="675" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle"> {{ Lexicon.approved }} </text>
 
 </svg>
-
+</div>
     <div class="text-box">
     {{ if en }}
         <p>

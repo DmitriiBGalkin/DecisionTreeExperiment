@@ -102,6 +102,8 @@ class Player(BasePlayer):
         ],
         label=Lexicon.state_label,
     )
+    price = models.FloatField()
+
 
 
 # FUNCTIONS
@@ -132,8 +134,14 @@ class InstructionsSample(Page):
             Lexicon=Lexicon,
             **which_language)
 
-class SampleQuestion(Page):
-    pass
+class SampleQuestion_1(Page):
+    form_model = "player"
+    form_fields = ["price"]
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Lexicon=Lexicon,
+            **which_language)
 
 class Survey(Page):
     @staticmethod
@@ -146,9 +154,7 @@ class Survey(Page):
                    'feedback']
 
 
-class CognitiveReflectionTest(Page):
-    form_model = 'player'
-    form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
 
 
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample, Survey]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, Survey]
+
