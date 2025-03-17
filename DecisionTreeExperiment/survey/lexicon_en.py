@@ -2,13 +2,15 @@ class Lexicon:
     welcome_title = "Welcome to the Experiment"
     # Section Titles
     profile_info_title = "Profile Information"
-    # Profile Fields
     loan_amount = "Loan Amount"
     loan_duration = "Loan Duration"
     credit_history = "Credit History"
     employment_status = "Employment"
     income = "Income"
     marital_status = "Marital Status"
+    assets = "Assets"  # Total savings, investments, or property owned
+    liabilities = "Liabilities"  # Existing financial obligations (e.g., other loans, credit card debt)
+    residence = "Residence"  # Owns home or rents (impacts financial stability)
     # Levels
     credit_history_bad = "Bad"
     credit_history_good = "Good"
@@ -74,4 +76,11 @@ class Lexicon:
     "Please write a few brief notes.)"
     state_label = "Which federal state do you live in?"
 
-
+    confidence_level_label = "How confident are you in your answer?"
+    confidence_level_1 = "Not confident at all"
+    confidence_level_2 = "Slightly confident"
+    confidence_level_3 = "Moderately confident"
+    confidence_level_4 = "Very confident"
+    confidence_level_5 = "Extremely confident"
+    question_loan_sample1_label = "Based on the presented decision tree and your profile information, would this loan be approved or denied?"
+    please_select_correct_answer = "Please select the correct answer."

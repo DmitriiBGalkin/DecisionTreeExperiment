@@ -1,5 +1,10 @@
 {{ block style }}
 <style>
+.page-header {
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    padding-top: 0px;
+}
 .otree-body {
     max-width: 95%;
     margin: 0 auto;
@@ -35,63 +40,33 @@ body {
     background-color: #ffffff;
 }
 .question-container {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 5px;
+    padding: 5px;
     border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #f9f9f9;
-    text-align: left;
+    text-align: center;
 }
-.slider-container {
+.radio-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     margin-top: 20px;
 }
-.slider-container label {
-    margin-bottom: 10px;
+.radio-container label {
+    margin-bottom: 5px;
 }
 .responsive-svg-container {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: center;
-
-.mgslider-wrapper {
-    border-spacing: 10px;
-}
-.mgslider-show {
-    text-align: center;
-}
-.mgslider-limit {
-    width: 10%;
-    min-width: 75px;
-    height: 40px;
-    margin: 100px;
-    text-align: center;
-    background: #eee;
-    border: 1px solid #888;
-}
-.mgslider-limit, .mgslider-value {
-    font-variant-numeric: tabular-nums;
-}
-.mgslider-before {
-    height: 16px;
-    width: 100%;
-    background: #1e5bff;
-}
-.mgslider-feedback {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 }
 </style>
 {{ endblock }}
 
 {{ block title }}
-    <h1>{% if en %}Sample Question{% else %}Beispielaufgabe{% endif %}</h1>
+    <h1>{% if en %}Sample Question 1 {% else %}Beispielaufgabe 1{% endif %}</h1>
 {{ endblock }}
 
 {{ block content }}
@@ -102,60 +77,41 @@ body {
 
     <p>
         {% if en %}
-            In this experiment, you will assume the role of a <b>loan applicant</b> who is applying for a loan.
-            You will be provided with <b>fixed profile information</b> about yourself as the applicant.
+            In this experiment, you will assume the role of a <b>loan applicant</b> with a fixed profile.
+            You can find this information on the <b>right side</b> of the screen – this information will remain <b>unchanged</b> throughout the experiment.
         {% else %}
-            In diesem Experiment übernehmen Sie die Rolle eines <b>Kreditantragstellers</b>, der einen Kredit beantragt.
-            Sie erhalten <b>festgelegte Profildaten</b> über sich als Antragsteller.
+            In diesem Experiment übernehmen Sie die Rolle eines <b>Kreditantragstellers</b> mit einem festen Profil.
+            Diese Informationen finden Sie auf der <b>rechten Seite</b> des Bildschirms – sie bleiben <b>während des gesamten Experiments unverändert</b>.
         {% endif %}
     </p>
 
     <p>
         {% if en %}
-            Throughout the experiment, you will be presented with different <b>decision trees</b>,
-            each representing a unique loan approval process used by different banks.
-            While your profile as an applicant remains <b>unchanged</b>, the <b>structure and criteria</b>
-            of the decision trees will vary.
+            You will be presented with multiple <b>decision trees</b>, each representing a different loan approval process used by banks.
+            Your task is to determine whether your loan application would be <b>approved or denied</b> based on the decision tree and your profile information.
         {% else %}
-            Im Verlauf des Experiments werden Ihnen verschiedene <b>Entscheidungsbäume</b> präsentiert,
-            die jeweils einen <b>individuellen Kreditgenehmigungsprozess</b> verschiedener Banken darstellen.
-            Während Ihr Profil als Antragsteller <b>unverändert</b> bleibt, werden sich die
-            <b>Struktur und Kriterien</b> der Entscheidungsbäume ändern.
-        {% endif %}
-    </p>
-
-    <p>
-        {% if en %}
-            Your task is to analyze the <b>decision tree</b> and determine whether, based on the bank's criteria,
-            <b>your loan application will be approved or denied</b>.
-        {% else %}
-            Ihre Aufgabe ist es, den <b>Entscheidungsbaum</b> zu analysieren und zu bestimmen, ob Ihr Kreditantrag
+            Ihnen werden mehrere <b>Entscheidungsbäume</b> präsentiert, die jeweils einen anderen Kreditgenehmigungsprozess von Banken darstellen.
+            Ihre Aufgabe ist es zu bestimmen, ob Ihr Kreditantrag basierend auf dem Entscheidungsbaum und Ihren Profilinformationen
             <b>genehmigt oder abgelehnt</b> wird.
         {% endif %}
     </p>
 
     <p>
         {% if en %}
-            After making your decision, you will be asked to rate how confident you are in your answer.
-            You will use a <b>confidence slider</b>, where:
+            After making your decision, you will also be asked to indicate <b>how confident</b> you are in your answer.
         {% else %}
-            Nachdem Sie Ihre Entscheidung getroffen haben, werden Sie gebeten, anzugeben,
-            wie sicher Sie sich mit Ihrer Antwort sind.
-            Sie verwenden dazu einen <b>Vertrauenskontrollschieber</b>, bei dem:
+            Nachdem Sie Ihre Entscheidung getroffen haben, werden Sie außerdem gebeten, anzugeben, <b>wie sicher</b> Sie sich Ihrer Antwort sind.
         {% endif %}
     </p>
 
-    <ul>
+    <p>
         {% if en %}
-            <li><b>0</b> = Not confident at all</li>
-            <li><b>50</b> = Moderately confident</li>
-            <li><b>100</b> = Extremely confident</li>
+            Below is an example question and explanation.
         {% else %}
-            <li><b>0</b> = Überhaupt nicht sicher</li>
-            <li><b>50</b> = Mäßig sicher</li>
-            <li><b>100</b> = Sehr sicher</li>
+            Unten finden Sie eine Beispielaufgabe und eine Erläuterung.
         {% endif %}
-    </ul>
+
+    </p>
 </div>
 
 
@@ -164,105 +120,36 @@ body {
     <!-- Left Side (Decision Tree) -->
     <div class="left-container">
         <div class="responsive-svg-container">
-            <svg width="100%" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
-                <!-- Edges / Branches -->
-                <line x1="400" y1="50" x2="200" y2="150" stroke="black" stroke-width="2"/>
-                <line x1="400" y1="50" x2="600" y2="150" stroke="black" stroke-width="2"/>
-                <line x1="200" y1="150" x2="150" y2="250" stroke="black" stroke-width="2"/>
-                <line x1="200" y1="150" x2="250" y2="250" stroke="black" stroke-width="2"/>
-                <line x1="600" y1="150" x2="550" y2="250" stroke="black" stroke-width="2"/>
-                <line x1="600" y1="150" x2="650" y2="250" stroke="black" stroke-width="2"/>
-
-                <!-- Condition Text on Branches -->
-                <text x="250" y="100" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.below }} 5,000 </text>
-                <text x="565" y="100" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.at_least }} 5,000</text>
-                <text x="135" y="220" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.credit_history_bad }} </text>
-                <text x="265" y="220" font-size="16" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.credit_history_good }}</text>
-                <text x="500" y="220" font-size="14" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.below }} 100,000</text>
-                <text x="700" y="220" font-size="14" font-family="Arial" fill="black" text-anchor="middle">{{ Lexicon.at_least }} 100,000</text>
-
-                <!-- Root Node -->
-                <ellipse cx="400" cy="50" rx="100" ry="40" fill="#cce5ff" stroke="black" stroke-width="2"/>
-                <text x="400" y="55" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.loan_amount }}</text>
-
-                <!-- Level 2 Decision Nodes -->
-                <ellipse cx="200" cy="150" rx="90" ry="35" fill="#fff4cc" stroke="black" stroke-width="2"/>
-                <text x="200" y="155" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.credit_history }}</text>
-
-                <ellipse cx="600" cy="150" rx="90" ry="35" fill="#fff4cc" stroke="black" stroke-width="2"/>
-                <text x="600" y="155" font-size="20" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.income }}</text>
-
-                <!-- Outcome (Leaf) Nodes -->
-                <rect x="100" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
-                <text x="150" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.denied }}</text>
-
-                <rect x="225" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
-                <text x="275" y="275" font-size="18" font-family="Arial" fill="black" text-anchor="middle" dominant-baseline="middle">{{ Lexicon.approved }}</text>
-            </svg>
+                {{ include svg_template }}
         </div>
     </div>
 
-    <!-- Right Side (Loan Applicant Info) -->
-    <div class="right-container">
+<!-- Profile Information Section -->
+<div class="right-container">
+
+</div>
+
+</div>
+
+<!-- Questions Section -->
+<div class="question-container">
+        {{ formfield 'question_loan_sample1' }}
+  <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
         {% if en %}
-            <p>Hypothetical Loan Applicant Information</p>
+            <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20.000 EUR</strong>, which is higher than 5.000 EUR. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45.000 EUR</strong> (below the required 100.000 EUR). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
         {% else %}
-            <p>Hypothetische Informationen zum Kreditnehmer</p>
+            <strong>Erläuterung:</strong> Laut den Profilinformationen beträgt die Kreditsumme <strong>20.000 EUR</strong>, was höher als 5.000 EUR ist. Daher würde der Entscheidungsbaum nach rechts abzweigen. Danach erfolgt eine Bewertung basierend auf dem Einkommen, welches <strong>45.000 EUR</strong> beträgt (unter den geforderten 100.000 EUR). Daher lautet die korrekte Antwort auf diese Frage, dass der Kredit <strong>abgelehnt</strong> würde.
         {% endif %}
     </div>
 </div>
-
-<style>
-        .mgslider-wrapper {
-            border-spacing: 10px;
-        }
-        .mgslider-show {
-            text-align: center;
-        }
-        .mgslider-limit {
-            width: 10%;
-            min-width: 75px;
-            height: 40px;
-            margin: 100px;
-            text-align: center;
-            background: #eee;
-            border: 1px solid #888;
-        }
-        .mgslider-limit, .mgslider-value {
-            font-variant-numeric: tabular-nums;
-        }
-        .mgslider-before {
-            height: 16px;
-            width: 100%;
-            background: #1e5bff;
-        }
-        .mgslider-feedback {
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-    </style>
-
-    {{ formfield_errors 'price' }}
-    <p>Click the blue bars to reveal the sliders.</p>
-
-    <div id="sliders_here"></div>
-
-    <script src="{{ static 'mgslider.js' }}"></script>
-
-    <script>
-        $(document).ready(function (event) {
-            slider1 = new mgslider("confidence_level", 0, 100, 1);
-            slider1.recall = true; // Optional line to remember value across errors
-            slider1.print(document.getElementById("sliders_here"));
-
-        });
-    </script>
-
+<!-- Confidence Rating -->
+<div class="question-container">
+        {{ formfield 'confidence_level_sample1' }}
 </div>
-
-<div class="btn-container">
+<div style="text-align: center; padding-top: 5px;">
     {{ next_button }}
 </div>
+
+
 
 {{ endblock }}

@@ -1,0 +1,131 @@
+{{ block style }}
+<style>
+.page-header {
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    padding-top: 0px;
+}
+.otree-body {
+    max-width: 95%;
+    margin: 0 auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+.container-full {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+}
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.left-container {
+    flex: 2; /* Takes 2/3 of the width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.right-container {
+    flex: 1; /* Takes 1/3 of the width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.question-container {
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 20px;
+}
+.radio-container label {
+    margin-bottom: 5px;
+}
+.responsive-svg-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+</style>
+{{ endblock }}
+
+{{ block title }}
+    <h1>{% if en %}Sample Question 2 {% else %}Beispielaufgabe 2{% endif %}</h1>
+{{ endblock }}
+
+{{ block content }}
+
+<!-- Instruction Box -->
+<div class="container-full">
+        {% if en %}
+            Below is another example question and explanation.
+        {% else %}
+            Unten finden Sie eine Beispielaufgabe und eine Erläuterung.
+        {% endif %}
+
+</div>
+
+
+<!-- Two-column layout -->
+<div class="main-container">
+    <!-- Left Side (Decision Tree) -->
+    <div class="left-container">
+        <div class="responsive-svg-container">
+                {{ include svg_template }}
+        </div>
+    </div>
+
+<!-- Profile Information Section -->
+<div class="right-container">
+    {{ include 'survey/Table_Profile_Information.html'}}
+</div>
+
+</div>
+
+<!-- Questions Section -->
+<div class="question-container">
+        {{ formfield 'question_loan_sample2' }}
+  <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
+      {% if en %}
+    <strong>Explanation:</strong> The decision tree first evaluates the <strong>loan amount</strong>, which is <strong>20.000 EUR</strong>. Since this is higher than 5.000 EUR, the decision tree follows the <strong>right branch</strong>.
+
+    Next, it evaluates <strong>credit history</strong>, which in the profile is marked as <strong>Good</strong>. Since a good credit history meets the bank's requirement, the evaluation continues.
+
+    Finally, the decision tree assesses <strong>employment status</strong>, which is <strong>Stable</strong>. Given that stable employment fulfills the bank's conditions, the correct decision is that the loan would be <strong>approved</strong>.
+{% else %}
+    <strong>Erläuterung:</strong> Der Entscheidungsbaum bewertet zuerst den <strong>Kreditbetrag</strong>, welcher <strong>20.000 EUR</strong> beträgt. Da dieser Betrag höher als 5.000 EUR ist, folgt der Entscheidungsbaum dem <strong>rechten Zweig</strong>.
+
+    Als Nächstes wird die <strong>Kreditwürdigkeit</strong> bewertet, die im Profil als <strong>Gut</strong> angegeben ist. Da eine gute Kreditwürdigkeit die Anforderungen der Bank erfüllt, geht die Bewertung weiter.
+
+    Schließlich bewertet der Entscheidungsbaum den <strong>Beschäftigungsstatus</strong>, der als <strong>Stabil</strong> angegeben ist. Da eine stabile Beschäftigung die Bedingungen der Bank erfüllt, lautet die korrekte Entscheidung, dass der Kredit <strong>genehmigt</strong> wird.
+{% endif %}
+
+    </div>
+</div>
+<!-- Confidence Rating -->
+<div class="question-container">
+        {{ formfield 'confidence_level_sample2' }}
+</div>
+<div style="text-align: center; padding-top: 5px;">
+    {{ next_button }}
+</div>
+
+
+
+{{ endblock }}

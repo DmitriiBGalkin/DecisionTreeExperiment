@@ -1,0 +1,86 @@
+<h3 style="text-align: center; font-size: 16px; margin-bottom: 5px;">
+        {% if en %}Your Profile Information{% else %}Ihre Profilinformationen{% endif %}
+    </h3>
+
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid #ccc; font-size: 14px;">
+        <!-- Header Row -->
+        <tr style="background-color: #f2f2f2; font-weight: bold;">
+            <th colspan="2" style="text-align: center; padding: 6px;">
+                {% if en %}Profile Information{% else %}Profilinformationen{% endif %}
+            </th>
+        </tr>
+
+        <!-- Loan Amount -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.loan_amount }}</th>
+            <td style="padding: 5px;">20.000 EUR</td>
+        </tr>
+
+        <!-- Loan Duration -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.loan_duration }}</th>
+            <td style="padding: 5px;">5 Years</td>
+        </tr>
+
+        <!-- Credit History -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.credit_history }}</th>
+            <td style="padding: 5px;">{% if en %}Good{% else %}Gut{% endif %}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size: 12px; font-style: italic; background-color: #f9f9f9;">
+                {% if en %}Levels: Bad • Good • Excellent{% else %}Stufen: Schlecht • Gut • Exzellent{% endif %}
+            </td>
+        </tr>
+
+        <!-- Employment Status -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.employment_status }}</th>
+            <td style="padding: 5px;">{% if en %}Stable{% else %}Stabil{% endif %}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size: 12px; font-style: italic; background-color: #f9f9f9;">
+                {% if en %}Levels: Unemployed • Stable{% else %}Stufen: Arbeitslos • Stabil{% endif %}
+            </td>
+        </tr>
+
+        <!-- Income -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.income }}</th>
+            <td style="padding: 5px;">45.000 EUR</td>
+        </tr>
+
+        <!-- Marital Status -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.marital_status }}</th>
+            <td style="padding: 5px;">{% if en %}Single{% else %}Ledig{% endif %}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size: 12px; font-style: italic; background-color: #f9f9f9;">
+                {% if en %}Levels: Single • Married • Divorced{% else %}Stufen: Ledig • Verheiratet • Geschieden{% endif %}
+            </td>
+        </tr>
+
+        <!-- Assets -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.assets }}</th>
+            <td style="padding: 5px;">15.000 EUR</td>
+        </tr>
+
+        <!-- Liabilities -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.liabilities }}</th>
+            <td style="padding: 5px;">5.000 EUR</td>
+        </tr>
+
+        <!-- Residence -->
+        <tr>
+            <th style="padding: 5px;">{{ Lexicon.residence }}</th>
+            <td style="padding: 5px;">{% if en %}Rented{% else %}Miete{% endif %}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size: 12px; font-style: italic; background-color: #f9f9f9;">
+                {% if en %}Levels: Rented • Mortgage • Homeowner{% else %}Stufen: Miete • Hypothek • Eigentümer{% endif %}
+            </td>
+        </tr>
+    </table>

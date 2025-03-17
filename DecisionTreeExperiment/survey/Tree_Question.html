@@ -1,0 +1,121 @@
+{{ block style }}
+<style>
+.page-header {
+    padding-top: 0px;
+}
+.otree-body {
+    max-width: 95%;
+    margin: 0 auto;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+.container-full {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 16px;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+}
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.left-container {
+    flex: 2;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.right-container {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.question-container {
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 10px;
+}
+.radio-container label {
+    margin-bottom: 5px;
+}
+.responsive-svg-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+</style>
+{{ endblock }}
+
+{{ block title }}
+    <h1>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{player.round_number}}/{{ number_of_rounds }})</h1>
+{{ endblock }}
+
+{{ block content }}
+
+<!-- Instruction Box -->
+<div class="container-full">
+    <h3>{{ if en }}Instructions{{ else }}Anweisungen{{ endif }}</h3>
+
+    <p>
+        {{ if en }}
+            Please carefully analyze the <b>decision tree</b> and the given <b>profile information</b>.
+            Based on the provided information, determine whether the loan application would be <b>approved or denied</b>,
+            and state your level of confidence in your decision.
+        {{ else }}
+            Bitte analysieren Sie sorgfältig den <b>Entscheidungsbaum</b> und die angegebenen <b>Profildaten</b>.
+            Basierend auf den bereitgestellten Informationen bestimmen Sie, ob der Kreditantrag <b>genehmigt oder abgelehnt</b> wird,
+            und geben Sie an, wie sicher Sie sich mit Ihrer Entscheidung sind.
+        {{ endif }}
+    </p>
+</div>
+
+<!-- Two-column layout -->
+<div class="main-container">
+    <!-- Left Side (Decision Tree) -->
+    <div class="left-container">
+        <div class="responsive-svg-container">
+            {{ include svg_template }}
+        </div>
+    </div>
+
+    <!-- Right Side (Loan Applicant Info) -->
+    <div class="right-container">
+    {{ include 'survey/Table_Profile_Information.html'}}
+    </div>
+</div>
+
+<!-- Questions Section -->
+<div class="question-container">
+    <div class="radio-container">
+        {{ formfield 'question_loan' }}
+    </div>
+</div>
+
+<!-- Confidence Rating -->
+<div class="question-container">    <div class="radio-container">
+        {{ formfield 'confidence_level' }}
+    </div>
+</div>
+
+<div style="text-align: center; padding-top: 5px;">
+    {{ next_button }}
+</div>
+
+{{ endblock }}

@@ -12,6 +12,9 @@ class Lexicon:
     employment_status = "Beschäftigung"
     income = "Einkommen"
     marital_status = "Familienstand"
+    assets = "Vermögen"  # Total savings, investments, or property owned
+    liabilities = "Verbindlichkeiten"  # Existing financial obligations (e.g., other loans, credit card debt)
+    residence = "Wohnstatus"  # Owns home or rents (impacts financial stability)
 
     # Levels
     credit_history_bad = "Schlecht"
@@ -82,3 +85,13 @@ class Lexicon:
     "(Ist Ihnen während der Teilnahme an dieser Studie etwas aufgefallen? Waren die Fragen an einer Stelle nicht klar oder war Ihnen die Beantwortung unangenehm? "
     "Bitte schreiben Sie kurz ein paar Stichworte dazu.)"
     state_label = "In welchem Bundesland leben Sie?"
+
+    confidence_level_label = "Wie sicher sind Sie sich mit Ihrer Antwort?"
+    confidence_level_1 = "Überhaupt nicht sicher"
+    confidence_level_2 = "Leicht sicher"
+    confidence_level_3 = "Mäßig sicher"
+    confidence_level_4 = "Sehr sicher"
+    confidence_level_5 = "Äußerst sicher"
+
+    question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren Profildaten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
+    please_select_correct_answer = "Bitte wählen Sie die korrekte Antwort."

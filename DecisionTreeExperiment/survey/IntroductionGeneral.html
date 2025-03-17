@@ -1,12 +1,17 @@
 {{ block style }}
 <style>
+.page-header {
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    padding-top: 10px;
+}
 .otree-body {
     max-width: 95%;
     margin: 0 auto;
 }
 body {
     font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 .btn-container {
     display: flex;
@@ -47,13 +52,13 @@ p {
 {{ endblock }}
 
 {{ block title }}
-    <h1>{{ Lexicon.welcome_title }}</h1>
+    <h2>{{ Lexicon.welcome_title }}</h2>
 {{ endblock }}
 
 {{ block content }}
 <div class="table-box">
     {{ if en }}
-        <h3 style="font-size: 20px;"><b>Welcome to the Experiment</b></h3>
+
         <p>
             This study is part of the <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> project, conducted by
             <b>Zeppelin University</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
@@ -78,7 +83,7 @@ p {
         <p><b>By clicking "Next," you consent to participate in this study.</b></p>
 
     {{ else }}
-        <h3 style="font-size: 20px;"><b>Willkommen zum Experiment</b></h3>
+
         <p>
             Diese Studie ist Teil des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>,
             durchgeführt von der <b>Zeppelin Universität</b> und dem <b>Deutschen Forschungszentrum für Künstliche Intelligenz (DFKI)</b>.
