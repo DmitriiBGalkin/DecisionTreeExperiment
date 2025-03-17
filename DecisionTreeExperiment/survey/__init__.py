@@ -19,7 +19,7 @@ class C(BaseConstants):
         ['Tree_2.html', False],
         ['Tree_3.html', True],
     ]
-
+    payment_for_correct_answer = 0.10
 class Subsession(BaseSubsession):
     pass
 
@@ -29,6 +29,27 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    question_loan = models.BooleanField(
+        choices=[
+            (True, Lexicon.approved),
+            (False, Lexicon.denied),
+        ],
+        label=Lexicon.question_loan_sample1_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
+    is_correct = models.BooleanField()
+    total_correct_answers=models.IntegerField()
+    confidence_level = models.IntegerField(
+        choices=[
+            (1, Lexicon.confidence_level_1),
+            (2, Lexicon.confidence_level_2),
+            (3, Lexicon.confidence_level_3),
+            (4, Lexicon.confidence_level_4),
+            (5, Lexicon.confidence_level_5),
+        ],
+        label=Lexicon.confidence_level_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
     familiarity_with_decision_trees = models.IntegerField(
         choices=[
             (1, Lexicon.familiarity_with_decision_trees_1),
@@ -145,25 +166,7 @@ class Player(BasePlayer):
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
-    question_loan = models.BooleanField(
-        choices=[
-            (1, Lexicon.approved),
-            (2, Lexicon.denied),
-        ],
-        label=Lexicon.question_loan_sample1_label,
-        widget=widgets.RadioSelectHorizontal,
-    )
-    confidence_level = models.IntegerField(
-        choices=[
-            (1, Lexicon.confidence_level_1),
-            (2, Lexicon.confidence_level_2),
-            (3, Lexicon.confidence_level_3),
-            (4, Lexicon.confidence_level_4),
-            (5, Lexicon.confidence_level_5),
-        ],
-        label=Lexicon.confidence_level_label,
-        widget=widgets.RadioSelectHorizontal,
-    )
+
 # FUNCTIONS
 # PAGES
 class IntroductionGeneral(Page):
@@ -238,26 +241,31 @@ class SampleQuestion_2(Page):
 class Tree_Question(Page):
     form_model = "player"
     form_fields = ["question_loan", "confidence_level"]
-
     @staticmethod
     def vars_for_template(player: Player):
         round_index = player.round_number - 1  # zero-indexed
         tree_template = C.TREE_ANSWERS[round_index][0]
-        correct_answer = C.TREE_ANSWERS[round_index][1]
         number_of_rounds=C.NUM_ROUNDS+2
-
         return dict(
             svg_template=f'Survey/Trees/{tree_template}',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
-
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
+        player.payoff = player.is_correct * C.payment_for_correct_answer
+        print(player.is_correct)
+        print(C.payment_for_correct_answer)
+        print(player.payoff)
 class Survey(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
+
     @staticmethod
     def vars_for_template(player: Player):
+        player.total_correct_answers = sum(p.is_correct for p in player.in_all_rounds())
         return dict(
             Lexicon=Lexicon,
             **which_language)
@@ -265,7 +273,20 @@ class Survey(Page):
     form_fields = ['gender', 'age', 'education_level', 'education_level_other', 'bundesland', 'serious_participation',
                    'feedback']
 
+class Results(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == C.NUM_ROUNDS
+    def vars_for_template(player: Player):
+        return dict(
+            total_score = player.total_correct_answers,
+            Lexicon = Lexicon,
+            **which_language)
+    form_model = 'player'
+    form_fields = ['gender', 'age', 'education_level', 'education_level_other', 'bundesland', 'serious_participation',
+                   'feedback']
 
 
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey]
+
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
 
