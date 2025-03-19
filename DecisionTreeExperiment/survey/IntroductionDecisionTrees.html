@@ -1,69 +1,5 @@
 {{ block style }}
-<style>
-.page-header {
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
-    padding-top:0px;
-}
-.otree-body {
-    max-width: 95%;
-    margin: 0 auto;
-}
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20px;
-}
-h1 {
-    font-size: 24px;
-    margin-top: 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-}
-p {
-    margin-bottom: 15px;
-    text-align: justify;
-}
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.text-box {
-    width: 90%;
-    border: 1px solid #ccc;
-    padding: 15px;
-    background-color: #f9f9f9;
-}
-.form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 20px;
-    }
-.responsive-svg-container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-}
-.form-box {
-        width: 75%;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-        text-align: center;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
 
 {{ block title }}
@@ -71,8 +7,7 @@ p {
 {{ endblock }}
 
 {{ block content }}
-<div class="main-container">
-    <div class="text-box">
+    <div class="box">
         {{ if en }}
             <p>
                 In the era of artificial intelligence, decisions impacting individuals—such as loan approvals—are often made by complex "black-box" AI models.
@@ -107,7 +42,7 @@ p {
     </div>
 
 <div class="responsive-svg-container">
-    <svg width="60%" height="auto" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
+    <svg width="80%" height="auto" viewBox="0 0 800 350" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
 
     <!-- Edges / Branches (Longer and Wider Angles) -->
     <line x1="400" y1="50" x2="200" y2="150" stroke="black" stroke-width="2"/>
@@ -151,7 +86,7 @@ p {
 
 </svg>
 </div>
-    <div class="text-box">
+    <div class="box">
     {{ if en }}
         <p>
             Suppose a bank provides you with the following decision tree as an explanation for their loan approval process.
@@ -217,13 +152,11 @@ p {
 </div>
 
     <div class="form-container">
-    <div class="form-box">
         {{ formfields }}
     </div>
-</div>
+
 
     <div class="btn-container">
         {{ next_button }}
     </div>
-</div>
 {{ endblock }}

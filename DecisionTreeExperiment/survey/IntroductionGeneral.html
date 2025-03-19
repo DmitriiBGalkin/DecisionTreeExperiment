@@ -1,62 +1,13 @@
 {{ block style }}
-<style>
-.page-header {
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
-    padding-top: 10px;
-}
-.otree-body {
-    max-width: 95%;
-    margin: 0 auto;
-}
-body {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-}
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20px;
-}
-h1 {
-    font-size: 24px;
-    margin-top: 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-p {
-    margin-bottom: 10px;
-}
-.main-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.text-box {
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-.table-box {
-    flex-basis: 60%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    align-items: center;
-}
-.table-box h2 {
-    margin-top: 0;
-    font-size: 20px;
-}
-</style>
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
 
 {{ block title }}
-    <h2>{{ Lexicon.welcome_title }}</h2>
+    <h1>{{ Lexicon.welcome_title }}</h1>
 {{ endblock }}
 
 {{ block content }}
-<div class="table-box">
+<div class="box">
     {{ if en }}
 
         <p>

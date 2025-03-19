@@ -1,68 +1,5 @@
 {{ block style }}
-<style>
-.page-header {
-    /* margin-top: 10px; */
-    /* margin-bottom: 10px; */
-    padding-top: 0px;
-}
-.otree-body {
-    max-width: 95%;
-    margin: 0 auto;
-}
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-.container-full {
-    width: 100%;
-    background-color: #f4f4f4;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 2px solid #ccc;
-}
-.main-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-.left-container {
-    flex: 2; /* Takes 2/3 of the width */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #ffffff;
-}
-.right-container {
-    flex: 1; /* Takes 1/3 of the width */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #ffffff;
-}
-.question-container {
-    margin-top: 5px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: center;
-}
-.radio-container {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    margin-top: 20px;
-}
-.radio-container label {
-    margin-bottom: 5px;
-}
-.responsive-svg-container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-}
-</style>
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
 
 {{ block title }}
@@ -72,7 +9,7 @@ body {
 {{ block content }}
 
 <!-- Instruction Box -->
-<div class="container-full">
+<div class="box">
     <h2>{% if en %}Instructions{% else %}Anweisungen{% endif %}</h2>
 
     <p>
@@ -116,7 +53,7 @@ body {
 
 
 <!-- Two-column layout -->
-<div class="main-container">
+<div class="container-flex">
     <!-- Left Side (Decision Tree) -->
     <div class="left-container">
         <div class="responsive-svg-container">
@@ -132,7 +69,7 @@ body {
 </div>
 
 <!-- Questions Section -->
-<div class="question-container">
+<div class="form-container">
         {{ formfield 'question_loan_sample1' }}
   <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
         {% if en %}
@@ -143,10 +80,10 @@ body {
     </div>
 </div>
 <!-- Confidence Rating -->
-<div class="question-container">
+<div class="form-container">
         {{ formfield 'confidence_level_sample1' }}
 </div>
-<div style="text-align: center; padding-top: 5px;">
+<div class="btn-container">
     {{ next_button }}
 </div>
 
