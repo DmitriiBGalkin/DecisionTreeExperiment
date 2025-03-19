@@ -1,51 +1,7 @@
 {{ block style }}
-<style>
-.otree-body {
-    max-width: 95%;
-    margin: 0 auto;
-}
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20px;
-}
-h1 {
-    font-size: 24px;
-    margin-top: 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-p {
-    margin-bottom: 10px;
-}
-.main-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-.form-box {
-    width: 60%;
-    max-width: 600px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    text-align: left;
-    margin-bottom: 15px;
-}
-</style>
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
+
 
 {{ block title }}
     <h1>{% if en %}Survey{% else %}Umfrage{% endif %}</h1>
@@ -53,9 +9,9 @@ p {
 
 {{ block content }}
 
-<div class="form-container">
+<div class="container-flex">
     <!-- Welcome Message -->
-    <div class="form-box">
+    <div class="box">
         <p>
         {% if en %}
             Thank you for completing the main part of the study. Please complete this final questionnaire.
@@ -68,7 +24,7 @@ p {
     </div>
 
     <!-- Form Fields in a Single Box -->
-    <div class="form-box">
+    <div class="box">
         <p>{{ formfield 'gender' }}</p>
         <p>{{ formfield 'age' }}</p>
         <p>{{ formfield 'education_level' }}</p>
