@@ -29,7 +29,7 @@ h1 {
     text-align: center;
 }
 p {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     text-align: justify;
 }
 
@@ -57,10 +57,10 @@ p {
 .box {
     width: 100%;
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 10px;
     font-size: 14px;
     background-color: #f9f9f9;
-    border-radius: 10px;
+    border-radius: 5px;
  }
 .box h2 {
     margin-top: 0;
@@ -81,15 +81,15 @@ p {
 /* Page Layout Adjustments */
 
 .left-container {
-    flex: 5; /* Takes 2/3 of the width */
-    padding: 20px;
+    flex: 7; /* Takes 2/3 of the width */
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #ffffff;
 }
 .right-container {
     flex: 2; /* Takes 1/3 of the width */
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #ffffff;

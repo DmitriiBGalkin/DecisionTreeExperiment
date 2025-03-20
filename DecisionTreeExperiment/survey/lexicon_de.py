@@ -34,7 +34,7 @@ class Lexicon:
     above = "Über"
     below = "Unter"
     between = "Zwischen"
-    at_least = "Mindestens"
+    and_more = "und mehr"
     at_most = "Höchstens"
 
     # Decision Tree Section

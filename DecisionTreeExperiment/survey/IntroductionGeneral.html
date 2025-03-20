@@ -8,32 +8,37 @@
 
 {{ block content }}
 <div class="box">
-    {{ if en }}
-
+    {% if en %}
         <p>
             This study is part of the <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> project, conducted by
             <b>Zeppelin University</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
         </p>
         <p>
             This experiment focuses on understanding decision trees and consists of the following phases:
-            <ul>
-                <li><b>Introduction:</b> A brief explanation of decision trees and how they work.</li>
-                <li><b>Practice Session:</b> You will be presented with sample questions to familiarize yourself with the task.</li>
-                <li><b>Main Study:</b> You will answer questions based on different decision trees.</li>
-                <li><b>Demographics & Feedback:</b> A short survey where you can provide feedback.</li>
-            </ul>
+        </p>
+        <ul>
+            <li><b>Introduction:</b> A brief explanation of decision trees and how they work.</li>
+            <li><b>Practice Session:</b> You will be presented with sample questions to familiarize yourself with the task.</li>
+            <li><b>Main Study:</b> You will answer questions based on different decision trees.</li>
+            <li><b>Demographics & Feedback:</b> A short survey where you can provide feedback.</li>
+        </ul>
+        <p>
+            <b>Remuneration:</b> Your participation fee is determined by Bilendi. Additionally, you will earn
+            <b>€0.10 for each correct answer</b> in the main part of the study.
         </p>
         <p>
-            You will receive a <b>base payment</b> for your participation. Additionally, you will earn
-            <b>€0.10 for each correct answer</b> in the main part of the study.
+            The study will take approximately <b>25 minutes</b> to complete.
         </p>
         <p>
             Your responses will remain <b>anonymous</b> and will be used <b>exclusively for research purposes</b>.
             All collected data will be stored and processed in accordance with <b>GDPR regulations</b>.
         </p>
-        <p><b>By clicking "Next," you consent to participate in this study.</b></p>
+        <p>
+            <b>Participation:</b> If you agree to participate, please click <b>"Next"</b> to continue.
+            If you do not wish to participate, you can simply close the browser window. However, please note that you will only receive remuneration if you complete the entire questionnaire.
+        </p>
 
-    {{ else }}
+    {% else %}
 
         <p>
             Diese Studie ist Teil des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>,
@@ -41,23 +46,30 @@
         </p>
         <p>
             Dieses Experiment befasst sich mit dem Verständnis von Entscheidungsbäumen und besteht aus folgenden Phasen:
-            <ul>
-                <li><b>Einführung:</b> Eine kurze Erklärung zu Entscheidungsbäumen und ihrer Funktionsweise.</li>
-                <li><b>Übungssession:</b> Sie erhalten Beispielaufgaben, um sich mit dem Ablauf vertraut zu machen.</li>
-                <li><b>Hauptstudie:</b> Sie beantworten Fragen zu verschiedenen Entscheidungsbäumen.</li>
-                <li><b>Demografie & Feedback:</b> Eine kurze Umfrage zur Erhebung einiger demografischer Informationen sowie die Möglichkeit, Feedback zu geben.</li>
-            </ul>
+        </p>
+        <ul>
+            <li><b>Einführung:</b> Eine kurze Erklärung zu Entscheidungsbäumen und ihrer Funktionsweise.</li>
+            <li><b>Übungsteil:</b> Sie erhalten Beispielaufgaben, um sich mit dem Ablauf vertraut zu machen.</li>
+            <li><b>Hauptstudie:</b> Sie beantworten Fragen zu verschiedenen Entscheidungsbäumen.</li>
+            <li><b>Demografie & Feedback:</b> Eine kurze Umfrage zur Erhebung einiger demografischer Informationen sowie die Möglichkeit, Feedback zu geben.</li>
+        </ul>
+        <p>
+            <b>Vergütung:</b> Ihre Teilnahmevergütung wird von Bilendi festgelegt. Zusätzlich verdienen Sie
+            <b>0,10 € für jede richtige Antwort</b> im Hauptteil der Studie.
         </p>
         <p>
-            Sie erhalten eine <b>Grundvergütung</b> für Ihre Teilnahme. Zusätzlich verdienen Sie
-            <b>0,10 € für jede richtige Antwort</b> im Hauptteil der Studie.
+            Die Studie dauert ungefähr <b>25 Minuten</b>.
         </p>
         <p>
             Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für Forschungszwecke</b> verwendet.
             Alle erhobenen Daten werden gemäß der <b>DSGVO</b> verarbeitet und gespeichert.
         </p>
-        <p><b>Durch Klicken auf "Weiter" erklären Sie sich mit der Teilnahme an dieser Studie einverstanden.</b></p>
-    {{ endif }}
+        <p>
+            <b>Teilnahme:</b> Wenn Sie teilnehmen möchten, klicken Sie bitte auf <b>"Weiter"</b>, um fortzufahren.
+            Falls Sie nicht teilnehmen möchten, können Sie einfach das Browserfenster schließen. Bitte beachten Sie jedoch, dass Sie Ihre Vergütung nur erhalten, wenn Sie den gesamten Fragebogen abschließen.
+        </p>
+
+    {% endif %}
 </div>
 
 <div class="btn-container">

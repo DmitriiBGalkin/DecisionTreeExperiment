@@ -1,6 +1,7 @@
 from otree.api import *
 from settings import LANGUAGE_CODE, SESSION_CONFIGS
 
+LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
 else:
@@ -189,6 +190,7 @@ class IntroductionDecisionTrees(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
+            svg_template='Survey/Trees/Tree_Sample_1.html',
             Lexicon=Lexicon,
             **which_language)
 

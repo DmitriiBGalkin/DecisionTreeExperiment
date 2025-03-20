@@ -26,6 +26,7 @@ class Lexicon:
     between = "Between"
     at_least = "At least"
     at_most = "At most"
+    and_more = "and more"
     approved = "Approved"
     denied = "Denied"
     #Decision Tree Question

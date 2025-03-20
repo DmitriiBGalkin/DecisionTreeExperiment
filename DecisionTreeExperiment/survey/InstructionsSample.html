@@ -3,7 +3,7 @@
 {{ endblock }}
 
 {{ block title }}
-    <h1>{% if en %}Overview of the Experiment{% else %}Übersicht über das Experiment{% endif %}</h1>
+    <h1>{% if en %}Main Study{% else %}Hauptstudie{% endif %}</h1>
 {{ endblock }}
 
 {{ block content }}
@@ -11,50 +11,55 @@
     {% if en %}
         <h3 style="font-size: 16px;"><b>Your Role in the Experiment</b></h3>
         <p>
-            In the main part of the experiment, you will be asked questions about decision trees in a certain scenario.
-            More specifically, throughout this experiment, you will assume the role of a loan applicant with hypothetical
-            profile information about your loan application.
+            In the main part of the experiment, you will take on the role of a <b>loan applicant</b> with hypothetical profile information.
+            You will be presented with different <b>decision trees</b>, each representing a different bank’s loan approval process.
         </p>
         <p>
-            You will be presented with several decision trees, each representing different bank loan approval processes.
-            While the profile information about your loan application will remain constant, the structure and content of
-            the decision trees will vary.
+            Your profile information will <b>stay the same</b> throughout the study, but the decision trees will change.
+            Your task is to analyze these trees and determine whether your loan application would be <b>approved or denied</b>.
         </p>
 
         <h3 style="font-size: 16px;"><b>Your Tasks:</b></h3>
         <ul>
-            <li>Answer questions about your understanding of the decision trees.</li>
-            <li>Respond to both single-answer and multiple-selection questions.</li>
-            <li>Rate your confidence in each answer. </li>
+            <li>Carefully analyze the decision tree and your profile information.</li>
+            <li>Answer whether your loan would be approved or denied.</li>
+            <li>Indicate how confident you are in your answer.</li>
         </ul>
 
         <p>
-            You will be paid for answering correctly in the main part of the experiment.
-            Before you start, you will also have 2 practice questions (not paid).
+            <b>Payment:</b> For each correct answer, you will earn an additional <b>€0.10</b> on top of your participation fee.
+            Before starting the main study, you will complete <b>two practice questions</b> (not paid).
+        </p>
+        <p>
+            <b>Note:</b> You are not expected to spend excessive time on each question or seek external help.
+            The goal of this study is to understand how people naturally interpret decision trees.
         </p>
 
     {% else %}
         <h3 style="font-size: 16px;"><b>Ihre Rolle im Experiment</b></h3>
         <p>
-            Im Hauptteil des Experiments werden Ihnen Fragen zu Entscheidungsbäumen in einem bestimmten Szenario gestellt.
-            Konkret übernehmen Sie in diesem Experiment die Rolle eines Kreditantragstellers mit hypothetischen Profildaten
-            zu Ihrem Kreditantrag.
+            Im Hauptteil des Experiments übernehmen Sie die Rolle eines <b>Kreditantragstellers</b> mit hypothetischen Profildaten.
+            Sie werden verschiedene <b>Entscheidungsbäume</b> sehen, die jeweils einen anderen Kreditgenehmigungsprozess einer Bank darstellen.
         </p>
         <p>
-            Sie werden mehrere Entscheidungsbäume sehen, die unterschiedliche Genehmigungsprozesse von Banken darstellen.
-            Während die Profildaten zu Ihrem Kreditantrag gleich bleiben, werden sich die Struktur und der Inhalt der Entscheidungsbäume ändern.
+            Ihre Profildaten bleiben <b>unverändert</b>, aber die Entscheidungsbäume werden sich ändern.
+            Ihre Aufgabe ist es, diese Entscheidungsbäume zu analysieren und zu bestimmen, ob Ihr Kreditantrag <b>genehmigt oder abgelehnt</b> wird.
         </p>
 
         <h3 style="font-size: 16px;"><b>Ihre Aufgaben:</b></h3>
         <ul>
-            <li>Beantworten Sie Fragen zu Ihrem Verständnis der Entscheidungsbäume.</li>
-            <li>Beantworten Sie sowohl Einzelauswahl- als auch Mehrfachauswahlfragen.</li>
-            <li>Bewerten Sie Ihr Vertrauen in jede Antwort.</li>
+            <li>Analysieren Sie den Entscheidungsbaum und Ihre Profildaten sorgfältig.</li>
+            <li>Geben Sie an, ob Ihr Kreditantrag genehmigt oder abgelehnt wird.</li>
+            <li>Schätzen Sie ein, wie sicher Sie sind, dass Ihre Antwort richtig ist.</li>
         </ul>
 
         <p>
-            Sie werden für korrekte Antworten im Hauptteil des Experiments bezahlt.
-            Bevor Sie beginnen, gibt es zwei Übungsfragen (ohne Bezahlung).
+            <b>Vergütung:</b> Für jede richtige Antwort erhalten Sie zusätzlich zu Ihrer Teilnahmevergütung <b>0,10 €</b>.
+            Vor der Hauptstudie bearbeiten Sie <b>zwei Übungsfragen</b> (ohne Bezahlung).
+        </p>
+        <p>
+            <b>Hinweis:</b> Sie müssen nicht übermäßig lange über jede Frage nachdenken oder externe Hilfe suchen.
+            Ziel dieser Studie ist es, zu verstehen, wie Menschen Entscheidungsbäume intuitiv interpretieren.
         </p>
     {% endif %}
 </div>
