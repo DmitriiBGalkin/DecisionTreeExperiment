@@ -1,7 +1,7 @@
 from otree.api import *
 from settings import LANGUAGE_CODE, SESSION_CONFIGS
 
-LANGUAGE_CODE = 'en' #this just for testing
+#LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
 else:
@@ -241,7 +241,8 @@ class SampleQuestion_2(Page):
         if values['question_loan_sample2'] != 1:
             return Lexicon.please_select_correct_answer
 
-class Tree_Question(Page):
+
+class TEST_Tree_Question(Page):
     form_model = "player"
     form_fields = ["question_loan", "confidence_level"]
     @staticmethod
@@ -250,7 +251,7 @@ class Tree_Question(Page):
         tree_template = C.TREE_ANSWERS[round_index][0]
         number_of_rounds=C.NUM_ROUNDS+2
         return dict(
-            svg_template=f'Survey/Trees/{tree_template}',
+            svg_template='Survey/Trees/TREE_TEST.html',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
@@ -261,6 +262,7 @@ class Tree_Question(Page):
         print(player.is_correct)
         print(C.payment_for_correct_answer)
         print(player.payoff)
+
 class Survey(Page):
     @staticmethod
     def is_displayed(player):
@@ -291,5 +293,6 @@ class Results(Page):
 
 
 
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
+#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
 
+page_sequence = [TEST_Tree_Question]

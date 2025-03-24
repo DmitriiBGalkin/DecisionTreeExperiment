@@ -38,6 +38,12 @@ class Lexicon:
     familiarity_with_decision_trees_4 = "Very familiar"
     familiarity_with_decision_trees_5 = "Extremely familiar"
     survey_title = "Survey"
+    or_oder = "or"
+
+
+    residence_rented = "Rented"
+    residence_mortgage = "Mortgage"
+    residence_homeowner = "Homeowner"
 
     # Gender
     gender_label = "What is your gender?"

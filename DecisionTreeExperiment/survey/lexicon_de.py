@@ -19,10 +19,13 @@ class Lexicon:
     # Levels
     credit_history_bad = "Schlecht"
     credit_history_good = "Gut"
-    credit_history_excellent = "Hervorragend"
+    credit_history_excellent = "Exzellent"
 
     employment_unemployed = "Arbeitslos"
     employment_stable = "Stabil"
+    residence_rented = "Miete"
+    residence_mortgage = "Hypothek"
+    residence_homeowner = "Eigentümer"
 
     marital_single = "Ledig"
     marital_married = "Verheiratet"
@@ -36,7 +39,7 @@ class Lexicon:
     between = "Zwischen"
     and_more = "und mehr"
     at_most = "Höchstens"
-
+    or_oder = "oder"
     # Decision Tree Section
     decision_tree_title = "Verständnis von Entscheidungsbäumen"
     familiarity_with_decision_trees_label = "Wie vertraut sind Sie mit Entscheidungsbäumen?"
