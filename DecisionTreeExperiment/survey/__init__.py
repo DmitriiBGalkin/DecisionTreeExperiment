@@ -13,7 +13,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 4
+    NUM_ROUNDS = 12
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -263,6 +263,29 @@ class TEST_Tree_Question(Page):
         print(C.payment_for_correct_answer)
         print(player.payoff)
 
+
+class Tree_Question(Page):
+    form_model = "player"
+    form_fields = ["question_loan", "confidence_level"]
+    @staticmethod
+    def vars_for_template(player: Player):
+        round_index = player.round_number - 1  # zero-indexed
+        tree_template = C.TREE_ANSWERS[round_index][0]
+        number_of_rounds=C.NUM_ROUNDS+2
+        return dict(
+            svg_template=f'Survey/Trees/{tree_template}',
+            Lexicon=Lexicon,
+            number_of_rounds=number_of_rounds,
+            **which_language)
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
+        player.payoff = player.is_correct * C.payment_for_correct_answer
+        print(player.is_correct)
+        print(C.payment_for_correct_answer)
+        print(player.payoff)
+
+
 class Survey(Page):
     @staticmethod
     def is_displayed(player):
@@ -293,6 +316,6 @@ class Results(Page):
 
 
 
-#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
 
-page_sequence = [TEST_Tree_Question]
+#page_sequence = [TEST_Tree_Question]

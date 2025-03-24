@@ -1,1 +1,66 @@
-<!-- HTML file Tree_11.html -->
+<svg width="100%" height="auto" viewBox="0 20 1000 420" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
+  <style>
+    .node-text { font-size: 18px; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 16px; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 16px; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+
+  <!-- Level 1: Income -->
+  <ellipse cx="525" cy="60" rx="90" ry="30" fill="#cce5ff" stroke="black" stroke-width="2"/>
+  <text x="525" y="60" class="node-text">{{ Lexicon.income }}</text>
+
+  <!-- Level 1 Branches -->
+  <line x1="525" y1="90" x2="300" y2="150" stroke="black" stroke-width="2"/>
+  <line x1="525" y1="90" x2="750" y2="150" stroke="black" stroke-width="2"/>
+  <text x="420" y="110" class="branch-text-left">{{ Lexicon.below }} 70.000</text>
+  <text x="630" y="110" class="branch-text-right">70.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Level 2 Left: Loan Amount (low income path) -->
+  <ellipse cx="300" cy="150" rx="90" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <text x="300" y="150" class="node-text">{{ Lexicon.loan_amount }}</text>
+
+  <!-- Level 2 Right: Loan Amount (high income path) -->
+  <ellipse cx="750" cy="150" rx="90" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <text x="750" y="150" class="node-text">{{ Lexicon.loan_amount }}</text>
+
+  <!-- Left Branches from Loan Amount < 70.000 path -->
+  <line x1="300" y1="180" x2="200" y2="250" stroke="black" stroke-width="2"/>
+  <line x1="300" y1="180" x2="400" y2="250" stroke="black" stroke-width="2"/>
+  <text x="240" y="215" class="branch-text-left">{{ Lexicon.below }} 18.000</text>
+  <text x="360" y="215" class="branch-text-right">18.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Right Branches from Loan Amount ≥ 70.000 path -->
+  <line x1="750" y1="180" x2="650" y2="250" stroke="black" stroke-width="2"/>
+  <line x1="750" y1="180" x2="850" y2="250" stroke="black" stroke-width="2"/>
+  <text x="690" y="215" class="branch-text-left">{{ Lexicon.below }} 60.000</text>
+  <text x="810" y="215" class="branch-text-right">60.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Leaf from high income path: Denied if loan ≥ 60.000 -->
+  <rect x="800" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <text x="850" y="275" class="node-text">{{ Lexicon.denied }}</text>
+
+  <!-- Leaf from high income path: Approved if loan < 60.000 -->
+  <rect x="600" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <text x="650" y="275" class="node-text">{{ Lexicon.approved }}</text>
+
+  <!-- Level 3 (left path): Credit History -->
+  <ellipse cx="200" cy="275" rx="90" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <text x="200" y="275" class="node-text">{{ Lexicon.credit_history }}</text>
+
+  <!-- Denied leaf (loan ≥ 20.000 for low income) -->
+  <rect x="350" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <text x="400" y="275" class="node-text">{{ Lexicon.denied }}</text>
+
+  <!-- Credit History Branches -->
+  <line x1="200" y1="305" x2="125" y2="360" stroke="black" stroke-width="2"/>
+  <line x1="200" y1="305" x2="275" y2="360" stroke="black" stroke-width="2"/>
+  <text x="150" y="330" class="branch-text-left">{{ Lexicon.credit_history_bad }}</text>
+  <text x="250" y="330" class="branch-text-right">{{ Lexicon.credit_history_good }} {{Lexicon.or_oder }} {{ Lexicon.credit_history_excellent }}</text>
+
+  <!-- Leaves from Credit History -->
+  <rect x="75" y="360" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <text x="125" y="385" class="node-text">{{ Lexicon.denied }}</text>
+
+  <rect x="250" y="360" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <text x="300" y="385" class="node-text">{{ Lexicon.approved }}</text>
+</svg>
