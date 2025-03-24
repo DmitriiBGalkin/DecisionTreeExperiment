@@ -40,6 +40,7 @@ class Lexicon:
     and_more = "und mehr"
     at_most = "Höchstens"
     or_oder = "oder"
+    not_nicht = "Nicht"
     # Decision Tree Section
     decision_tree_title = "Verständnis von Entscheidungsbäumen"
     familiarity_with_decision_trees_label = "Wie vertraut sind Sie mit Entscheidungsbäumen?"

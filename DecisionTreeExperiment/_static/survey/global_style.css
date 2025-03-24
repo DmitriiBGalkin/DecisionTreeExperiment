@@ -4,6 +4,11 @@
     max-width: 100%;
     margin: 0 auto;
 }
+.otree-body.container {
+    max-width: 95%;  /* or choose another value that fits your needs, e.g., 90% */
+    margin-left: auto;
+    margin-right: auto;
+}
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
@@ -82,7 +87,7 @@ p {
 /* Page Layout Adjustments */
 
 .left-container {
-    flex: 2; /* Takes 2/3 of the width */
+    flex: 2.5; /* Takes 2/3 of the width */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;

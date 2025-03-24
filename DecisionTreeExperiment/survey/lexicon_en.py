@@ -39,7 +39,7 @@ class Lexicon:
     familiarity_with_decision_trees_5 = "Extremely familiar"
     survey_title = "Survey"
     or_oder = "or"
-
+    not_nicht = "Not"
 
     residence_rented = "Rented"
     residence_mortgage = "Mortgage"
