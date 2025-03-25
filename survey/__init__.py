@@ -222,7 +222,7 @@ class IntroductionDecisionTrees(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            svg_template='Survey/Trees/Tree_Sample_1.html',
+            svg_template='survey/Trees/Tree_Sample_1.html',
             Lexicon=Lexicon,
             **which_language)
 
@@ -247,7 +247,7 @@ class SampleQuestion_1(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            svg_template='Survey/Trees/Tree_Sample_1.html',
+            svg_template='survey/Trees/Tree_Sample_1.html',
             Lexicon=Lexicon,
             **which_language)
 
@@ -264,7 +264,7 @@ class SampleQuestion_2(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            svg_template='Survey/Trees/Tree_Sample_2.html',
+            svg_template='survey/Trees/Tree_Sample_2.html',
             Lexicon=Lexicon,
             **which_language)
 
@@ -282,7 +282,7 @@ class TEST_Tree_Question(Page):
         tree_template = C.TREE_ANSWERS[round_index][0]
         number_of_rounds=C.NUM_ROUNDS+2
         return dict(
-            svg_template='Survey/Trees/TREE_TEST.html',
+            svg_template='survey/Trees/TREE_TEST.html',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
@@ -304,7 +304,7 @@ class Tree_Question(Page):
         tree_template = C.TREE_ANSWERS[round_index][0]
         number_of_rounds=C.NUM_ROUNDS
         return dict(
-            svg_template=f'Survey/Trees/{tree_template}',
+            svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
@@ -329,7 +329,7 @@ class Attention_Check(Page):
         tree_template = C.TREE_ANSWERS[round_index][0]
         number_of_rounds=C.NUM_ROUNDS
         return dict(
-            svg_template=f'Survey/Trees/{tree_template}',
+            svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
