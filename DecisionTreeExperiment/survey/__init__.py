@@ -13,13 +13,23 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 12
+    NUM_ROUNDS = 13
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
-        ['Tree_2.html', False],
-        ['Tree_3.html', True],
+        ['Tree_2.html', True],
+        ['Tree_3.html', False],
         ['Tree_4.html', True],
+        ['Tree_5.html', True],
+        ['Tree_6.html', False],
+        ['Tree_7.html', False],
+        ['Tree_8.html', True],
+        ['Tree_9.html', True],
+        ['Tree_10.html', False],
+        ['Tree_11.html', False],
+        ['Tree_12.html', True],
+        ['Tree_13.html', False],
+        ['Tree_14.html', True],
     ]
     payment_for_correct_answer = 0.10
 class Subsession(BaseSubsession):
@@ -39,6 +49,15 @@ class Player(BasePlayer):
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
+    attention_check = models.BooleanField(
+        choices=[
+            (True, Lexicon.approved),
+            (False, Lexicon.denied),
+        ],
+        label=Lexicon.attention_check_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
+
     is_correct = models.BooleanField()
     total_correct_answers=models.IntegerField()
     confidence_level = models.IntegerField(
@@ -52,6 +71,18 @@ class Player(BasePlayer):
         label=Lexicon.confidence_level_label,
         widget=widgets.RadioSelectHorizontal,
     )
+    fake_confidence_level = models.IntegerField(
+        choices=[
+            (1, Lexicon.confidence_level_1),
+            (2, Lexicon.confidence_level_2),
+            (3, Lexicon.confidence_level_3),
+            (4, Lexicon.confidence_level_4),
+            (5, Lexicon.confidence_level_5),
+        ],
+        label=Lexicon.confidence_level_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
+
     familiarity_with_decision_trees = models.IntegerField(
         choices=[
             (1, Lexicon.familiarity_with_decision_trees_1),
@@ -271,7 +302,7 @@ class Tree_Question(Page):
     def vars_for_template(player: Player):
         round_index = player.round_number - 1  # zero-indexed
         tree_template = C.TREE_ANSWERS[round_index][0]
-        number_of_rounds=C.NUM_ROUNDS+2
+        number_of_rounds=C.NUM_ROUNDS
         return dict(
             svg_template=f'Survey/Trees/{tree_template}',
             Lexicon=Lexicon,
@@ -284,6 +315,24 @@ class Tree_Question(Page):
         print(player.is_correct)
         print(C.payment_for_correct_answer)
         print(player.payoff)
+
+
+class Attention_Check(Page):
+    form_model = "player"
+    form_fields = ["attention_check", "fake_confidence_level"]
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number in [6, 11]
+    @staticmethod
+    def vars_for_template(player: Player):
+        round_index = player.round_number - 2  # zero-indexed
+        tree_template = C.TREE_ANSWERS[round_index][0]
+        number_of_rounds=C.NUM_ROUNDS
+        return dict(
+            svg_template=f'Survey/Trees/{tree_template}',
+            Lexicon=Lexicon,
+            number_of_rounds=number_of_rounds,
+            **which_language)
 
 
 class Survey(Page):
@@ -316,6 +365,6 @@ class Results(Page):
 
 
 
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question,  Survey, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
 
 #page_sequence = [TEST_Tree_Question]

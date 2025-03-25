@@ -91,3 +91,4 @@ class Lexicon:
     confidence_level_5 = "Extremely confident"
     question_loan_sample1_label = "Based on the presented decision tree and your profile information, would this loan be approved or denied?"
     please_select_correct_answer = "Please select the correct answer."
+    attention_check_label = "This is an attention check. Based on the instructions, please select the left answer (Approved)."

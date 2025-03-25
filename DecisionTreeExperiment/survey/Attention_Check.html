@@ -1,0 +1,57 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+{{ endblock }}
+
+
+{{ block title }}
+    <h1>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{player.round_number}}/{{ number_of_rounds }})</h1>
+{{ endblock }}
+
+{{ block content }}
+
+<!-- Instruction Box -->
+<div class="box">
+    <h3>{{ if en }}Instructions{{ else }}Anweisungen{{ endif }}</h3>
+
+    <p>
+        {{ if en }}
+            Please carefully analyze the <b>decision tree</b> and the given <b>profile information</b>.
+            Based on the provided information, determine whether the loan application would be <b>approved or denied</b>,
+            and state your level of confidence in your decision.
+        {{ else }}
+            Bitte analysieren Sie sorgfältig den <b>Entscheidungsbaum</b> und die angegebenen <b>Profildaten</b>.
+            Basierend auf den bereitgestellten Informationen bestimmen Sie, ob der Kreditantrag <b>genehmigt oder abgelehnt</b> wird,
+            und geben Sie an, wie sicher Sie sich mit Ihrer Entscheidung sind.
+        {{ endif }}
+    </p>
+</div>
+
+<!-- Two-column layout -->
+<div class="container-flex">
+    <!-- Left Side (Decision Tree) -->
+    <div class="left-container">
+        <div class="responsive-svg-container">
+            {{ include svg_template }}
+        </div>
+    </div>
+
+    <!-- Right Side (Loan Applicant Info) -->
+    <div class="right-container">
+    {{ include 'survey/Table_Profile_Information.html'}}
+    </div>
+</div>
+
+<!-- Questions Section -->
+<div class="form-container">
+        {{ formfield 'attention_check' }}
+</div>
+
+<!-- Confidence Rating -->
+<div class="form-container">
+        {{ formfield 'fake_confidence_level' }}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+{{ endblock }}

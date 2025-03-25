@@ -99,3 +99,4 @@ class Lexicon:
 
     question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren Profildaten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
     please_select_correct_answer = "Bitte wählen Sie die korrekte Antwort."
+    attention_check_label = "Dies ist eine Aufmerksamkeitsprüfung. Bitte wählen Sie entsprechend der Anweisung die linke Antwort aus (Genehmigt)."
