@@ -1,7 +1,7 @@
 from otree.api import *
 from settings import LANGUAGE_CODE, SESSION_CONFIGS
 
-LANGUAGE_CODE = 'en' #this just for testing
+#LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
 else:
