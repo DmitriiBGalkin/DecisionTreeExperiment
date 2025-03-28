@@ -2,16 +2,14 @@
     <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
 
-{{ block title }}
-    <h1>{% if en %}Sample Question 1 {% else %}Beispielaufgabe 1{% endif %}</h1>
-{{ endblock }}
 
 {{ block content }}
 
 <!-- Instruction Box -->
 <div class="box">
-    <h2>{% if en %}Instructions{% else %}Anweisungen{% endif %}</h2>
+    <h4>{% if en %}Sample Question 1 {% else %}Beispielaufgabe 1{% endif %}</h4>
 
+    <b>{% if en %}Instructions{% else %}Anweisungen{% endif %}:</b>
     <p>
         {% if en %}
             In this experiment, you will assume the role of a <b>loan applicant</b> with a fixed profile.
@@ -56,9 +54,7 @@
 <div class="container-flex">
     <!-- Left Side (Decision Tree) -->
     <div class="left-container">
-        <div class="responsive-svg-container">
-                {{ include svg_template }}
-        </div>
+            {{ include svg_template }}
     </div>
 
 <!-- Profile Information Section -->
@@ -73,9 +69,9 @@
         {{ formfield 'question_loan_sample1' }}
   <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
         {% if en %}
-            <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20.000 EUR</strong>, which is higher than 5.000 EUR. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45.000 EUR</strong> (below the required 100.000 EUR). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
+            <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20.000 €</strong>, which is higher than 5.000 €. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45.000 €</strong> (below the required 100.000 €). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
         {% else %}
-            <strong>Erläuterung:</strong> Laut den Profilinformationen beträgt die Kreditsumme <strong>20.000 EUR</strong>, was höher als 5.000 EUR ist. Daher würde der Entscheidungsbaum nach rechts abzweigen. Danach erfolgt eine Bewertung basierend auf dem Einkommen, welches <strong>45.000 EUR</strong> beträgt (unter den geforderten 100.000 EUR). Daher lautet die korrekte Antwort auf diese Frage, dass der Kredit <strong>abgelehnt</strong> würde.
+            <strong>Erläuterung:</strong> Laut den Profilinformationen beträgt die Kreditsumme <strong>20.000 €</strong>, was höher als 5.000 € ist. Daher würde der Entscheidungsbaum nach rechts abzweigen. Danach erfolgt eine Bewertung basierend auf dem Einkommen, welches <strong>45.000 €</strong> beträgt (unter 100.000 €). Daher lautet die korrekte Antwort auf diese Frage, dass der Kredit <strong>abgelehnt</strong> würde.
         {% endif %}
     </div>
 </div>

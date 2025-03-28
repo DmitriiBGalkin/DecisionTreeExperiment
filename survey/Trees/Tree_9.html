@@ -1,4 +1,10 @@
-<svg width="100%" height="auto" viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" style="background-color:white;">
+<svg
+  viewBox="00 0 870 350"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMinYMid  meet"
+  style="background-color: white;"
+>
+
   <style>
     .node-text { font-size: 18px; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
     .branch-text-left { font-size: 16px; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
@@ -25,12 +31,12 @@
   <!-- Level 2 Branches -->
   <!-- Left side (Income < 30.000) -->
   <line x1="250" y1="180" x2="150" y2="250" stroke="black" stroke-width="2"/>
-  <text x="190" y="215" class="branch-text-left">{{ Lexicon.below }} 5.000</text>
+  <text x="190" y="215" class="branch-text-left">5.000 {{ Lexicon.and_more }}</text>
   <rect x="100" y="250" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
   <text x="150" y="275" class="node-text">{{ Lexicon.approved }}</text>
 
   <line x1="250" y1="180" x2="350" y2="250" stroke="black" stroke-width="2"/>
-  <text x="310" y="215" class="branch-text-right">5.000 {{ Lexicon.and_more }}</text>
+  <text x="310" y="215" class="branch-text-right">{{ Lexicon.below }} 5.000</text>
   <rect x="300" y="250" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
   <text x="350" y="275" class="node-text">{{ Lexicon.denied }}</text>
 

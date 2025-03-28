@@ -3,16 +3,12 @@
 {{ endblock }}
 
 
-{{ block title }}
-    <h1>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{player.round_number}}/{{ number_of_rounds }})</h1>
-{{ endblock }}
+
 
 {{ block content }}
-
-<!-- Instruction Box -->
 <div class="box">
-    <h3>{{ if en }}Instructions{{ else }}Anweisungen{{ endif }}</h3>
-
+    <h4>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{player.round_number}}/{{ number_of_rounds }}). </h4>
+    <b>{{ if en }}Instructions:{{ else }}Anweisungen:{{ endif }}</b>
     <p>
         {{ if en }}
             Please carefully analyze the <b>decision tree</b> and the given <b>profile information</b>.

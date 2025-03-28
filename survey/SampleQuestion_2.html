@@ -2,16 +2,13 @@
     <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
 {{ endblock }}
 
-{{ block title }}
-    <h1>{% if en %}Sample Question 2 {% else %}Beispielaufgabe 2{% endif %}</h1>
-{{ endblock }}
-
 {{ block content }}
 
 <!-- Instruction Box -->
 <div class="box">
+     <h4>{% if en %}Sample Question 2 {% else %}Beispielaufgabe 2{% endif %}</h4>
         {% if en %}
-            Below is another example question and explanation.
+    Below is another example question and explanation.
         {% else %}
             Unten finden Sie eine Beispielaufgabe und eine Erläuterung.
         {% endif %}
@@ -23,9 +20,7 @@
 <div class="container-flex">
     <!-- Left Side (Decision Tree) -->
     <div class="left-container">
-        <div class="responsive-svg-container">
                 {{ include svg_template }}
-        </div>
     </div>
 
 <!-- Profile Information Section -->
@@ -40,13 +35,13 @@
         {{ formfield 'question_loan_sample2' }}
   <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
       {% if en %}
-    <strong>Explanation:</strong> The decision tree first evaluates the <strong>loan amount</strong>, which is <strong>20.000 EUR</strong>. Since this is higher than 5.000 EUR, the decision tree follows the <strong>right branch</strong>.
+    <strong>Explanation:</strong> The decision tree first evaluates the <strong>loan amount</strong>, which is <strong>20.000 €</strong>. Since this is higher than 5.000 €, the decision tree follows the <strong>right branch</strong>.
 
     Next, it evaluates <strong>credit history</strong>, which in the profile is marked as <strong>Good</strong>. Since a good credit history meets the bank's requirement, the evaluation continues.
 
     Finally, the decision tree assesses <strong>employment status</strong>, which is <strong>Stable</strong>. Given that stable employment fulfills the bank's conditions, the correct decision is that the loan would be <strong>approved</strong>.
 {% else %}
-    <strong>Erläuterung:</strong> Der Entscheidungsbaum bewertet zuerst den <strong>Kreditbetrag</strong>, welcher <strong>20.000 EUR</strong> beträgt. Da dieser Betrag höher als 5.000 EUR ist, folgt der Entscheidungsbaum dem <strong>rechten Zweig</strong>.
+    <strong>Erläuterung:</strong> Der Entscheidungsbaum bewertet zuerst den <strong>Kreditbetrag</strong>, welcher <strong>20.000 €</strong> beträgt. Da dieser Betrag höher als 5.000 € ist, folgt der Entscheidungsbaum dem <strong>rechten Zweig</strong>.
 
     Als Nächstes wird die <strong>Kreditwürdigkeit</strong> bewertet, die im Profil als <strong>Gut</strong> angegeben ist. Da eine gute Kreditwürdigkeit die Anforderungen der Bank erfüllt, geht die Bewertung weiter.
 

@@ -40,8 +40,8 @@
 </div>
 
 <!-- Decision Tree Graphic -->
-<div class="responsive-svg-container">
-    {{ include svg_template }}
+<div class="sample-responsive-svg">
+        {{ include svg_template }}
 </div>
 
 <div class="box">
@@ -77,7 +77,7 @@
 
         <p>
             Angenommen, eine Bank stellt Ihnen den folgenden <b>obigen</b> Entscheidungsbaum als Erklärung für ihren Kreditvergabeprozess bereit.
-            Laut diesem Baum bewertet die Bank zunächst die <b>Kreditsumme</b>, die im obersten Knoten dargestellt wird.
+            Laut diesem Baum bewertet die Bank zunächst die <b>Kreditbetrag</b>, die im obersten Knoten dargestellt wird.
         </p>
 
         <ul>
@@ -89,9 +89,9 @@
                 </ul>
             </li>
             <li>
-                <b>Wenn der Kreditbetrag mindestens 5.000 € beträgt</b> (rechter Zweig), bewertet die Bank als nächsten Schritt das Einkommen des Antragstellers.
+                <b>Wenn der Kreditbetrag 5.000 € und mehr beträgt</b> (rechter Zweig), bewertet die Bank als nächsten Schritt das Einkommen des Antragstellers.
                 <ul>
-                    <li>Wenn das Einkommen mindestens <b>100.000 €</b> beträgt, wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Wenn das Einkommen <b>100.000 €</b> (und mehr) beträgt, wird der Kredit <b>genehmigt</b>.</li>
                     <li>Andernfalls wird die Anfrage <b>abgelehnt</b>.</li>
                 </ul>
             </li>
