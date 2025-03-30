@@ -1,5 +1,6 @@
 from otree.api import *
-from settings import LANGUAGE_CODE, SESSION_CONFIGS
+from settings import LANGUAGE_CODE
+import random
 
 LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
@@ -9,11 +10,10 @@ else:
 which_language = {'en': False, 'de': False}  # noqa
 which_language[LANGUAGE_CODE[:2]] = True
 
-
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 16
+    NUM_ROUNDS = 21
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -33,6 +33,10 @@ class C(BaseConstants):
         ['Tree_15.html', False],
         ['Tree_16.html', True],
         ['Tree_17.html', True],
+        ['Tree_18.html', True],
+        ['Tree_19.html', True],
+        ['Tree_20.html', False],
+        ['Tree_21.html', True],
     ]
     payment_for_correct_answer = 0.10
 class Subsession(BaseSubsession):
@@ -204,6 +208,13 @@ class Player(BasePlayer):
     )
 
 # FUNCTIONS
+def creating_session(subsession: Subsession):
+    if subsession.round_number == 1:
+        if subsession.session.config['random_order']:
+            for player in subsession.get_players():
+                participant = player.participant
+                participant.order = random.choice([True, False])
+
 # PAGES
 class IntroductionGeneral(Page):
     @staticmethod
@@ -368,6 +379,6 @@ class Results(Page):
 
 
 
-#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
 
-page_sequence = [TEST_Tree_Question]
+#page_sequence = [TEST_Tree_Question]

@@ -2,9 +2,16 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='survey',
+        name='Survey_without_Random_Order',
          app_sequence=['survey'],
          num_demo_participants=5,
+         random_order=False,
+    ),
+    dict(
+        name='Survey_with_Random_Order',
+         app_sequence=['survey'],
+         num_demo_participants=5,
+        random_order=True ,
     ),
 ]
 
@@ -17,7 +24,7 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
 
-PARTICIPANT_FIELDS = []
+PARTICIPANT_FIELDS = ["treeOrder"]
 SESSION_FIELDS = []
 
 # ISO-639 code
