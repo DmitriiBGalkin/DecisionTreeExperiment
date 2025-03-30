@@ -1,7 +1,7 @@
 from otree.api import *
 from settings import LANGUAGE_CODE, SESSION_CONFIGS
 
-#LANGUAGE_CODE = 'en' #this just for testing
+LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
 else:
@@ -13,7 +13,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 13
+    NUM_ROUNDS = 16
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -30,6 +30,9 @@ class C(BaseConstants):
         ['Tree_12.html', True],
         ['Tree_13.html', False],
         ['Tree_14.html', True],
+        ['Tree_15.html', False],
+        ['Tree_16.html', True],
+        ['Tree_17.html', True],
     ]
     payment_for_correct_answer = 0.10
 class Subsession(BaseSubsession):
@@ -365,6 +368,6 @@ class Results(Page):
 
 
 
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
+#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
 
-#page_sequence = [TEST_Tree_Question]
+page_sequence = [TEST_Tree_Question]
