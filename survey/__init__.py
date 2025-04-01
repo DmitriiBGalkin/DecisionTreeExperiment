@@ -2,7 +2,7 @@ from otree.api import *
 from settings import LANGUAGE_CODE
 import random
 
-LANGUAGE_CODE = 'en' #this just for testing
+#LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
 else:
