@@ -22,4 +22,4 @@ def combine_tree_files(folder_path, n, output_file='Combined_Trees.html'):
     print(f"Combined content written to '{output_file}'")
 
 
-combine_tree_files(folder_path=r'.\Trees', n=17)
+combine_tree_files(folder_path=r'.\Trees', n=20)

@@ -13,7 +13,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 21
+    NUM_ROUNDS = 23
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -36,9 +36,10 @@ class C(BaseConstants):
         ['Tree_18.html', True],
         ['Tree_19.html', True],
         ['Tree_20.html', False],
-        ['Tree_21.html', True],
+        ['Tree_21.html', True]
     ]
     payment_for_correct_answer = 0.10
+    tree_order=list(range(0, 21))
 class Subsession(BaseSubsession):
     pass
 
@@ -65,7 +66,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
     )
 
-    is_correct = models.BooleanField()
+    is_correct = models.BooleanField(initial=False)
     total_correct_answers=models.IntegerField()
     confidence_level = models.IntegerField(
         choices=[
@@ -208,13 +209,19 @@ class Player(BasePlayer):
     )
 
 # FUNCTIONS
+
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        if subsession.session.config['random_order']:
-            for player in subsession.get_players():
-                participant = player.participant
-                participant.order = random.choice([True, False])
-
+        base_order = C.tree_order
+        for player in subsession.get_players():
+            participant = player.participant
+            if subsession.session.config.get('random_order', False):
+                order = base_order.copy()
+                random.shuffle(order)
+                participant.treeOrder = order
+            else:
+                participant.treeOrder = base_order.copy()
+            print(participant.treeOrder)
 # PAGES
 class IntroductionGeneral(Page):
     @staticmethod
@@ -294,7 +301,7 @@ class TEST_Tree_Question(Page):
     def vars_for_template(player: Player):
         round_index = player.round_number - 1  # zero-indexed
         tree_template = C.TREE_ANSWERS[round_index][0]
-        number_of_rounds=C.NUM_ROUNDS+2
+        number_of_rounds=C.NUM_ROUNDS
         return dict(
             svg_template='survey/Trees/TREE_TEST.html',
             Lexicon=Lexicon,
@@ -313,10 +320,16 @@ class Tree_Question(Page):
     form_model = "player"
     form_fields = ["question_loan", "confidence_level"]
     @staticmethod
+    def is_displayed(player):
+        return player.round_number not in [6, 11]
+    @staticmethod
     def vars_for_template(player: Player):
-        round_index = player.round_number - 1  # zero-indexed
-        tree_template = C.TREE_ANSWERS[round_index][0]
+        round_number = player.round_number
+        num_attention_checks_before = sum(1 for r in [6, 11] if r < round_number)
+        tree_number = player.participant.treeOrder[round_number-1-num_attention_checks_before]
+        tree_template = C.TREE_ANSWERS[tree_number][0]
         number_of_rounds=C.NUM_ROUNDS
+        print(num_attention_checks_before,'tree number',tree_number,'round number',player.round_number,tree_template)
         return dict(
             svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
@@ -324,7 +337,10 @@ class Tree_Question(Page):
             **which_language)
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
+        round_number = player.round_number
+        num_attention_checks_before = sum(1 for r in [6, 11] if r < round_number)
+        tree_number = player.participant.treeOrder[round_number-1-num_attention_checks_before]
+        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number][1])
         player.payoff = player.is_correct * C.payment_for_correct_answer
         print(player.is_correct)
         print(C.payment_for_correct_answer)
@@ -339,11 +355,11 @@ class Attention_Check(Page):
         return player.round_number in [6, 11]
     @staticmethod
     def vars_for_template(player: Player):
-        round_index = player.round_number - 2  # zero-indexed
+        round_index = player.round_number - 1  # zero-indexed
         tree_template = C.TREE_ANSWERS[round_index][0]
         number_of_rounds=C.NUM_ROUNDS
         return dict(
-            svg_template=f'survey/Trees/{tree_template}',
+            svg_template=f'survey/Trees/AC_{tree_template}',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
@@ -378,7 +394,11 @@ class Results(Page):
                    'feedback']
 
 
-
+#Actual sequence
 page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
 
+#For testing the randomisation technique
+#page_sequence = [Tree_Question, Attention_Check,  Survey, Results]
+
+#For testing the tree view
 #page_sequence = [TEST_Tree_Question]

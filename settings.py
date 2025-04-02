@@ -4,14 +4,14 @@ SESSION_CONFIGS = [
     dict(
         name='Survey_without_Random_Order',
          app_sequence=['survey'],
-         num_demo_participants=5,
+         num_demo_participants=500,
          random_order=False,
     ),
     dict(
         name='Survey_with_Random_Order',
          app_sequence=['survey'],
-         num_demo_participants=5,
-        random_order=True ,
+         num_demo_participants=500,
+         random_order=True,
     ),
 ]
 
