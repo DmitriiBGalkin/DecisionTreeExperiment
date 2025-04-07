@@ -43,12 +43,14 @@ class Lexicon:
     not_nicht = "Nicht"
     # Decision Tree Section
     decision_tree_title = "Verständnis von Entscheidungsbäumen"
-    familiarity_with_decision_trees_label = "Wie vertraut sind Sie mit Entscheidungsbäumen?"
-    familiarity_with_decision_trees_1 = "Überhaupt nicht vertraut"
-    familiarity_with_decision_trees_2 = "Etwas vertraut"
-    familiarity_with_decision_trees_3 = "Einigermaßen vertraut"
-    familiarity_with_decision_trees_4 = "Sehr vertraut"
-    familiarity_with_decision_trees_5 = "Äußerst vertraut"
+    familiarity_with_decision_trees_label = "Sind Sie in Ihrem persönlichen, akademischen oder beruflichen Umfeld bereits mit Entscheidungsbäumen oder ähnlichen grafischen Darstellungen (z. B. Flussdiagrammen) zur Abbildung von Entscheidungsprozessen in Berührung gekommen?"
+
+    familiarity_with_decision_trees_1 = "Überhaupt nicht"
+    familiarity_with_decision_trees_2 = "Selten"
+    familiarity_with_decision_trees_3 = "Gelegentlich"
+    familiarity_with_decision_trees_4 = "Häufig"
+    familiarity_with_decision_trees_5 = "Sehr häufig"
+
     survey_title = "Umfrage"
 
     # Gender

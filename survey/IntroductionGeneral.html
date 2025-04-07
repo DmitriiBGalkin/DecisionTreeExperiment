@@ -24,7 +24,8 @@
         </ul>
         <p>
             <b>Remuneration:</b> Your participation fee is determined by Bilendi. Additionally, you will earn
-            <b>€0.10 for each correct answer</b> in the main part of the study.
+            <b>€{{ C.payment_for_correct_answer|to2 }} for each correct answer</b> in the main part of the study.
+            This means you can earn up to <b>€{{ C.total_possible | to2 }}</b> in bonus payments.
         </p>
         <p>
             The study will take approximately <b>25 minutes</b> to complete.
@@ -55,7 +56,8 @@
         </ul>
         <p>
             <b>Vergütung:</b> Ihre Teilnahmevergütung wird von Bilendi festgelegt. Zusätzlich verdienen Sie
-            <b>0,10 € für jede richtige Antwort</b> im Hauptteil der Studie.
+            <b>€{{ C.payment_for_correct_answer|to2 }} für jede richtige Antwort</b> im Hauptteil der Studie.
+            Insgesamt können Sie bis zu <b>€{{ C.total_possible | to2 }}</b> als Bonus erhalten.
         </p>
         <p>
             Die Studie dauert ungefähr <b>25 Minuten</b>.

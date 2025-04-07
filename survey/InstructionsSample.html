@@ -12,22 +12,22 @@
         <h3 style="font-size: 16px;"><b>Your Role in the Experiment</b></h3>
         <p>
             In the main part of the experiment, you will take on the role of a <b>loan applicant</b> with hypothetical profile information.
-            You will be presented with different <b>decision trees</b>, each representing a different bank’s loan approval process.
+            You will be presented with a series of <b>decision trees</b>, each illustrating a different bank’s loan approval process.
         </p>
         <p>
-            Your profile information will <b>stay the same</b> throughout the study, but the decision trees will change.
-            Your task is to analyze these trees and determine whether your loan application would be <b>approved or denied</b>.
+            Your profile will <b>remain constant</b> throughout the study, but the structure and content of the decision trees will vary.
+            Please note that the decision trees may sometimes represent only <b>segments of larger decision-making processes</b>, not full trees.
         </p>
 
         <h3 style="font-size: 16px;"><b>Your Tasks:</b></h3>
         <ul>
             <li>Carefully analyze the decision tree and your profile information.</li>
-            <li>Answer whether your loan would be approved or denied.</li>
+            <li>Answer whether your loan would be approved or denied, based solely on the information in the presented decision tree.</li>
             <li>Indicate how confident you are in your answer.</li>
         </ul>
 
         <p>
-            <b>Payment:</b> For each correct answer, you will earn an additional <b>€0.10</b> on top of your participation fee.
+            <b>Payment:</b> For each correct answer, you will earn an additional <b>€{{ C.payment_for_correct_answer|to2 }}</b> on top of your participation fee.
             Before starting the main study, you will complete <b>two practice questions</b> (not paid).
         </p>
         <p>
@@ -39,22 +39,22 @@
         <h3 style="font-size: 16px;"><b>Ihre Rolle im Experiment</b></h3>
         <p>
             Im Hauptteil des Experiments übernehmen Sie die Rolle eines <b>Kreditantragstellers</b> mit hypothetischen Profildaten.
-            Sie werden verschiedene <b>Entscheidungsbäume</b> sehen, die jeweils einen anderen Kreditgenehmigungsprozess einer Bank darstellen.
+            Sie sehen eine Reihe von <b>Entscheidungsbäumen</b>, die jeweils einen anderen Kreditgenehmigungsprozess einer Bank abbilden.
         </p>
         <p>
-            Ihre Profildaten bleiben <b>unverändert</b>, aber die Entscheidungsbäume werden sich ändern.
-            Ihre Aufgabe ist es, diese Entscheidungsbäume zu analysieren und zu bestimmen, ob Ihr Kreditantrag <b>genehmigt oder abgelehnt</b> wird.
+            Ihre Profildaten bleiben während der gesamten Studie <b>gleich</b>, aber die Entscheidungsbäume unterscheiden sich in Struktur und Inhalt.
+            Bitte beachten Sie, dass die dargestellten Entscheidungsbäume teilweise nur <b>Ausschnitte größerer Entscheidungsstrukturen</b> zeigen und keine vollständigen Bäume sein müssen.
         </p>
 
         <h3 style="font-size: 16px;"><b>Ihre Aufgaben:</b></h3>
         <ul>
             <li>Analysieren Sie den Entscheidungsbaum und Ihre Profildaten sorgfältig.</li>
-            <li>Geben Sie an, ob Ihr Kreditantrag genehmigt oder abgelehnt wird.</li>
+            <li>Geben Sie an, ob Ihr Kreditantrag genehmigt oder abgelehnt würde – ausschließlich basierend auf dem dargestellten Entscheidungsbaum.</li>
             <li>Schätzen Sie ein, wie sicher Sie sind, dass Ihre Antwort richtig ist.</li>
         </ul>
 
         <p>
-            <b>Vergütung:</b> Für jede richtige Antwort erhalten Sie zusätzlich zu Ihrer Teilnahmevergütung <b>0,10 €</b>.
+            <b>Vergütung:</b> Für jede richtige Antwort erhalten Sie zusätzlich zu Ihrer Teilnahmevergütung <b>€{{ C.payment_for_correct_answer|to2 }}</b>.
             Vor der Hauptstudie bearbeiten Sie <b>zwei Übungsfragen</b> (ohne Bezahlung).
         </p>
         <p>
@@ -63,6 +63,7 @@
         </p>
     {% endif %}
 </div>
+
 
 <div class="btn-container">
     {{ next_button }}

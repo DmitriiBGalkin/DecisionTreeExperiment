@@ -38,7 +38,8 @@ class C(BaseConstants):
         ['Tree_20.html', False],
         ['Tree_21.html', True]
     ]
-    payment_for_correct_answer = 0.10
+    payment_for_correct_answer = 0.30
+    total_possible = payment_for_correct_answer*(NUM_ROUNDS-2)
     tree_order=list(range(0, 21))
 class Subsession(BaseSubsession):
     pass
@@ -293,28 +294,15 @@ class SampleQuestion_2(Page):
         if values['question_loan_sample2'] != 1:
             return Lexicon.please_select_correct_answer
 
-
-class TEST_Tree_Question(Page):
-    form_model = "player"
-    form_fields = ["question_loan", "confidence_level"]
+class PreMainStudy(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number == 1
     @staticmethod
     def vars_for_template(player: Player):
-        round_index = player.round_number - 1  # zero-indexed
-        tree_template = C.TREE_ANSWERS[round_index][0]
-        number_of_rounds=C.NUM_ROUNDS
         return dict(
-            svg_template='survey/Trees/TREE_TEST.html',
             Lexicon=Lexicon,
-            number_of_rounds=number_of_rounds,
             **which_language)
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
-        player.payoff = player.is_correct * C.payment_for_correct_answer
-        print(player.is_correct)
-        print(C.payment_for_correct_answer)
-        print(player.payoff)
-
 
 class Tree_Question(Page):
     form_model = "player"
@@ -393,9 +381,30 @@ class Results(Page):
     form_fields = ['gender', 'age', 'education_level', 'education_level_other', 'bundesland', 'serious_participation',
                    'feedback']
 
+class TEST_Tree_Question(Page):
+    form_model = "player"
+    form_fields = ["question_loan", "confidence_level"]
+    @staticmethod
+    def vars_for_template(player: Player):
+        round_index = player.round_number - 1  # zero-indexed
+        tree_template = C.TREE_ANSWERS[round_index][0]
+        number_of_rounds=C.NUM_ROUNDS
+        return dict(
+            svg_template='survey/Trees/TREE_TEST.html',
+            Lexicon=Lexicon,
+            number_of_rounds=number_of_rounds,
+            **which_language)
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
+        player.payoff = player.is_correct * C.payment_for_correct_answer
+        print(player.is_correct)
+        print(C.payment_for_correct_answer)
+        print(player.payoff)
+
 
 #Actual sequence
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,Tree_Question, Attention_Check,  Survey, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,PreMainStudy, Tree_Question, Attention_Check,  Survey, Results]
 
 #For testing the randomisation technique
 #page_sequence = [Tree_Question, Attention_Check,  Survey, Results]

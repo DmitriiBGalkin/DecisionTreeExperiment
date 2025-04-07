@@ -1,0 +1,54 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+{{ endblock }}
+
+{{ block title }}
+    <h1>{% if en %}Main Study{% else %}Hauptstudie{% endif %}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="box">
+    {% if en %}
+        <p>
+            You are now about to begin the <b>main part</b> of the study. In this section, you will evaluate a series of loan applications using various decision trees.
+        </p>
+        <p>
+            Please read each question carefully. Some questions are included as <b>attention checks</b> to ensure instructions are being followed.
+            These may ask you to select a specific answer, even if they appear similar to the other questions.
+        </p>
+        <p>
+            <b>Incentive:</b> For every correct answer in this section, you will earn an additional <b>€{{ C.payment_for_correct_answer|to2 }}</b> on top of your base compensation.
+            These rewards are designed to motivate accuracy and attentiveness.
+        </p>
+        <p>
+            Both attention checks and performance-based incentives help us ensure high-quality data and better understand how people interpret decision trees.
+        </p>
+        <p>
+            Click <b>"Next"</b> to begin the main study.
+        </p>
+
+    {% else %}
+        <p>
+            Sie beginnen nun mit dem <b>Hauptteil</b> der Studie. In diesem Abschnitt bewerten Sie eine Reihe von Kreditanträgen anhand verschiedener Entscheidungsbäume.
+        </p>
+        <p>
+            Bitte lesen Sie jede Frage sorgfältig. Einige Fragen dienen als <b>Aufmerksamkeitsprüfungen</b>, um sicherzustellen, dass die Anweisungen beachtet werden.
+            Diese Fragen können Sie auffordern, eine bestimmte Antwort auszuwählen – auch wenn sie ähnlich aussehen wie reguläre Fragen.
+        </p>
+        <p>
+            <b>Anreiz:</b> Für jede korrekte Antwort in diesem Abschnitt erhalten Sie zusätzlich zu Ihrer Grundvergütung <b>€{{ C.payment_for_correct_answer|to2 }}</b>.
+            Diese Belohnung soll sorgfältiges und aufmerksames Bearbeiten fördern.
+        </p>
+        <p>
+            Sowohl die Aufmerksamkeitsprüfungen als auch die leistungsbezogenen Vergütungen helfen uns, die Datenqualität zu sichern und besser zu verstehen, wie Menschen Entscheidungsbäume interpretieren.
+        </p>
+        <p>
+            Klicken Sie auf <b>"Weiter"</b>, um mit der Hauptstudie zu beginnen.
+        </p>
+    {% endif %}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+{{ endblock }}
