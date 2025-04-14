@@ -66,14 +66,33 @@ class Lexicon:
 
     # Education
     education_label = "Welchen Bildungsabschluss haben Sie? Bitte wählen Sie den höchsten Abschluss, den Sie bisher erreicht haben."
+
     education_schueler = "Noch Schüler"
-    education_hauptschule = "Volks-, Hauptschulabschluss, Quali"
-    education_mittlere_reife = "Mittlere Reife, Realschul- oder gleichwertiger Abschluss"
-    education_lehre = "Abgeschlossene Lehre"
-    education_fachabitur = "Fachabitur, Fachhochschulreife"
-    education_abitur = "Abitur, Hochschulreife"
-    education_hochschulabschluss = "Fachhochschul-/Hochschulabschluss"
-    education_other = "Anderer Abschluss, und zwar:"
+    education_hauptschule = "Volks- oder Hauptschulabschluss (inkl. Quali)"
+    education_mittlere_reife = "Mittlere Reife / Realschulabschluss oder gleichwertig"
+    education_lehre = "Abgeschlossene Berufsausbildung / Lehre"
+    education_fachabitur = "Fachabitur / Fachhochschulreife"
+    education_abitur = "Allgemeine Hochschulreife / Abitur"
+    education_bachelor = "Bachelorabschluss"
+    education_master = "Masterabschluss / Diplom / Magister / Staatsexamen"
+    education_phd = "Promotion / Doktortitel"
+    education_other = "Anderer Abschluss (bitte angeben)"
+
+
+    study_label = "Was ist (oder war) Ihr Studienfach?"
+    study_none = "Kein Studium / Nicht zutreffend"
+    study_engineering = "Ingenieurwissenschaften"
+    study_computer_science = "Informatik / Informationstechnologie"
+    study_mathematics = "Mathematik / Statistik"
+    study_natural_sciences = "Naturwissenschaften (z. B. Physik, Chemie, Biologie)"
+    study_medicine = "Medizin / Gesundheitswissenschaften"
+    study_economics = "Wirtschaftswissenschaften / Betriebswirtschaftslehre"
+    study_law = "Rechtswissenschaften"
+    study_social_sciences = "Sozialwissenschaften / Politikwissenschaft / Soziologie"
+    study_education = "Erziehungswissenschaft / Pädagogik"
+    study_humanities = "Geisteswissenschaften / Kunst / Sprachen"
+    study_other = "Anderes Fach (bitte angeben)"
+    study_other_label = "Falls anderes Fach, bitte angeben:"
 
     # Serious Participation
     participation_label = (
@@ -102,3 +121,15 @@ class Lexicon:
     question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren Profildaten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
     please_select_correct_answer = "Bitte wählen Sie die korrekte Antwort."
     attention_check_label = "Dies ist eine Aufmerksamkeitsprüfung. Bitte wählen Sie entsprechend der Anweisung die linke Antwort aus (Genehmigt)."
+    attention_check_label_confidence = "Dies ist eine Aufmerksamkeitsfrage. Bitte wählen Sie die äußerste rechte Option (Sehr sicher)."
+
+    subjective_social_status_label = "Stellen Sie sich vor, diese Leiter repräsentiert die gesellschaftliche Stellung von Menschen. Oben stehen diejenigen, denen es am besten geht – sie haben das meiste Geld, die beste Bildung und die angesehensten Berufe. Unten stehen diejenigen, denen es am schlechtesten geht. Wo würden Sie sich selbst auf dieser Leiter einordnen?"
+    income_band_label = "Wie hoch ist Ihr ungefähres Jahreseinkommen (vor Steuern)?"
+    income_band_1 = "Weniger als 10.000 €"
+    income_band_2 = "10.000 € – 19.999 €"
+    income_band_3 = "20.000 € – 29.999 €"
+    income_band_4 = "30.000 € – 39.999 €"
+    income_band_5 = "40.000 € – 49.999 €"
+    income_band_6 = "50.000 € – 59.999 €"
+    income_band_7 = "60.000 € – 69.999 €"
+    income_band_8 = "70.000 € oder mehr"

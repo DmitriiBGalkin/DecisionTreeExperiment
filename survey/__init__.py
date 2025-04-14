@@ -88,7 +88,7 @@ class Player(BasePlayer):
             (4, Lexicon.confidence_level_4),
             (5, Lexicon.confidence_level_5),
         ],
-        label=Lexicon.confidence_level_label,
+        label=Lexicon.attention_check_label_confidence,
         widget=widgets.RadioSelectHorizontal,
     )
 
@@ -113,8 +113,7 @@ class Player(BasePlayer):
             (3, Lexicon.gender_diverse),
             (4, Lexicon.gender_no_answer),
         ],
-        label=Lexicon.gender_label,
-        widget=widgets.RadioSelect,
+        label=Lexicon.gender_label
     )
     age = models.IntegerField(
         label=Lexicon.age_label,
@@ -129,11 +128,38 @@ class Player(BasePlayer):
             Lexicon.education_lehre,
             Lexicon.education_fachabitur,
             Lexicon.education_abitur,
-            Lexicon.education_hochschulabschluss,
+            Lexicon.education_bachelor,
+            Lexicon.education_master,
+            Lexicon.education_phd,
             Lexicon.education_other,
         ],
         label=Lexicon.education_label
     )
+
+
+    field_of_study = models.StringField(
+        choices=[
+            Lexicon.study_none,
+            Lexicon.study_engineering,
+            Lexicon.study_computer_science,
+            Lexicon.study_mathematics,
+            Lexicon.study_natural_sciences,
+            Lexicon.study_medicine,
+            Lexicon.study_economics,
+            Lexicon.study_law,
+            Lexicon.study_social_sciences,
+            Lexicon.study_education,
+            Lexicon.study_humanities,
+            Lexicon.study_other,
+        ],
+        label=Lexicon.study_label
+    )
+
+    field_of_study_other = models.StringField(
+        label=Lexicon.study_other_label,
+        blank=True,
+    )
+
     education_level_other = models.StringField(
         label="Falls Sie 'Anderer Abschluss' gewählt haben, bitte angeben:",
         blank=True,  # This allows the field to remain empty
@@ -208,21 +234,60 @@ class Player(BasePlayer):
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
+    subjective_social_status = models.IntegerField(
+        choices=[(i, str(i)) for i in range(1, 11)],
+        label=Lexicon.subjective_social_status_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
+    income_band = models.IntegerField(
+        choices=[
+            (1, Lexicon.income_band_1),
+            (2, Lexicon.income_band_2),
+            (3, Lexicon.income_band_3),
+            (4, Lexicon.income_band_4),
+            (5, Lexicon.income_band_5),
+            (6, Lexicon.income_band_6),
+            (7, Lexicon.income_band_7),
+            (8, Lexicon.income_band_8),
+        ],
+        label=Lexicon.income_band_label
+    )
+
 
 # FUNCTIONS
 
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        base_order = C.tree_order
+        easy_trees = list(range(11))         # Tree_1 to Tree_11
+        hard_trees = list(range(11, 21))     # Tree_12 to Tree_21
+
         for player in subsession.get_players():
             participant = player.participant
-            if subsession.session.config.get('random_order', False):
-                order = base_order.copy()
-                random.shuffle(order)
-                participant.treeOrder = order
+            use_random = subsession.session.config.get('random_order', False)
+
+            if use_random:
+                # Randomly assign whether participant sees easy or hard trees first
+                easy_first = random.choice([True, False])
+                participant.easyFirst = easy_first
+
+                easy_part = easy_trees.copy()
+                hard_part = hard_trees.copy()
+                random.shuffle(easy_part)
+                random.shuffle(hard_part)
+
+                if easy_first:
+                    full_order = easy_part + hard_part
+                else:
+                    full_order = hard_part + easy_part
+
             else:
-                participant.treeOrder = base_order.copy()
-            print(participant.treeOrder)
+                # Fixed order from 0 to 20 (Tree_1.html to Tree_21.html)
+                participant.easyFirst = True  # or set to None if not used
+                full_order = list(range(21))
+
+            participant.treeOrder = full_order
+            print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+
 # PAGES
 class IntroductionGeneral(Page):
     @staticmethod
@@ -353,7 +418,7 @@ class Attention_Check(Page):
             **which_language)
 
 
-class Survey(Page):
+class Survey_Demographics(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
@@ -365,7 +430,7 @@ class Survey(Page):
             Lexicon=Lexicon,
             **which_language)
     form_model = 'player'
-    form_fields = ['gender', 'age', 'education_level', 'education_level_other', 'bundesland', 'serious_participation',
+    form_fields = ['gender', 'age', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
                    'feedback']
 
 class Results(Page):
@@ -377,9 +442,7 @@ class Results(Page):
             total_score = player.total_correct_answers,
             Lexicon = Lexicon,
             **which_language)
-    form_model = 'player'
-    form_fields = ['gender', 'age', 'education_level', 'education_level_other', 'bundesland', 'serious_participation',
-                   'feedback']
+
 
 class TEST_Tree_Question(Page):
     form_model = "player"
@@ -404,10 +467,13 @@ class TEST_Tree_Question(Page):
 
 
 #Actual sequence
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,PreMainStudy, Tree_Question, Attention_Check,  Survey, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,PreMainStudy, Tree_Question, Attention_Check,  Survey_Demographics, Results]
 
 #For testing the randomisation technique
-#page_sequence = [Tree_Question, Attention_Check,  Survey, Results]
+#page_sequence = [Tree_Question, Attention_Check,  Survey_Demographics, Results]
 
 #For testing the tree view
 #page_sequence = [TEST_Tree_Question]
+
+#For testing the survey
+#page_sequence = [Survey_Demographics]

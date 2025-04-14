@@ -59,14 +59,34 @@ class Lexicon:
 
     # Education
     education_label = "What is the highest level of education you have completed?"
+
     education_schueler = "Still in school"
-    education_hauptschule = "Primary/Secondary school diploma"
-    education_mittlere_reife = "Intermediate school diploma (Realschule or equivalent)"
-    education_lehre = "Completed apprenticeship"
+    education_hauptschule = "Lower secondary education (e.g., Hauptschule)"
+    education_mittlere_reife = "Intermediate secondary education (e.g., Realschule or equivalent)"
+    education_lehre = "Completed vocational training / apprenticeship"
     education_fachabitur = "Advanced technical college entrance qualification"
-    education_abitur = "High school diploma (Abitur)"
-    education_hochschulabschluss = "University degree"
+    education_abitur = "General higher education entrance qualification (Abitur)"
+    education_bachelor = "Bachelor’s degree"
+    education_master = "Master’s degree / Diploma / Magister / State examination"
+    education_phd = "Doctorate / PhD"
+    education_other = "Other (please specify)"
+
     education_other = "Other degree, namely:"
+
+    study_label = "What is your (current or past) field of study?"
+    study_none = "I did not study / not applicable"
+    study_engineering = "Engineering"
+    study_computer_science = "Computer Science / Information Technology"
+    study_mathematics = "Mathematics / Statistics"
+    study_natural_sciences = "Natural Sciences (e.g., Physics, Chemistry, Biology)"
+    study_medicine = "Medicine / Health Sciences"
+    study_economics = "Economics / Business Administration"
+    study_law = "Law"
+    study_social_sciences = "Social Sciences / Political Science / Sociology"
+    study_education = "Education / Pedagogy"
+    study_humanities = "Humanities / Arts / Languages"
+    study_other = "Other (please specify)"
+    study_other_label = "If other, please specify:"
 
     # Serious Participation
     participation_label = (
@@ -93,3 +113,15 @@ class Lexicon:
     question_loan_sample1_label = "Based on the presented decision tree and your profile information, would this loan be approved or denied?"
     please_select_correct_answer = "Please select the correct answer."
     attention_check_label = "This is an attention check. Based on the instructions, please select the left answer (Approved)."
+    attention_check_label_confidence = "This is an attention check. Please select the rightmost option (Extremely confident)."
+
+    subjective_social_status_label = "Think of this ladder as representing where people stand in society. At the top are the people who are best off—those who have the most money, education, and respected jobs. At the bottom are the people who are worst off. Where would you place yourself on this ladder?"
+    income_band_label = "What is your approximate yearly income (before taxes)?"
+    income_band_1 = "Less than €10,000"
+    income_band_2 = "€10,000 – €19,999"
+    income_band_3 = "€20,000 – €29,999"
+    income_band_4 = "€30,000 – €39,999"
+    income_band_5 = "€40,000 – €49,999"
+    income_band_6 = "€50,000 – €59,999"
+    income_band_7 = "€60,000 – €69,999"
+    income_band_8 = "€70,000 or more"
