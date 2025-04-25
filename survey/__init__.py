@@ -13,7 +13,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 23
+    NUM_ROUNDS = 21
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -58,14 +58,7 @@ class Player(BasePlayer):
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
-    attention_check = models.BooleanField(
-        choices=[
-            (True, Lexicon.approved),
-            (False, Lexicon.denied),
-        ],
-        label=Lexicon.attention_check_label,
-        widget=widgets.RadioSelectHorizontal,
-    )
+
 
     is_correct = models.BooleanField(initial=False)
     total_correct_answers=models.IntegerField()
@@ -80,17 +73,7 @@ class Player(BasePlayer):
         label=Lexicon.confidence_level_label,
         widget=widgets.RadioSelectHorizontal,
     )
-    fake_confidence_level = models.IntegerField(
-        choices=[
-            (1, Lexicon.confidence_level_1),
-            (2, Lexicon.confidence_level_2),
-            (3, Lexicon.confidence_level_3),
-            (4, Lexicon.confidence_level_4),
-            (5, Lexicon.confidence_level_5),
-        ],
-        label=Lexicon.attention_check_label_confidence,
-        widget=widgets.RadioSelectHorizontal,
-    )
+
 
     familiarity_with_decision_trees = models.IntegerField(
         choices=[
@@ -237,7 +220,7 @@ class Player(BasePlayer):
     subjective_social_status = models.IntegerField(
         choices=[(i, str(i)) for i in range(1, 11)],
         label=Lexicon.subjective_social_status_label,
-        widget=widgets.RadioSelectHorizontal,
+        widget=widgets.RadioSelectHorizontal
     )
     income_band = models.IntegerField(
         choices=[
@@ -378,8 +361,7 @@ class Tree_Question(Page):
     @staticmethod
     def vars_for_template(player: Player):
         round_number = player.round_number
-        num_attention_checks_before = sum(1 for r in [6, 11] if r < round_number)
-        tree_number = player.participant.treeOrder[round_number-1-num_attention_checks_before]
+        tree_number = player.participant.treeOrder[round_number]
         tree_template = C.TREE_ANSWERS[tree_number][0]
         number_of_rounds=C.NUM_ROUNDS
         print(num_attention_checks_before,'tree number',tree_number,'round number',player.round_number,tree_template)
@@ -391,8 +373,7 @@ class Tree_Question(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
         round_number = player.round_number
-        num_attention_checks_before = sum(1 for r in [6, 11] if r < round_number)
-        tree_number = player.participant.treeOrder[round_number-1-num_attention_checks_before]
+        tree_number = player.participant.treeOrder[round_number]
         player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number][1])
         player.payoff = player.is_correct * C.payment_for_correct_answer
         print(player.is_correct)
@@ -400,29 +381,10 @@ class Tree_Question(Page):
         print(player.payoff)
 
 
-class Attention_Check(Page):
-    form_model = "player"
-    form_fields = ["attention_check", "fake_confidence_level"]
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number in [6, 11]
-    @staticmethod
-    def vars_for_template(player: Player):
-        round_index = player.round_number - 1  # zero-indexed
-        tree_template = C.TREE_ANSWERS[round_index][0]
-        number_of_rounds=C.NUM_ROUNDS
-        return dict(
-            svg_template=f'survey/Trees/AC_{tree_template}',
-            Lexicon=Lexicon,
-            number_of_rounds=number_of_rounds,
-            **which_language)
-
-
 class Survey_Demographics(Page):
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
-
     @staticmethod
     def vars_for_template(player: Player):
         player.total_correct_answers = sum(p.is_correct for p in player.in_all_rounds())
@@ -467,10 +429,10 @@ class TEST_Tree_Question(Page):
 
 
 #Actual sequence
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2,PreMainStudy, Tree_Question, Attention_Check,  Survey_Demographics, Results]
+page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, Survey_Demographics, Results]
 
 #For testing the randomisation technique
-#page_sequence = [Tree_Question, Attention_Check,  Survey_Demographics, Results]
+#page_sequence = [Tree_Question, Survey_Demographics, Results]
 
 #For testing the tree view
 #page_sequence = [TEST_Tree_Question]

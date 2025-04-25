@@ -1,0 +1,38 @@
+
+class Attention_Check(Page):
+    form_model = "player"
+    form_fields = ["attention_check", "fake_confidence_level"]
+    @staticmethod
+    def is_displayed(player):
+        return player.round_number in [6, 11]
+    @staticmethod
+    def vars_for_template(player: Player):
+        round_index = player.round_number - 1  # zero-indexed
+        tree_template = C.TREE_ANSWERS[round_index][0]
+        number_of_rounds=C.NUM_ROUNDS
+        return dict(
+            svg_template=f'survey/Trees/AC_{tree_template}',
+            Lexicon=Lexicon,
+            number_of_rounds=number_of_rounds,
+            **which_language)
+
+fake_confidence_level = models.IntegerField(
+        choices=[
+            (1, Lexicon.confidence_level_1),
+            (2, Lexicon.confidence_level_2),
+            (3, Lexicon.confidence_level_3),
+            (4, Lexicon.confidence_level_4),
+            (5, Lexicon.confidence_level_5),
+        ],
+        label=Lexicon.attention_check_label_confidence,
+        widget=widgets.RadioSelectHorizontal,
+    )
+
+      attention_check = models.BooleanField(
+        choices=[
+            (True, Lexicon.approved),
+            (False, Lexicon.denied),
+        ],
+        label=Lexicon.attention_check_label,
+        widget=widgets.RadioSelectHorizontal,
+    )
