@@ -1,0 +1,106 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+{{ endblock }}
+
+{{ block title }}
+    <h1>{{ if en }}Important Information for Pre-Study Participants{{ else }}Wichtige Informationen für Pre-Study-Teilnehmende{{ endif }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="box">
+    {{ if en }}
+        <p>
+            Thank you for taking part in the <b>pre-study</b>! The next pages will show the actual experiment.
+        </p>
+
+        <p>
+            If you find any mistakes, issues, or have suggestions for improvement, please use the feedback box provided at the bottom of each page.
+        </p>
+
+        <p>
+            The study will take approximately <b>30 minutes</b> and consists of:
+        </p>
+
+        <ul>
+            <li>Introduction</li>
+            <li>Two sample questions</li>
+            <li>21 main study questions</li>
+            <li>A short survey</li>
+            <li>Final results and payment overview</li>
+        </ul>
+
+        <p>
+            Your compensation will be:
+            <ul>
+                <li><b>€2.00</b> base payment (if you complete the experiment)</li>
+                <li><b>€0.30</b> additional for each correct answer (up to €6.30 maximum)</li>
+            </ul>
+            — meaning you can earn up to a total of <b>€8.30</b> in this study.
+        </p>
+
+        <p>
+            <b>Important:</b> To receive your payment, you will need to visit <b>Janet Gauss</b> and provide your <b>participant code</b>.
+            <br>
+            This code will be shown to you on the <b>final page</b> of the experiment, together with your <b>total number of correct answers</b> and your <b>final payment amount</b>.
+        </p>
+
+        <p>
+            Please note that the experiment is <b>not optimized for mobile devices</b>.
+            We strongly recommend using a <b>laptop</b> or <b>personal computer</b> for the best experience.
+        </p>
+
+        <p>
+            Thank you very much, and good luck with the experiment!
+        </p>
+
+    {{ else }}
+        <p>
+            Vielen Dank für Ihre Teilnahme an der <b>Pre-Study</b>! Auf den nächsten Seiten beginnt das eigentliche Experiment.
+        </p>
+
+        <p>
+            Falls Sie Fehler oder Probleme entdecken oder Verbesserungsvorschläge haben, nutzen Sie bitte das Feedback-Feld am Ende jeder Seite.
+        </p>
+
+        <p>
+            Die Studie dauert ungefähr <b>30 Minuten</b> und umfasst:
+        </p>
+
+        <ul>
+            <li>Einleitung</li>
+            <li>Zwei Beispielaufgaben</li>
+            <li>21 Hauptfragen</li>
+            <li>Eine kurze Umfrage</li>
+            <li>Ergebnisse und Auszahlung</li>
+        </ul>
+
+        <p>
+            Ihre Vergütung besteht aus:
+            <ul>
+                <li><b>2,00 €</b> Grundvergütung (bei vollständiger Teilnahme am Experiment)</li>
+                <li><b>0,30 €</b> zusätzlich für jede richtige Antwort (bis zu maximal 6,30 €)</li>
+            </ul>
+            — das bedeutet, Sie können insgesamt bis zu <b>8,30 €</b> in dieser Studie verdienen.
+        </p>
+
+        <p>
+            <b>Wichtig:</b> Um Ihre Vergütung zu erhalten, müssen Sie <b>Janet Gauss</b> aufsuchen und ihr Ihren <b>Teilnahmecode</b> mitteilen.
+            <br>
+            Dieser Code wird Ihnen auf der <b>letzten Seite</b> des Experiments zusammen mit Ihrer <b>Gesamtanzahl richtiger Antworten</b> und Ihrer <b>endgültigen Auszahlungssumme</b> angezeigt.
+        </p>
+
+        <p>
+            Bitte beachten Sie, dass das Experiment <b>nicht für mobile Endgeräte optimiert</b> ist.
+            Verwenden Sie daher bitte einen <b>Laptop</b> oder <b>PC</b> für die Teilnahme.
+        </p>
+
+        <p>
+            Vielen Dank und viel Erfolg beim Experiment!
+        </p>
+    {{ endif }}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+{{ endblock }}

@@ -3,15 +3,17 @@ from os import environ
 SESSION_CONFIGS = [
     dict(
         name='Survey_without_Random_Order',
-         app_sequence=['survey'],
-         num_demo_participants=500,
-         random_order=False,
+        app_sequence=['survey','onlySurveyAndResults'],
+        num_demo_participants=4,
+        random_order=False,
+        student_debug=True
     ),
     dict(
         name='Survey_with_Random_Order',
-         app_sequence=['survey'],
-         num_demo_participants=500,
-         random_order=True,
+        app_sequence=['survey','onlySurveyAndResults'],
+        num_demo_participants=4,
+        random_order=True,
+        student_debug=True
     ),
 ]
 
@@ -22,10 +24,10 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
+    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc=""
 )
 
-PARTICIPANT_FIELDS = ["treeOrder","easyFirst"]
+PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers"]
 SESSION_FIELDS = []
 
 # ISO-639 code

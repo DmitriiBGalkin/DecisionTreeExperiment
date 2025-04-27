@@ -1,0 +1,125 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+{{ endblock }}
+
+{{ block title }}
+    <h1>{{ if en }}Study Completed{{ else }}Studie abgeschlossen{{ endif }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="box">
+    {% if session.config.student_debug %}
+
+        {{ if en }}
+            <p>
+                Thank you for completing the study! 🎉
+            </p>
+
+            <div style="background-color: #eaf7ff; border: 1px solid #b3e0ff; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                <div style="font-weight: bold; margin-bottom: 10px;">
+                    Your Participant Code:
+                </div>
+                <div style="font-size: 1.4em; background: white; border: 2px dashed #b3e0ff; padding: 12px 20px; border-radius: 8px; display: inline-block; margin-bottom: 20px;">
+                    {{ participant.code }}
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <b>You answered:</b> {{ participant.total_correct_answers }}/21 questions correctly.
+                </div>
+                <div style="margin-top: 5px;">
+                    <b>This earns you:</b> €{{ player.payoff|to2 }} on top of your base participation fee.
+                </div>
+                <div style="margin-top: 5px;">
+                    <b>Your total payment:</b> €{{ participant.payoff_plus_participation_fee|to2 }}
+                </div>
+
+                <p style="margin-top: 15px;">
+                    Please provide your Participant Code to <b>Janet Gauss</b> to receive your payment.
+                </p>
+            </div>
+
+            <p>
+                If you have any further questions, you can email <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a>.
+            </p>
+
+            <p>
+                You may now close this window. Thank you once again for your help!
+            </p>
+
+        {{ else }}
+            <p>
+                Vielen Dank für Ihre Teilnahme an der Studie! 🎉
+            </p>
+
+            <div style="background-color: #eaf7ff; border: 1px solid #b3e0ff; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
+                <div style="font-weight: bold; margin-bottom: 10px;">
+                    Ihr Teilnehmer-Code:
+                </div>
+                <div style="font-size: 1.4em; background: white; border: 2px dashed #b3e0ff; padding: 12px 20px; border-radius: 8px; display: inline-block; margin-bottom: 20px;">
+                    {{ participant.code }}
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <b>Sie haben:</b> {{ participant.total_correct_answers }}/21 Fragen richtig beantwortet.
+                </div>
+                <div style="margin-top: 5px;">
+                    <b>Dies ergibt:</b> €{{ player.payoff|to2 }} zusätzlich zu Ihrer Grundvergütung.
+                </div>
+                <div style="margin-top: 5px;">
+                    <b>Ihre Gesamtauszahlung:</b> €{{ participant.payoff_plus_participation_fee|to2 }}
+                </div>
+
+                <p style="margin-top: 15px;">
+                    Bitte übermitteln Sie Ihren Teilnehmer-Code an <b>Janet Gauss</b>, um Ihre Vergütung zu erhalten.
+                </p>
+            </div>
+
+            <p>
+                Bei weiteren Fragen können Sie eine E-Mail an <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a> senden.
+            </p>
+
+            <p>
+                Sie können dieses Fenster jetzt schließen. Vielen Dank nochmals für Ihre Teilnahme!
+            </p>
+        {{ endif }}
+
+    {% else %}
+
+        {{ if en }}
+            <p>
+                Thank you for completing the study! 🎉
+            </p>
+
+            <p>
+                Your responses have been recorded successfully.
+            </p>
+
+            <p>
+                If you have any further questions, you can email <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a>.
+            </p>
+
+            <p>
+                You may now close this window. Thank you once again for your participation!
+            </p>
+
+        {{ else }}
+            <p>
+                Vielen Dank für Ihre Teilnahme an der Studie! 🎉
+            </p>
+
+            <p>
+                Ihre Antworten wurden erfolgreich gespeichert.
+            </p>
+
+            <p>
+                Bei weiteren Fragen können Sie eine E-Mail an <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a> senden.
+            </p>
+
+            <p>
+                Sie können dieses Fenster jetzt schließen. Vielen Dank nochmals für Ihre Teilnahme!
+            </p>
+        {{ endif }}
+
+    {% endif %}
+</div>
+{{ endblock }}

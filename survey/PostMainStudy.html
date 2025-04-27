@@ -1,0 +1,49 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+{{ endblock }}
+
+{{ block title }}
+    <h1>{{ if en }}Next Steps{{ else }}Nächste Schritte{{ endif }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="box">
+    {{ if en }}
+        <p>
+            Thank you for completing the <b>main part</b> of the study!
+        </p>
+        <p>
+            On the next page, you will be asked to complete a short <b>survey</b> about your background and experience.
+            This helps us better understand the results.
+        </p>
+        <p>
+            After the survey, you will see a summary of your <b>results</b> and your <b>final payment amount</b>, based on your performance.
+        </p>
+        <p>
+            Please click <b>"Next"</b> to proceed to the survey.
+        </p>
+
+    {{ else }}
+        <p>
+            Vielen Dank, dass Sie den <b>Hauptteil</b> der Studie abgeschlossen haben!
+        </p>
+        <p>
+            Auf der nächsten Seite werden Sie gebeten, eine kurze <b>Umfrage</b> zu Ihrem Hintergrund und Ihren Erfahrungen auszufüllen.
+            Diese Informationen helfen uns, die Ergebnisse besser zu verstehen.
+        </p>
+        <p>
+            Nach der Umfrage sehen Sie eine Zusammenfassung Ihrer <b>Ergebnisse</b> sowie Ihre <b>abschließende Auszahlungssumme</b>, die auf Ihrer Leistung basiert.
+        </p>
+        <p>
+            Klicken Sie auf <b>"Weiter"</b>, um zur Umfrage zu gelangen.
+        </p>
+    {{ endif }}
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+
+{{ include_sibling 'student_feedback.html' with feedback_field='PostMainStudy_SF' }}
+
+{{ endblock }}

@@ -8,7 +8,7 @@
 
 {{ block content }}
 <div class="box">
-    {% if en %}
+    {{ if en }}
         <p>
             This study is part of the <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> project, conducted by
             <b>Zeppelin University</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
@@ -18,28 +18,52 @@
         </p>
         <ul>
             <li><b>Introduction:</b> A brief explanation of decision trees and how they work.</li>
-            <li><b>Practice Session:</b> You will be presented with sample questions to familiarize yourself with the task.</li>
-            <li><b>Main Study:</b> You will answer questions based on different decision trees.</li>
-            <li><b>Demographics & Feedback:</b> A short survey where you can provide feedback.</li>
+            <li><b>Practice Session:</b> Sample questions to familiarize yourself with the task.</li>
+            <li><b>Main Study:</b> Answering questions based on different decision trees.</li>
+            <li><b>Demographics & Feedback:</b> A short survey for demographics and feedback.</li>
         </ul>
+
         <p>
-            <b>Remuneration:</b> Your participation fee is determined by Bilendi. Additionally, you will earn
-            <b>€{{ C.payment_for_correct_answer|to2 }} for each correct answer</b> in the main part of the study.
-            This means you can earn up to <b>€{{ C.total_possible | to2 }}</b> in bonus payments.
+            <b>Remuneration:</b> Your participation fee is determined by Bilendi. Additionally, you can earn
+            <b>€{{ C.payment_for_correct_answer|to2 }} per correct answer</b> in the main part of the study.
+            You can earn up to <b>€{{ C.total_possible|to2 }}</b> in bonus payments.
         </p>
+
         <p>
             The study will take approximately <b>25 minutes</b> to complete.
         </p>
+
         <p>
             Your responses will remain <b>anonymous</b> and will be used <b>exclusively for research purposes</b>.
-            All collected data will be stored and processed in accordance with <b>GDPR regulations</b>.
+            Data processing is done in accordance with <b>GDPR regulations</b>.
         </p>
+
+        <div class="box" style="margin-top: 20px;">
+            <details>
+                <summary style="cursor: pointer; font-weight: bold; font-size: 1.1em;">Click to view Consent Information</summary>
+                <p>You are participating in a scientific online study hosted using the oTree software on the Heroku platform.</p>
+                <p>Heroku is operated by Salesforce (415 Mission St, San Francisco, CA 94105, United States).</p>
+                <p>The goal of the study is to investigate the understanding of decision trees within the project <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>.</p>
+                <p>No personal data is collected for this study.</p>
+                <p>However, the Heroku platform collects technical data such as IP address and timestamps, which could potentially be linked to your person.</p>
+                <p>We do not receive this data. Please refer to Salesforce's Privacy Policy: <a href="https://www.salesforce.com/company/legal/privacy/" target="_blank">https://www.salesforce.com/company/legal/privacy/</a>.</p>
+                <p>According to our knowledge, Heroku deletes the data directly after the study ends.</p>
+                <p>Participation is voluntary and can be withdrawn at any time.</p>
+                <p>The data will be used exclusively for scientific purposes.</p>
+                <p>Because personal identification is not possible, we cannot process a deletion or withdrawal request unless you precisely specify what data you submitted.</p>
+                <p>Data processing is conducted in accordance with the GDPR (General Data Protection Regulation).</p>
+                <p>Since Heroku is based in the USA, a transfer to a third country cannot be fully ruled out.</p>
+                <p>If you have questions, please contact: Dmitrii Galkin, Zeppelin University, <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a>.</p>
+                <p>By clicking “Next”, you consent to participate under the stated conditions.</p>
+            </details>
+        </div>
+
         <p>
             <b>Participation:</b> If you agree to participate, please click <b>"Next"</b> to continue.
             If you do not wish to participate, you can simply close the browser window. However, please note that you will only receive remuneration if you complete the entire questionnaire.
         </p>
 
-    {% else %}
+    {{ else }}
 
         <p>
             Diese Studie ist Teil des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>,
@@ -49,32 +73,59 @@
             Dieses Experiment befasst sich mit dem Verständnis von Entscheidungsbäumen und besteht aus folgenden Phasen:
         </p>
         <ul>
-            <li><b>Einführung:</b> Eine kurze Erklärung zu Entscheidungsbäumen und ihrer Funktionsweise.</li>
-            <li><b>Übungsteil:</b> Sie erhalten Beispielaufgaben, um sich mit dem Ablauf vertraut zu machen.</li>
-            <li><b>Hauptstudie:</b> Sie beantworten Fragen zu verschiedenen Entscheidungsbäumen.</li>
-            <li><b>Demografie & Feedback:</b> Eine kurze Umfrage zur Erhebung einiger demografischer Informationen sowie die Möglichkeit, Feedback zu geben.</li>
+            <li><b>Einführung:</b> Kurze Erklärung zu Entscheidungsbäumen und deren Funktionsweise.</li>
+            <li><b>Übungsteil:</b> Beispielaufgaben zum Kennenlernen der Aufgabe.</li>
+            <li><b>Hauptstudie:</b> Beantwortung von Fragen zu Entscheidungsbäumen.</li>
+            <li><b>Demografie & Feedback:</b> Kurze Umfrage zu demografischen Angaben und Feedback.</li>
         </ul>
+
         <p>
-            <b>Vergütung:</b> Ihre Teilnahmevergütung wird von Bilendi festgelegt. Zusätzlich verdienen Sie
-            <b>€{{ C.payment_for_correct_answer|to2 }} für jede richtige Antwort</b> im Hauptteil der Studie.
-            Insgesamt können Sie bis zu <b>€{{ C.total_possible | to2 }}</b> als Bonus erhalten.
+            <b>Vergütung:</b> Ihre Teilnahmevergütung wird von Bilendi festgelegt. Zusätzlich können Sie
+            <b>€{{ C.payment_for_correct_answer|to2 }} pro richtiger Antwort</b> im Hauptteil der Studie verdienen.
+            Insgesamt können Sie bis zu <b>€{{ C.total_possible|to2 }}</b> als Bonus erhalten.
         </p>
+
         <p>
             Die Studie dauert ungefähr <b>25 Minuten</b>.
         </p>
+
         <p>
-            Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für Forschungszwecke</b> verwendet.
-            Alle erhobenen Daten werden gemäß der <b>DSGVO</b> verarbeitet und gespeichert.
+            Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für wissenschaftliche Zwecke</b> verwendet.
+            Die Verarbeitung erfolgt gemäß der <b>DSGVO</b>.
         </p>
+
+        <div class="box" style="margin-top: 20px;">
+            <details>
+                <summary style="cursor: pointer; font-weight: bold; font-size: 1.1em;">Klicken Sie hier, um die Einverständniserklärung anzuzeigen</summary>
+                <p>Sie nehmen an einer wissenschaftlichen Online-Studie teil, die mithilfe der Software oTree über die Plattform Heroku gehostet wird.</p>
+                <p>Verantwortlich für Heroku ist Salesforce (415 Mission St, San Francisco, CA 94105, Vereinigte Staaten).</p>
+                <p>Ziel der Studie ist es, das Verständnis von Entscheidungsbäumen im Rahmen des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> zu untersuchen.</p>
+                <p>Es werden für die Studie keine personenbezogenen Daten erhoben.</p>
+                <p>Die Plattform Heroku erhebt jedoch technische Daten wie IP-Adresse und Zeitstempel, welche Ihrer Person zugerechnet werden könnten.</p>
+                <p>Diese Daten erhalten wir nicht und verweisen daher auf die Datenschutzerklärung von Salesforce: <a href="https://www.salesforce.com/company/legal/privacy/" target="_blank">https://www.salesforce.com/company/legal/privacy/</a>.</p>
+                <p>Eine Löschung findet nach unserem Kenntnisstand bei Heroku direkt nach Ablauf der Studie statt.</p>
+                <p>Die Teilnahme ist freiwillig und kann jederzeit abgebrochen werden.</p>
+                <p>Die Daten werden ausschließlich für wissenschaftliche Zwecke verwendet.</p>
+                <p>Aufgrund dessen, dass eine Personenzuordnung nicht möglich ist, können wir auch nach Erhalt Ihrer Angaben, einen Widerruf oder eine Löschung nicht veranlassen ohne die genaue Angabe von Ihnen, was Sie uns übermittelt haben.</p>
+                <p>Die Verarbeitung erfolgt gemäß den Bestimmungen der Datenschutz-Grundverordnung (DSGVO).</p>
+                <p>Da Heroku ein Anbieter mit Sitz in den USA ist, kann ein sogenannter Drittstaatentransfer nicht vollständig ausgeschlossen werden.</p>
+                <p>Bei Fragen wenden Sie sich bitte an: Dmitrii Galkin, Zeppelin Universität, <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a>.</p>
+                <p>Mit dem Klick auf „Weiter“ erklären Sie sich mit der Teilnahme unter den genannten Bedingungen einverstanden.</p>
+            </details>
+        </div>
+
         <p>
             <b>Teilnahme:</b> Wenn Sie teilnehmen möchten, klicken Sie bitte auf <b>"Weiter"</b>, um fortzufahren.
             Falls Sie nicht teilnehmen möchten, können Sie einfach das Browserfenster schließen. Bitte beachten Sie jedoch, dass Sie Ihre Vergütung nur erhalten, wenn Sie den gesamten Fragebogen abschließen.
         </p>
 
-    {% endif %}
+    {{ endif }}
 </div>
 
 <div class="btn-container">
     {{ next_button }}
 </div>
+
+{{ include_sibling 'student_feedback.html' with feedback_field='IntroductionGeneral_SF' }}
+
 {{ endblock }}

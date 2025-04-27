@@ -1,6 +1,7 @@
 from otree.api import *
 from settings import LANGUAGE_CODE
 import random
+import time
 
 #LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
@@ -39,7 +40,7 @@ class C(BaseConstants):
         ['Tree_21.html', True]
     ]
     payment_for_correct_answer = 0.30
-    total_possible = payment_for_correct_answer*(NUM_ROUNDS-2)
+    total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     tree_order=list(range(0, 21))
 class Subsession(BaseSubsession):
     pass
@@ -56,22 +57,16 @@ class Player(BasePlayer):
             (False, Lexicon.denied),
         ],
         label=Lexicon.question_loan_sample1_label,
-        widget=widgets.RadioSelectHorizontal,
+        widget=widgets.RadioSelectHorizontal
     )
 
 
     is_correct = models.BooleanField(initial=False)
     total_correct_answers=models.IntegerField()
+
     confidence_level = models.IntegerField(
-        choices=[
-            (1, Lexicon.confidence_level_1),
-            (2, Lexicon.confidence_level_2),
-            (3, Lexicon.confidence_level_3),
-            (4, Lexicon.confidence_level_4),
-            (5, Lexicon.confidence_level_5),
-        ],
-        label=Lexicon.confidence_level_label,
-        widget=widgets.RadioSelectHorizontal,
+        blank=True,
+        label=Lexicon.confidence_level_label
     )
 
 
@@ -86,159 +81,84 @@ class Player(BasePlayer):
         label=Lexicon.familiarity_with_decision_trees_label,
         widget=widgets.RadioSelectHorizontal,
     )
-    sample_question_1 = models.BooleanField()
-    sample_question_2 = models.BooleanField()
-    # Survey Questions
-    gender = models.IntegerField(
-        choices=[
-            (1, Lexicon.gender_male),
-            (2, Lexicon.gender_female),
-            (3, Lexicon.gender_diverse),
-            (4, Lexicon.gender_no_answer),
-        ],
-        label=Lexicon.gender_label
-    )
-    age = models.IntegerField(
-        label=Lexicon.age_label,
-        min=18,
-        max=100
-    )
-    education_level = models.StringField(
-        choices=[
-            Lexicon.education_schueler,
-            Lexicon.education_hauptschule,
-            Lexicon.education_mittlere_reife,
-            Lexicon.education_lehre,
-            Lexicon.education_fachabitur,
-            Lexicon.education_abitur,
-            Lexicon.education_bachelor,
-            Lexicon.education_master,
-            Lexicon.education_phd,
-            Lexicon.education_other,
-        ],
-        label=Lexicon.education_label
-    )
-
-
-    field_of_study = models.StringField(
-        choices=[
-            Lexicon.study_none,
-            Lexicon.study_engineering,
-            Lexicon.study_computer_science,
-            Lexicon.study_mathematics,
-            Lexicon.study_natural_sciences,
-            Lexicon.study_medicine,
-            Lexicon.study_economics,
-            Lexicon.study_law,
-            Lexicon.study_social_sciences,
-            Lexicon.study_education,
-            Lexicon.study_humanities,
-            Lexicon.study_other,
-        ],
-        label=Lexicon.study_label
-    )
-
-    field_of_study_other = models.StringField(
-        label=Lexicon.study_other_label,
-        blank=True,
-    )
-
-    education_level_other = models.StringField(
-        label="Falls Sie 'Anderer Abschluss' gewählt haben, bitte angeben:",
-        blank=True,  # This allows the field to remain empty
-    )
-    serious_participation = models.BooleanField(
-        choices=[
-            (1, Lexicon.participation_serious),
-            (2, Lexicon.participation_not_serious),
-        ],
-        label=Lexicon.participation_label
-    )
-    feedback = models.LongStringField(
-        label=Lexicon.feedback_label,
-        blank=True,
-    )
-    bundesland = models.StringField(
-        choices=[
-            (1, "Baden-Württemberg"),
-            (2, "Bayern"),
-            (3, "Berlin"),
-            (4, "Brandenburg"),
-            (5, "Bremen"),
-            (6, "Hamburg"),
-            (7, "Hessen"),
-            (8, "Mecklenburg-Vorpommern"),
-            (9, "Niedersachsen"),
-            (10, "Nordrhein-Westfalen"),
-            (11, "Rheinland-Pfalz"),
-            (12, "Saarland"),
-            (13, "Sachsen"),
-            (14, "Sachsen-Anhalt"),
-            (15, "Schleswig-Holstein"),
-            (16, "Thüringen"),
-        ],
-        label=Lexicon.state_label,
-    )
     confidence_level_sample1 = models.IntegerField(
-        choices=[
-            (1, Lexicon.confidence_level_1),
-            (2, Lexicon.confidence_level_2),
-            (3, Lexicon.confidence_level_3),
-            (4, Lexicon.confidence_level_4),
-            (5, Lexicon.confidence_level_5),
-        ],
-        label=Lexicon.confidence_level_label,
-        widget=widgets.RadioSelectHorizontal,
+        blank=True,
+        label=Lexicon.confidence_level_label
     )
-    question_loan_sample1=models.IntegerField(
+    question_loan_sample1 = models.BooleanField(
         choices=[
-            (1, Lexicon.approved),
-            (2, Lexicon.denied),
+            (True, Lexicon.approved),
+            (False, Lexicon.denied),
         ],
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
     confidence_level_sample2 = models.IntegerField(
-        choices=[
-            (1, Lexicon.confidence_level_1),
-            (2, Lexicon.confidence_level_2),
-            (3, Lexicon.confidence_level_3),
-            (4, Lexicon.confidence_level_4),
-            (5, Lexicon.confidence_level_5),
-        ],
-        label=Lexicon.confidence_level_label,
-        widget=widgets.RadioSelectHorizontal,
+        blank=True,
+        label=Lexicon.confidence_level_label
     )
-    question_loan_sample2 = models.IntegerField(
+    question_loan_sample2 = models.BooleanField(
         choices=[
-            (1, Lexicon.approved),
-            (2, Lexicon.denied),
+            (True, Lexicon.approved),
+            (False, Lexicon.denied),
         ],
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
-    subjective_social_status = models.IntegerField(
-        choices=[(i, str(i)) for i in range(1, 11)],
-        label=Lexicon.subjective_social_status_label,
-        widget=widgets.RadioSelectHorizontal
+
+    #Creating time-stamps for each page:
+    # IntroductionGeneral_TS = models.FloatField()
+    # IntroductionDecisionTrees_TS = models.FloatField()
+    # InstructionsSample_TS = models.FloatField()
+    # SampleQuestion_1_TS = models.FloatField()
+    # SampleQuestion_2_TS = models.FloatField()
+    # PreMainStudy_TS = models.FloatField()
+    # Tree_Question_TS = models.FloatField()
+    # Survey_Demographics_TS = models.FloatField()
+    # Results_TS = models.FloatField()
+
+    IntroductionGeneral_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
     )
-    income_band = models.IntegerField(
-        choices=[
-            (1, Lexicon.income_band_1),
-            (2, Lexicon.income_band_2),
-            (3, Lexicon.income_band_3),
-            (4, Lexicon.income_band_4),
-            (5, Lexicon.income_band_5),
-            (6, Lexicon.income_band_6),
-            (7, Lexicon.income_band_7),
-            (8, Lexicon.income_band_8),
-        ],
-        label=Lexicon.income_band_label
+    IntroductionDecisionTrees_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    InstructionsSample_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    SampleQuestion_1_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    SampleQuestion_2_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    PreMainStudy_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    Tree_Question_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
+    )
+    PostMainStudy_SF = models.LongStringField(
+        label=Lexicon.feedback_label_SF,
+        blank=True,
     )
 
-
-# FUNCTIONS
-
+def confidence_level_error_message(player, value):
+    if value is None:
+        return Lexicon.move_slider_warning
+def confidence_level_sample1_error_message(player, value):
+    if value is None:
+        return Lexicon.move_slider_warning
+def confidence_level_sample2_error_message(player, value):
+    if value is None:
+        return Lexicon.move_slider_warning
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         easy_trees = list(range(11))         # Tree_1 to Tree_11
@@ -272,7 +192,19 @@ def creating_session(subsession: Subsession):
             print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 
 # PAGES
+
+class PreStudyInfo(Page):
+    def is_displayed(player):
+        return player.session.config.get('student_debug', False) and player.round_number == 1
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        return dict(
+            Lexicon=Lexicon,
+            **which_language)
 class IntroductionGeneral(Page):
+    form_model = 'player'
+    form_fields = ['IntroductionGeneral_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -281,11 +213,13 @@ class IntroductionGeneral(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
-
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.IntroductionGeneral_TS = time.time()
 
 class IntroductionDecisionTrees(Page):
     form_model = 'player'
-    form_fields = ['familiarity_with_decision_trees']
+    form_fields = ['familiarity_with_decision_trees','IntroductionDecisionTrees_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -295,9 +229,13 @@ class IntroductionDecisionTrees(Page):
             svg_template='survey/Trees/Tree_Sample_1.html',
             Lexicon=Lexicon,
             **which_language)
-
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.IntroductionDecisionTrees_TS = time.time()
 
 class InstructionsSample(Page):
+    form_model = 'player'
+    form_fields = ['InstructionsSample_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -306,10 +244,13 @@ class InstructionsSample(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.IntroductionDecisionTrees_TS = time.time()
 
 class SampleQuestion_1(Page):
     form_model = "player"
-    form_fields = ["question_loan_sample1","confidence_level_sample1"]
+    form_fields = ["question_loan_sample1","confidence_level_sample1", 'SampleQuestion_1_SF']
 
     @staticmethod
     def is_displayed(player):
@@ -320,14 +261,17 @@ class SampleQuestion_1(Page):
             svg_template='survey/Trees/Tree_Sample_1.html',
             Lexicon=Lexicon,
             **which_language)
-
     def error_message(player, values):
-        if values['question_loan_sample1'] != 2:
-            return Lexicon.please_select_correct_answer
+        if values['question_loan_sample1'] != False or values['confidence_level_sample1'] < 89:
+            return Lexicon.please_select_correct_answers
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.SampleQuestion_1_TS = time.time()
+
 
 class SampleQuestion_2(Page):
     form_model = "player"
-    form_fields = ["question_loan_sample2", "confidence_level_sample2"]
+    form_fields = ["question_loan_sample2", "confidence_level_sample2", 'SampleQuestion_2_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -339,10 +283,14 @@ class SampleQuestion_2(Page):
             **which_language)
 
     def error_message(player, values):
-        if values['question_loan_sample2'] != 1:
-            return Lexicon.please_select_correct_answer
-
+        if values['question_loan_sample2'] != True or values['confidence_level_sample2'] > 30:
+            return Lexicon.please_select_correct_answers
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.SampleQuestion_2_TS = time.time()
 class PreMainStudy(Page):
+    form_model = "player"
+    form_fields = ['PreMainStudy_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -351,20 +299,20 @@ class PreMainStudy(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
-
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     player.PreMainStudy_TS = time.time()
 class Tree_Question(Page):
     form_model = "player"
-    form_fields = ["question_loan", "confidence_level"]
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number not in [6, 11]
+    form_fields = ["question_loan", "confidence_level","Tree_Question_SF"]
+
     @staticmethod
     def vars_for_template(player: Player):
         round_number = player.round_number
-        tree_number = player.participant.treeOrder[round_number]
+        tree_number = player.participant.treeOrder[round_number-1]
         tree_template = C.TREE_ANSWERS[tree_number][0]
         number_of_rounds=C.NUM_ROUNDS
-        print(num_attention_checks_before,'tree number',tree_number,'round number',player.round_number,tree_template)
+        print('tree number',tree_number,'round number',player.round_number,tree_template)
         return dict(
             svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
@@ -372,8 +320,9 @@ class Tree_Question(Page):
             **which_language)
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        # player.Tree_Question_TS = time.time()
         round_number = player.round_number
-        tree_number = player.participant.treeOrder[round_number]
+        tree_number = player.participant.treeOrder[round_number-1]
         player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number][1])
         player.payoff = player.is_correct * C.payment_for_correct_answer
         print(player.is_correct)
@@ -381,29 +330,23 @@ class Tree_Question(Page):
         print(player.payoff)
 
 
-class Survey_Demographics(Page):
+class PostMainStudy(Page):
+    form_model = 'player'
+    form_fields = ["PostMainStudy_SF"]
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
     @staticmethod
     def vars_for_template(player: Player):
-        player.total_correct_answers = sum(p.is_correct for p in player.in_all_rounds())
+        player.participant.total_correct_answers = sum(p.is_correct for p in player.in_all_rounds())
         return dict(
             Lexicon=Lexicon,
             **which_language)
-    form_model = 'player'
-    form_fields = ['gender', 'age', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
-                   'feedback']
 
-class Results(Page):
-    @staticmethod
-    def is_displayed(player):
-        return player.round_number == C.NUM_ROUNDS
-    def vars_for_template(player: Player):
-        return dict(
-            total_score = player.total_correct_answers,
-            Lexicon = Lexicon,
-            **which_language)
+    # @staticmethod
+    # def before_next_page(player: Player, timeout_happened):
+    #     player.Survey_Demographics_TS = time.time()
+
 
 
 class TEST_Tree_Question(Page):
@@ -428,14 +371,10 @@ class TEST_Tree_Question(Page):
         print(player.payoff)
 
 
+
+
 #Actual sequence
-page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, Survey_Demographics, Results]
+page_sequence = [PreStudyInfo, IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
-#For testing the randomisation technique
-#page_sequence = [Tree_Question, Survey_Demographics, Results]
 
-#For testing the tree view
-#page_sequence = [TEST_Tree_Question]
 
-#For testing the survey
-#page_sequence = [Survey_Demographics]

@@ -1,6 +1,40 @@
 {{ block style }}
     <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+ <style>
+     .otree-form-errors{
+     display: none;
+     }
+ .slider-wrapper {
+    position: relative; /* Important: make slider-wrapper the positioning parent */
+}
+.error-message {
+    margin-top: 8px; /* space from the slider */
+    background: #ffffff;
+    color: #d9534f; /* red color for errors */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+    text-align: center;
+    display: block;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+
+
+</style>
+
+
 {{ endblock }}
+
+{% block form_errors %}
+<!-- Override the default error block: don't show global errors -->
+{% endblock %}
 
 
 {{ block content }}
@@ -39,12 +73,116 @@
         {{ formfield 'question_loan' }}
 </div>
 
-<!-- Confidence Rating -->
 <div class="form-container">
-        {{ formfield 'confidence_level' }}
+    {{ Lexicon.confidence_level_label }}
+  <div class="slider-container">
+      <div class="slider-ticks-top">
+    <span class="tick-label left">0</span>
+    <span class="tick-label right">100</span>
+  </div>
+    <div class="slider-wrapper">
+      <!-- Background track -->
+      <div class="slider-track"></div>
+
+      <!-- Dummy input for user interaction -->
+      <input
+        type="range"
+        id="dummy_slider"
+        min="0"
+        max="100"
+        step="1"
+        value="" required>  <!-- or blank if you prefer -->
+
+
+      <!-- Real hidden input for oTree submission -->
+      <input
+        type="hidden"
+        id="confidence_slider"
+        name="confidence_level"
+      >
+    </div>
+    <div class="value-display">
+      {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
+            <div class="error-message">{{ formfield_errors 'confidence_level' }}</div>
+
+    </div>
+  </div>
 </div>
 
-<div class="btn-container">
+  <div class="btn-container">
     {{ next_button }}
-</div>
+  </div>
+{{ endblock }}
+
+
+{{ block scripts }}
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    const dummySlider = document.getElementById('dummy_slider');
+    const realSlider = document.getElementById('confidence_slider');
+    const sliderValue = document.getElementById('sliderValue');
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const errorMessage = document.querySelector('.error-message');
+
+    let isDragging = false;
+    let hasInteracted = false; // 🔥 new flag to control initial visibility
+
+    // Initially hide dummy slider and value
+    dummySlider.style.visibility = 'hidden';
+    sliderValue.innerText = '';
+    sliderValue.style.visibility = 'hidden';
+
+    function updateSliderFromEvent(e) {
+        const rect = sliderWrapper.getBoundingClientRect();
+        const clickPos = (e.clientX - rect.left) / rect.width * 100;
+        const clampedPos = Math.max(0, Math.min(100, clickPos));
+
+        dummySlider.value = Math.round(clampedPos);
+        realSlider.value = dummySlider.value;
+        sliderValue.innerText = dummySlider.value;
+
+        // Only after first user interaction, show the slider + value
+        if (!hasInteracted) {
+            dummySlider.style.visibility = 'visible';
+            sliderValue.style.visibility = 'visible';
+            hasInteracted = true;
+        }
+
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }
+
+    sliderWrapper.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        updateSliderFromEvent(e);
+    });
+
+    window.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            updateSliderFromEvent(e);
+        }
+    });
+
+    window.addEventListener('mouseup', function() {
+        isDragging = false;
+    });
+
+    dummySlider.addEventListener('input', function() {
+        realSlider.value = this.value;
+        sliderValue.innerText = this.value;
+
+        if (!hasInteracted) {
+            dummySlider.style.visibility = 'visible';
+            sliderValue.style.visibility = 'visible';
+            hasInteracted = true;
+        }
+
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    });
+});
+</script>
+
 {{ endblock }}

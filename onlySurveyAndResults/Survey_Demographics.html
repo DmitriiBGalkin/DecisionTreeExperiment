@@ -1,0 +1,142 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+    <style>
+    .survey-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px; /* reduced gap */
+        margin-top: 10px;
+    }
+
+    /* Responsive: 1 column on smaller screens */
+    @media (max-width: 768px) {
+        .survey-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .survey-section-title {
+        grid-column: span 2;
+        font-size: 1.2em; /* slightly smaller */
+        margin: 20px 0 5px; /* reduced vertical margin */
+        font-weight: bold;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 3px; /* tighter padding */
+    }
+
+    .box {
+        padding: 15px; /* reduced padding */
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-bottom: 15px; /* reduced margin */
+    }
+
+    /* Optional: ensure children inside grid can shrink nicely */
+    .survey-layout > * {
+        min-width: 0;
+    }
+</style>
+
+{{ endblock }}
+
+{{ block title }}
+    <h1>{{ if en }}Survey{{ else }}Umfrage{{ endif }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="container-flex">
+
+    <!-- Shortened Welcome Message -->
+    <div class="box">
+        {{ if en }}
+            <p><b>Thank you</b> for completing the main part of the study.</p>
+            <p>Please answer the final questions honestly. Your responses are <b>completely anonymous</b>.</p>
+            <p>You can also leave feedback or report any problems below.</p>
+        {{ else }}
+            <p><b>Vielen Dank</b> für das Absolvieren des Hauptteils der Studie.</p>
+            <p>Bitte beantworten Sie die abschließenden Fragen ehrlich. Ihre Angaben sind <b>vollständig anonymisiert</b>.</p>
+            <p>Unten können Sie auch Feedback geben oder Probleme melden.</p>
+        {{ endif }}
+    </div>
+
+    <!-- Survey Questions -->
+    <div class="box survey-layout">
+
+        <div class="survey-section-title">
+            {{ if en }}Personal Information{{ else }}Persönliche Angaben{{ endif }}
+        </div>
+
+        {{ formfield 'gender' }}
+        {{ formfield 'age' }}
+        {{ formfield 'bundesland' }}
+
+        <div class="survey-section-title">
+            {{ if en }}Education{{ else }}Bildungsweg{{ endif }}
+        </div>
+
+        {{ formfield 'education_level' }}
+        {{ formfield 'education_level_other' }}
+        {{ formfield 'field_of_study' }}
+        {{ formfield 'field_of_study_other' }}
+
+        <div class="survey-section-title">
+            {{ if en }}Income & Social Status{{ else }}Einkommen & Sozialer Status{{ endif }}
+        </div>
+
+        {{ formfield 'income_band' }}
+    <div style="display: flex; flex-direction: column;">
+    <p style="margin-bottom: 10px;">
+        {{ formfield 'subjective_social_status' }}
+    </p>
+
+    <!-- Ladder Visualization -->
+    <div style="display: flex; justify-content: center; margin-top: 0px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+
+            <!-- Highest label at top -->
+            <div style="font-size: 0.8em; font-weight: bold; margin-bottom: 5px;">Höchste Stellung</div>
+
+            {% for i in range(10, 0, -1) %}
+                <div style="display: flex; align-items: center; width: 120px;">
+                    <div style="width: 10px; height: 20px; background-color: #333; margin-right: 5px;"></div>
+                    <div style="flex-grow: 1; height: 2px; background-color: #333;"></div>
+                    <div style="width: 10px; height: 20px; background-color: #333; margin-left: 5px;"></div>
+                    <div style="margin-left: 10px; font-weight: bold;">{{ i }}</div>
+                </div>
+            {% endfor %}
+
+            <!-- Lowest label at bottom -->
+            <div style="font-size: 0.8em; font-weight: bold; margin-top: 5px;">Niedrigste Stellung</div>
+
+        </div>
+    </div>
+</div>
+
+        <div class="survey-section-title">
+            {{ if en }}Participation Quality{{ else }}Teilnahmequalität{{ endif }}
+        </div>
+        <div style="grid-column: span 2;">
+                    {{ formfield 'serious_participation' }}
+        </div>
+
+
+        <div class="survey-section-title">
+            {{ if en }}Feedback{{ else }}Feedback{{ endif }}
+        </div>
+
+        <!-- Feedback Fields full width (span 2 columns) -->
+        <div style="grid-column: span 2;">
+            {{ formfield 'feedback' }}
+        </div>
+
+    </div>
+</div>
+
+<div class="btn-container">
+    {{ next_button }}
+</div>
+
+{{ include_sibling 'student_feedback.html' with feedback_field='Survey_Demographics_SF' }}
+
+{{ endblock }}

@@ -165,3 +165,139 @@ p {
         flex-direction: column;
     }
 }
+
+.slider-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  padding-top: 25px;    /* extra padding above */
+  font-size: 14px;
+}
+
+.slider-label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.slider-wrapper {
+  position: relative;
+  height: 20px;
+}
+
+.slider-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: transparent;  /* track is drawn by .slider-track */
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb {
+  width: 12px;
+  height: 24px;
+  background: #007BFF;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover,
+input[type=range]::-moz-range-thumb:hover {
+  background-color: #0056b3;
+}
+
+.value-display {
+    padding: 10px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* hide the value until slider first appears */
+#sliderValue {
+  visibility: hidden;
+}
+
+.error-message {
+    color: #d9534f;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+/* Tick labels ABOVE the slider */
+.slider-ticks-top {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  font-size: 12px;
+  color: #555;
+}
+
+.slider-ticks-top .tick-label {
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.slider-ticks-top .left {
+  left: -5px;
+}
+
+.slider-ticks-top .right {
+  right: -10px;
+}
+
+/* TICK MARKS drawn on track */
+.slider-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.slider-track::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 2px;
+  height: 20px;
+  background-color: #666;
+}
+
+.slider-track::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 0;
+  width: 2px;
+  height: 20px;
+  background-color: #666;
+}
+

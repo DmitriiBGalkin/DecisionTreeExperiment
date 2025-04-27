@@ -106,11 +106,14 @@
 </div>
 
 <div class="form-container">
-    {{ formfields }}
+    {{ formfield 'familiarity_with_decision_trees' }}
 </div>
 
 <!-- Continue Button -->
 <div class="btn-container">
     {{ next_button }}
 </div>
+
+{{ include_sibling 'student_feedback.html' with feedback_field='IntroductionDecisionTrees_SF' }}
+
 {{ endblock }}

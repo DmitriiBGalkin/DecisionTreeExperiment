@@ -1,5 +1,106 @@
 {{ block style }}
     <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+ <style>
+ .slider-wrapper {
+    position: relative; /* Important: make slider-wrapper the positioning parent */
+}
+.error-message {
+    margin-top: 8px; /* space from the slider */
+    background: #ffffff;
+    color: #d9534f; /* red color for errors */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1.1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+    text-align: center;
+    display: block;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+
+
+</style>
+
+
+{{ endblock }}
+
+
+{{ block scripts }}
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    const dummySlider = document.getElementById('dummy_slider');
+    const realSlider = document.getElementById('confidence_slider');
+    const sliderValue = document.getElementById('sliderValue');
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const errorMessage = document.querySelector('.error-message');
+
+    let isDragging = false;
+    let hasInteracted = false; // 🔥 new flag to control initial visibility
+
+    // Initially hide dummy slider and value
+    dummySlider.style.visibility = 'hidden';
+    sliderValue.innerText = '';
+    sliderValue.style.visibility = 'hidden';
+
+    function updateSliderFromEvent(e) {
+        const rect = sliderWrapper.getBoundingClientRect();
+        const clickPos = (e.clientX - rect.left) / rect.width * 100;
+        const clampedPos = Math.max(0, Math.min(100, clickPos));
+
+        dummySlider.value = Math.round(clampedPos);
+        realSlider.value = dummySlider.value;
+        sliderValue.innerText = dummySlider.value;
+
+        // Only after first user interaction, show the slider + value
+        if (!hasInteracted) {
+            dummySlider.style.visibility = 'visible';
+            sliderValue.style.visibility = 'visible';
+            hasInteracted = true;
+        }
+
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }
+
+    sliderWrapper.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        updateSliderFromEvent(e);
+    });
+
+    window.addEventListener('mousemove', function(e) {
+        if (isDragging) {
+            updateSliderFromEvent(e);
+        }
+    });
+
+    window.addEventListener('mouseup', function() {
+        isDragging = false;
+    });
+
+    dummySlider.addEventListener('input', function() {
+        realSlider.value = this.value;
+        sliderValue.innerText = this.value;
+
+        if (!hasInteracted) {
+            dummySlider.style.visibility = 'visible';
+            sliderValue.style.visibility = 'visible';
+            hasInteracted = true;
+        }
+
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    });
+});
+</script>
+
+
 {{ endblock }}
 
 
@@ -67,7 +168,7 @@
 <!-- Questions Section -->
 <div class="form-container">
         {{ formfield 'question_loan_sample1' }}
-  <div style=\"margin-top: 15px; padding: 10px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;\">
+  <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
         {% if en %}
             <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20.000 €</strong>, which is higher than 5.000 €. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45.000 €</strong> (below the required 100.000 €). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
         {% else %}
@@ -75,14 +176,59 @@
         {% endif %}
     </div>
 </div>
-<!-- Confidence Rating -->
+
+
+
+
 <div class="form-container">
-        {{ formfield 'confidence_level_sample1' }}
-</div>
-<div class="btn-container">
-    {{ next_button }}
+    {{ Lexicon.confidence_level_label }}
+  <div class="slider-container">
+      <div class="slider-ticks-top">
+    <span class="tick-label left">0</span>
+    <span class="tick-label right">100</span>
+  </div>
+    <div class="slider-wrapper">
+      <!-- Background track -->
+      <div class="slider-track"></div>
+
+      <!-- Dummy input for user interaction -->
+      <input
+        type="range"
+        id="dummy_slider"
+        min="0"
+        max="100"
+        step="1"
+        value="" required>  <!-- or blank if you prefer -->
+
+
+      <!-- Real hidden input for oTree submission -->
+      <input
+        type="hidden"
+        id="confidence_slider"
+        name="confidence_level_sample1"
+      >
+    </div>
+    <div class="value-display">
+      {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
+        <div class="error-message">{{ formfield_errors 'confidence_level_sample1' }}</div>
+    </div>
+
+  </div>
+        <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
+        {{ if en }}
+            <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer. For this sample question, please select any value above 90 to show a high degree of confidence (for example, 100).
+        {{ else }}
+            <strong>Erläuterung:</strong> Um den Schieberegler zu aktivieren, klicken Sie bitte zunächst irgendwo auf den Schieberegler – dann erscheint der Reglerknopf. Sie können dann die gewünschte Position anklicken oder ziehen, um anzugeben, wie sicher Sie sich bei Ihrer Antwort sind. Für diese Beispielaufgabe wählen Sie bitte einen Wert über 90, um ein hohes Maß an Sicherheit anzuzeigen (zum Beispiel 100).
+        {{ endif }}
+    </div>
 </div>
 
+  <div class="btn-container">
+    {{ next_button }}
+  </div>
+
+{{ include_sibling 'student_feedback.html' with feedback_field='SampleQuestion_1_SF' }}
 
 
 {{ endblock }}
+
