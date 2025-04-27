@@ -16,7 +16,14 @@ SESSION_CONFIGS = [
         student_debug=True
     ),
 ]
-
+ROOMS = [
+    dict(
+        name='decision_tree_study',
+        display_name='dt_exp',
+        # participant_label_file='_rooms/your_study.txt',
+        # use_secure_urls=True,
+    )
+]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
