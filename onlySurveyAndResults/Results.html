@@ -63,7 +63,7 @@
                     <b>Sie haben:</b> {{ participant.total_correct_answers }}/21 Fragen richtig beantwortet.
                 </div>
                 <div style="margin-top: 5px;">
-                    <b>Dies ergibt:</b> €{{ player.payoff|to2 }} zusätzlich zu Ihrer Grundvergütung.
+                    <b>Dies ergibt:</b> €{{ participant.payoff|to2 }} zusätzlich zu Ihrer Grundvergütung.
                 </div>
                 <div style="margin-top: 5px;">
                     <b>Ihre Gesamtauszahlung:</b> €{{ participant.payoff_plus_participation_fee|to2 }}
