@@ -41,9 +41,13 @@ window.addEventListener('DOMContentLoaded', function() {
     const errorMessage = document.querySelector('.error-message');
 
     let isDragging = false;
-    let hasInteracted = false; // 🔥 new flag to control initial visibility
+    let hasInteracted = false;
+    const t0 = performance.now();
 
-    // Initially hide dummy slider and value
+    let firstSliderTime = null;
+    let lastSliderTime = null;
+    const radioChanges = [];
+
     dummySlider.style.visibility = 'hidden';
     sliderValue.innerText = '';
     sliderValue.style.visibility = 'hidden';
@@ -57,7 +61,6 @@ window.addEventListener('DOMContentLoaded', function() {
         realSlider.value = dummySlider.value;
         sliderValue.innerText = dummySlider.value;
 
-        // Only after first user interaction, show the slider + value
         if (!hasInteracted) {
             dummySlider.style.visibility = 'visible';
             sliderValue.style.visibility = 'visible';
@@ -67,6 +70,13 @@ window.addEventListener('DOMContentLoaded', function() {
         if (errorMessage) {
             errorMessage.style.display = 'none';
         }
+
+        const now = Math.round(performance.now() - t0);
+        if (firstSliderTime === null) {
+            firstSliderTime = now;
+            console.log(`🟢 First slider interaction at: ${firstSliderTime} ms`);
+        }
+        lastSliderTime = now;
     }
 
     sliderWrapper.addEventListener('mousedown', function(e) {
@@ -81,6 +91,9 @@ window.addEventListener('DOMContentLoaded', function() {
     });
 
     window.addEventListener('mouseup', function() {
+        if (isDragging && lastSliderTime !== null) {
+            console.log(`🔴 Final slider value at: ${lastSliderTime} ms`);
+        }
         isDragging = false;
     });
 
@@ -97,9 +110,47 @@ window.addEventListener('DOMContentLoaded', function() {
         if (errorMessage) {
             errorMessage.style.display = 'none';
         }
+
+        const now = Math.round(performance.now() - t0);
+        if (firstSliderTime === null) {
+            firstSliderTime = now;
+            console.log(`🟢 First slider interaction at: ${firstSliderTime} ms`);
+        }
+        lastSliderTime = now;
     });
+
+    // Track radio value changes
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            const time = Math.round(performance.now() - t0);
+            const value = radio.value;
+            radioChanges.push({ value, time });
+            console.log(`🎯 Radio changed to "${value}" at: ${time} ms`);
+        });
+    });
+
+    // Save all data on form submission
+    const submitButton = document.querySelector('button.otree-btn-next');
+    const interactionInput = document.getElementById('interaction_times');
+
+    if (submitButton && interactionInput) {
+        submitButton.addEventListener('click', () => {
+            const now = Math.round(performance.now() - t0);
+            const log = {
+                slider_first: firstSliderTime,
+                slider_last: lastSliderTime,
+                radio_changes: radioChanges,
+                next_click: now
+            };
+            interactionInput.value = JSON.stringify(log);
+            console.log("✅ Form interaction log:", log);
+        });
+    } else {
+        console.warn("⚠️ Missing submit button or interaction_times input");
+    }
 });
 </script>
+
 
 {{ endblock }}
 
@@ -111,19 +162,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 {{ block content }}
+<input type="hidden" name="interaction_times" id="interaction_times">
 
-<!-- Instruction Box -->
 <div class="box">
-    <h4>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{player.round_number}}/{{ number_of_rounds }}). </h4>
+    <h4>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{ player.round_number }}/{{ number_of_rounds }}).</h4>
     <b>{{ if en }}Instructions:{{ else }}Anweisungen:{{ endif }}</b>
     <p>
         {{ if en }}
-            Please carefully analyze the <b>decision tree</b> and the given <b>profile information</b>.
-            Based on the provided information, determine whether the loan application would be <b>approved or denied</b>,
-            and state your level of confidence in your decision.
+            Please review the <b>decision tree</b> and your <b>profile information</b>.
+            Decide whether the loan application would be <b>approved or denied</b> based on the information, and indicate how confident you are in your answer.
         {{ else }}
-            Bitte analysieren Sie sorgfältig den <b>Entscheidungsbaum</b> und die angegebenen <b>Profildaten</b>.
-            Bitte bestimmen Sie basierend auf den bereitgestellten Informationen, ob Ihr Kreditantrag genehmigt oder abgelehnt wird und geben Sie an, wie sicher Sie sich mit Ihrer Entscheidung sind.
+            Bitte betrachten Sie den <b>Entscheidungsbaum</b> und Ihre <b>persönlichen Daten</b> aufmerksam.
+            Entscheiden Sie, ob Ihr Kreditantrag basierend auf diesen Informationen <b>genehmigt oder abgelehnt</b> wird.
+            Geben Sie anschließend an, wie sicher Sie sich bei Ihrer Entscheidung sind.
         {{ endif }}
     </p>
 </div>
@@ -183,6 +234,8 @@ window.addEventListener('DOMContentLoaded', function() {
 </div>
 
   <div class="btn-container">
+      <input type="hidden" name="interaction_times" id="interaction_times">
+
     {{ next_button }}
   </div>
 {{ include_sibling 'student_feedback.html' with feedback_field='Tree_Question_SF' }}

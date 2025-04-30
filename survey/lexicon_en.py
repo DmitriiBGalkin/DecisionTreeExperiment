@@ -126,3 +126,16 @@ class Lexicon:
     income_band_8 = "€70,000 or more"
 
     feedback_label_SF = "Please leave any comments, feedback, suggestions, or let us know if you found any mistakes in the experiment."
+    # Decision Tree Parts
+    root_node = "Root Node"
+    label_root_node = "Start of the decision process"
+
+    decision_node = "Decision Node"
+    label_decision_node = "Rule or Question"
+
+    branch_condition = "Condition"
+    branch = "Branch"
+    leaf_node = "Leaf Node"
+    label_leaf_node = "Final Decision"
+
+    salary = "Salary"

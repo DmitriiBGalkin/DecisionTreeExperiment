@@ -1,6 +1,8 @@
 from otree.api import *
 from settings import LANGUAGE_CODE
 import random
+import json
+
 import time
 
 #LANGUAGE_CODE = 'en' #this just for testing
@@ -107,15 +109,7 @@ class Player(BasePlayer):
     )
 
     #Creating time-stamps for each page:
-    # IntroductionGeneral_TS = models.FloatField()
-    # IntroductionDecisionTrees_TS = models.FloatField()
-    # InstructionsSample_TS = models.FloatField()
-    # SampleQuestion_1_TS = models.FloatField()
-    # SampleQuestion_2_TS = models.FloatField()
-    # PreMainStudy_TS = models.FloatField()
-    # Tree_Question_TS = models.FloatField()
-    # Survey_Demographics_TS = models.FloatField()
-    # Results_TS = models.FloatField()
+    interaction_times = models.LongStringField(blank=True)
 
     IntroductionGeneral_SF = models.LongStringField(
         label=Lexicon.feedback_label_SF,
@@ -226,7 +220,8 @@ class IntroductionDecisionTrees(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            svg_template='survey/Trees/Tree_Sample_1.html',
+            svg_template_model='survey/Trees/naked_model.html',
+            svg_template='survey/Trees/Tree_Sample_Desc.html',
             Lexicon=Lexicon,
             **which_language)
     # @staticmethod
@@ -262,7 +257,7 @@ class SampleQuestion_1(Page):
             Lexicon=Lexicon,
             **which_language)
     def error_message(player, values):
-        if values['question_loan_sample1'] != False or values['confidence_level_sample1'] < 89:
+        if values['question_loan_sample1'] != False:
             return Lexicon.please_select_correct_answers
     # @staticmethod
     # def before_next_page(player, timeout_happened):
@@ -283,7 +278,7 @@ class SampleQuestion_2(Page):
             **which_language)
 
     def error_message(player, values):
-        if values['question_loan_sample2'] != True or values['confidence_level_sample2'] > 30:
+        if values['question_loan_sample2'] != True:
             return Lexicon.please_select_correct_answers
     # @staticmethod
     # def before_next_page(player, timeout_happened):
@@ -304,7 +299,7 @@ class PreMainStudy(Page):
     #     player.PreMainStudy_TS = time.time()
 class Tree_Question(Page):
     form_model = "player"
-    form_fields = ["question_loan", "confidence_level","Tree_Question_SF"]
+    form_fields = ["question_loan", "confidence_level","Tree_Question_SF","interaction_times"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -328,7 +323,6 @@ class Tree_Question(Page):
         print(player.is_correct)
         print(C.payment_for_correct_answer)
         print(player.payoff)
-
 
 class PostMainStudy(Page):
     form_model = 'player'

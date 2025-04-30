@@ -103,12 +103,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
 {{ endblock }}
 
-
 {{ block content }}
 
 <!-- Instruction Box -->
 <div class="box">
-    <h4>{% if en %}Sample Question 1 {% else %}Beispielaufgabe 1{% endif %}</h4>
+    <h4>{% if en %}Sample Question 1{% else %}Beispielaufgabe 1{% endif %}</h4>
 
     <b>{% if en %}Instructions{% else %}Anweisungen{% endif %}:</b>
     <p>
@@ -116,8 +115,8 @@ window.addEventListener('DOMContentLoaded', function() {
             In this experiment, you will assume the role of a <b>loan applicant</b> with a fixed profile.
             You can find this information on the <b>right side</b> of the screen – this information will remain <b>unchanged</b> throughout the experiment.
         {% else %}
-            In diesem Experiment übernehmen Sie die Rolle eines <b>Kreditantragstellers</b> mit einem festen Profil.
-            Diese Informationen finden Sie auf der <b>rechten Seite</b> des Bildschirms – sie bleiben <b>während des gesamten Experiments unverändert</b>.
+            In diesem Experiment übernehmen Sie die Rolle <b>einer Person, die einen Kredit bei ihrer Bank beantragen will</b>.
+            Ihre <b>persönlichen Daten</b> finden Sie auf der rechten Seite des Bildschirms – sie bleiben während des gesamten Experiments <b>unverändert</b>.
         {% endif %}
     </p>
 
@@ -126,9 +125,8 @@ window.addEventListener('DOMContentLoaded', function() {
             You will be presented with multiple <b>decision trees</b>, each representing a different loan approval process used by banks.
             Your task is to determine whether your loan application would be <b>approved or denied</b> based on the decision tree and your profile information.
         {% else %}
-            Ihnen werden mehrere <b>Entscheidungsbäume</b> präsentiert, die jeweils einen anderen Kreditgenehmigungsprozess von Banken darstellen.
-            Ihre Aufgabe ist es zu bestimmen, ob Ihr Kreditantrag basierend auf dem Entscheidungsbaum und Ihren Profilinformationen
-            <b>genehmigt oder abgelehnt</b> wird.
+            Ihnen werden mehrere <b>Entscheidungsbäume</b> präsentiert, die jeweils unterschiedliche Entscheidungsverfahren von Banken über Ihre Kreditanfrage darstellen.
+            Ihre Aufgabe ist es zu bestimmen, ob Ihr Kreditantrag <b>genehmigt oder abgelehnt</b> würde – basierend auf dem Entscheidungsbaum und Ihren persönlichen Daten.
         {% endif %}
     </p>
 
@@ -136,7 +134,7 @@ window.addEventListener('DOMContentLoaded', function() {
         {% if en %}
             After making your decision, you will also be asked to indicate <b>how confident</b> you are in your answer.
         {% else %}
-            Nachdem Sie Ihre Entscheidung getroffen haben, werden Sie außerdem gebeten, anzugeben, <b>wie sicher</b> Sie sich Ihrer Antwort sind.
+            Nachdem Sie Ihre Entscheidung getroffen haben, werden Sie außerdem gebeten anzugeben, <b>wie sicher</b> Sie sich Ihrer Antwort sind.
         {% endif %}
     </p>
 
@@ -144,91 +142,64 @@ window.addEventListener('DOMContentLoaded', function() {
         {% if en %}
             Below is an example question and explanation.
         {% else %}
-            Unten finden Sie eine Beispielaufgabe und eine Erläuterung.
+            Unten finden Sie eine Beispielaufgabe sowie eine Erläuterung der korrekten Lösung.
         {% endif %}
-
     </p>
 </div>
 
-
 <!-- Two-column layout -->
 <div class="container-flex">
-    <!-- Left Side (Decision Tree) -->
     <div class="left-container">
-            {{ include svg_template }}
+        {{ include svg_template }}
     </div>
-
-<!-- Profile Information Section -->
-<div class="right-container">
-    {{ include 'survey/Table_Profile_Information.html'}}
-</div>
-
+    <div class="right-container">
+        {{ include 'survey/Table_Profile_Information.html' }}
+    </div>
 </div>
 
 <!-- Questions Section -->
 <div class="form-container">
-        {{ formfield 'question_loan_sample1' }}
-  <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
+    {{ formfield 'question_loan_sample1' }}
+    <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
         {% if en %}
-            <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20.000 €</strong>, which is higher than 5.000 €. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45.000 €</strong> (below the required 100.000 €). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
+            <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20,000 €</strong>, which is higher than 5,000 €. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45,000 €</strong> (below the required 100,000 €). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
         {% else %}
-            <strong>Erläuterung:</strong> Laut den Profilinformationen beträgt die Kreditsumme <strong>20.000 €</strong>, was höher als 5.000 € ist. Daher würde der Entscheidungsbaum nach rechts abzweigen. Danach erfolgt eine Bewertung basierend auf dem Einkommen, welches <strong>45.000 €</strong> beträgt (unter 100.000 €). Daher lautet die korrekte Antwort auf diese Frage, dass der Kredit <strong>abgelehnt</strong> würde.
+            <strong>Erläuterung:</strong> Laut Ihren persönlichen Daten beträgt die Kreditsumme <strong>20.000 €</strong>, was über der Schwelle von 5.000 € liegt. Der Entscheidungsbaum verzweigt daher nach rechts. Anschließend wird Ihr <strong>Gehalt</strong> berücksichtigt, das bei <strong>45.000 €</strong> liegt – also unterhalb der geforderten Grenze von 100.000 €. Die korrekte Antwort lautet daher: Der Kredit würde <strong>abgelehnt</strong>.
         {% endif %}
     </div>
 </div>
 
-
-
-
+<!-- Confidence Slider -->
 <div class="form-container">
     {{ Lexicon.confidence_level_label }}
-  <div class="slider-container">
-      <div class="slider-ticks-top">
-    <span class="tick-label left">0</span>
-    <span class="tick-label right">100</span>
-  </div>
-    <div class="slider-wrapper">
-      <!-- Background track -->
-      <div class="slider-track"></div>
-
-      <!-- Dummy input for user interaction -->
-      <input
-        type="range"
-        id="dummy_slider"
-        min="0"
-        max="100"
-        step="1"
-        value="" required>  <!-- or blank if you prefer -->
-
-
-      <!-- Real hidden input for oTree submission -->
-      <input
-        type="hidden"
-        id="confidence_slider"
-        name="confidence_level_sample1"
-      >
+    <div class="slider-container">
+        <div class="slider-ticks-top">
+            <span class="tick-label left">0</span>
+            <span class="tick-label right">100</span>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track"></div>
+            <input type="range" id="dummy_slider" min="0" max="100" step="1" value="">
+            <input type="hidden" id="confidence_slider" name="confidence_level_sample1">
+        </div>
+        <div class="value-display">
+            {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
+            <div class="error-message">{{ formfield_errors 'confidence_level_sample1' }}</div>
+        </div>
     </div>
-    <div class="value-display">
-      {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
-        <div class="error-message">{{ formfield_errors 'confidence_level_sample1' }}</div>
-    </div>
-
-  </div>
-        <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
-        {{ if en }}
-            <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer. For this sample question, please select any value above 90 to show a high degree of confidence (for example, 100).
-        {{ else }}
-            <strong>Erläuterung:</strong> Um den Schieberegler zu aktivieren, klicken Sie bitte zunächst irgendwo auf den Schieberegler – dann erscheint der Reglerknopf. Sie können dann die gewünschte Position anklicken oder ziehen, um anzugeben, wie sicher Sie sich bei Ihrer Antwort sind. Für diese Beispielaufgabe wählen Sie bitte einen Wert über 90, um ein hohes Maß an Sicherheit anzuzeigen (zum Beispiel 100).
-        {{ endif }}
+    <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
+        {% if en %}
+            <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer.
+        {% else %}
+            <strong>Erläuterung:</strong> Um den Schieberegler zu aktivieren, klicken Sie bitte zunächst irgendwo auf den Regler – dann erscheint der Schiebeknopf. Sie können die gewünschte Position anklicken oder ziehen, um anzugeben, wie sicher Sie sich bei Ihrer Antwort sind.
+        {% endif %}
     </div>
 </div>
 
-  <div class="btn-container">
+<div class="btn-container">
     {{ next_button }}
-  </div>
+</div>
 
 {{ include_sibling 'student_feedback.html' with feedback_field='SampleQuestion_1_SF' }}
 
-
 {{ endblock }}
-

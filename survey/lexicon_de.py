@@ -134,3 +134,17 @@ class Lexicon:
     income_band_8 = "70.000 € oder mehr"
 
     feedback_label_SF = "Bitte hinterlassen Sie Kommentare, Feedback oder Verbesserungsvorschläge oder teilen Sie uns mit, falls Sie Fehler im Experiment gefunden haben."
+
+    # Entscheidungsbaumteile
+    root_node = "Wurzelknoten"
+    label_root_node = "Start des Entscheidungsprozesses"
+
+    decision_node = "Entscheidungsknoten"
+    label_decision_node = "Regel oder Frage"
+    branch = "Zweig"
+    branch_condition = "Bedingung"
+
+    leaf_node = "Blattknoten"
+    label_leaf_node = "Endgültige Entscheidung"
+
+    salary = "Gehalt"

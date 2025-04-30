@@ -92,24 +92,8 @@
 
     <!-- Ladder Visualization -->
     <div style="display: flex; justify-content: center; margin-top: 0px; position: relative;">
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                {{ include 'onlySurveyAndResults/Steps.html'}}
 
-            <!-- Highest label at top -->
-            <div style="font-size: 0.8em; font-weight: bold; margin-bottom: 5px;">Höchste Stellung</div>
-
-            {% for i in range(10, 0, -1) %}
-                <div style="display: flex; align-items: center; width: 120px;">
-                    <div style="width: 10px; height: 20px; background-color: #333; margin-right: 5px;"></div>
-                    <div style="flex-grow: 1; height: 2px; background-color: #333;"></div>
-                    <div style="width: 10px; height: 20px; background-color: #333; margin-left: 5px;"></div>
-                    <div style="margin-left: 10px; font-weight: bold;">{{ i }}</div>
-                </div>
-            {% endfor %}
-
-            <!-- Lowest label at bottom -->
-            <div style="font-size: 0.8em; font-weight: bold; margin-top: 5px;">Niedrigste Stellung</div>
-
-        </div>
     </div>
 </div>
 
