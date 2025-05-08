@@ -71,7 +71,6 @@ class Lexicon:
     education_phd = "Doctorate / PhD"
     education_other = "Other (please specify)"
 
-    education_other = "Other degree, namely:"
 
     study_label = "What is your (current or past) field of study?"
     study_none = "I did not study / not applicable"
@@ -99,12 +98,12 @@ class Lexicon:
     participation_not_serious = "I just clicked through, please discard my data!"
 
     # Feedback
-    feedback_label = "Would you like to provide feedback on this study or help us understand your answers better? "
+    feedback_label = ("Would you like to provide feedback on this study or help us understand your answers better? "
     "(Did anything stand out during the study? Were any questions unclear or uncomfortable? "
-    "Please write a few brief notes.)"
+    "Please write a few brief notes.)")
     state_label = "Which federal state do you live in?"
 
-    confidence_level_label = "On the scale from 0 (not confident at all) to 100 (absolutely confident), how confident are you in your answer?""
+    confidence_level_label = "On the scale from 0 (not confident at all) to 100 (absolutely confident), how confident are you in your answer?"
     value_label_prefix = "Value:"
     value_label_suffix = "/100"
     move_slider_warning = "Please move the slider to indicate your confidence."
