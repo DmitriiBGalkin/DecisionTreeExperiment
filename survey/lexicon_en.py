@@ -16,7 +16,7 @@ class Lexicon:
     credit_history_good = "Good"
     credit_history_excellent = "Excellent"
     employment_unemployed = "Unemployed"
-    employment_stable = "Stable"
+    employment_stable = "Employed"
     marital_single = "Single"
     marital_married = "Married"
     marital_divorced = "Divorced"

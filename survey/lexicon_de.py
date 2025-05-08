@@ -22,7 +22,7 @@ class Lexicon:
     credit_history_excellent = "Exzellent"
 
     employment_unemployed = "Arbeitslos"
-    employment_stable = "Stabil"
+    employment_stable = "Berufstätig"
     residence_rented = "Miete"
     residence_mortgage = "Hypothek"
     residence_homeowner = "Eigentümer"
