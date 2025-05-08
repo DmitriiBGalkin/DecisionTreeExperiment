@@ -107,45 +107,46 @@ window.addEventListener('DOMContentLoaded', function() {
 
 <!-- Instruction Box -->
 <div class="box">
-    <h4>{% if en %}Sample Question 1{% else %}Beispielaufgabe 1{% endif %}</h4>
+    <h4>{{ if en }}Sample Question 1{{ else }}Beispielaufgabe 1{{ endif }}</h4>
 
-    <b>{% if en %}Instructions{% else %}Anweisungen{% endif %}:</b>
+    <b>{{ if en }}Instructions{{ else }}Anweisungen{{ endif }}:</b>
     <p>
-        {% if en %}
-            In this experiment, you will assume the role of a <b>loan applicant</b> with a fixed profile.
-            You can find this information on the <b>right side</b> of the screen – this information will remain <b>unchanged</b> throughout the experiment.
-        {% else %}
-            In diesem Experiment übernehmen Sie die Rolle <b>einer Person, die einen Kredit bei ihrer Bank beantragen will</b>.
-            Ihre <b>persönlichen Daten</b> finden Sie auf der rechten Seite des Bildschirms – sie bleiben während des gesamten Experiments <b>unverändert</b>.
-        {% endif %}
+        {{ if en }}
+            In this study, you take on the role of a person applying for a loan from a bank.
+            Your <b>personal profile</b> is shown on the <b>right side</b> of the screen and stays the same throughout the entire experiment.
+        {{ else }}
+            In dieser Studie übernehmen Sie die Rolle einer Person, die einen Kredit bei ihrer Bank beantragen will.
+            Ihre <b>persönlichen Daten</b> finden Sie auf der <b>rechten Seite</b> des Bildschirms – sie bleiben während des gesamten Experiments <b>unverändert</b>.
+        {{ endif }}
     </p>
 
     <p>
-        {% if en %}
-            You will be presented with multiple <b>decision trees</b>, each representing a different loan approval process used by banks.
-            Your task is to determine whether your loan application would be <b>approved or denied</b> based on the decision tree and your profile information.
-        {% else %}
-            Ihnen werden mehrere <b>Entscheidungsbäume</b> präsentiert, die jeweils unterschiedliche Entscheidungsverfahren von Banken über Ihre Kreditanfrage darstellen.
+        {{ if en }}
+            You will be shown various <b>decision trees</b>, each representing how a bank might decide on your loan application.
+            Your task is to determine whether your loan would be <b>approved or rejected</b> – based on the decision tree and your profile.
+        {{ else }}
+            Ihnen werden mehrere <b>Entscheidungsbäume</b> präsentiert, die jeweils eine mögliche Entscheidung Ihrer Bank über Ihren Kreditantrag zeigen.
             Ihre Aufgabe ist es zu bestimmen, ob Ihr Kreditantrag <b>genehmigt oder abgelehnt</b> würde – basierend auf dem Entscheidungsbaum und Ihren persönlichen Daten.
-        {% endif %}
+        {{ endif }}
     </p>
 
     <p>
-        {% if en %}
-            After making your decision, you will also be asked to indicate <b>how confident</b> you are in your answer.
-        {% else %}
+        {{ if en }}
+            After making your decision, you’ll be asked to indicate <b>how confident</b> you are in your answer.
+        {{ else }}
             Nachdem Sie Ihre Entscheidung getroffen haben, werden Sie außerdem gebeten anzugeben, <b>wie sicher</b> Sie sich Ihrer Antwort sind.
-        {% endif %}
+        {{ endif }}
     </p>
 
     <p>
-        {% if en %}
+        {{ if en }}
             Below is an example question and explanation.
-        {% else %}
+        {{ else }}
             Unten finden Sie eine Beispielaufgabe sowie eine Erläuterung der korrekten Lösung.
-        {% endif %}
+        {{ endif }}
     </p>
 </div>
+
 
 <!-- Two-column layout -->
 <div class="container-flex">
@@ -164,7 +165,7 @@ window.addEventListener('DOMContentLoaded', function() {
         {% if en %}
             <strong>Explanation:</strong> According to the profile information, the loan amount is <strong>20,000 €</strong>, which is higher than 5,000 €. Therefore, the decision tree would branch to the right. It is then evaluated based on income, which is <strong>45,000 €</strong> (below the required 100,000 €). Therefore, the correct answer to this question is that the loan would be <strong>denied</strong>.
         {% else %}
-            <strong>Erläuterung:</strong> Laut Ihren persönlichen Daten beträgt die Kreditsumme <strong>20.000 €</strong>, was über der Schwelle von 5.000 € liegt. Der Entscheidungsbaum verzweigt daher nach rechts. Anschließend wird Ihr <strong>Gehalt</strong> berücksichtigt, das bei <strong>45.000 €</strong> liegt – also unterhalb der geforderten Grenze von 100.000 €. Die korrekte Antwort lautet daher: Der Kredit würde <strong>abgelehnt</strong>.
+            <strong>Erläuterung:</strong> Laut Ihren persönlichen Daten beträgt die beantragte Summe des Kredits <strong>20.000 €</strong>. Das liegt über der Schwelle von 5.000 €. Der Entscheidungsbaum verzweigt sich daher nach rechts. Danach wird Ihr <strong>Gehalt</strong> berücksichtigt, das bei <strong>45.000 €</strong> liegt. Ihr Gehalt liegt hiermit unterhalb des geforderten Gehalts von 100.000 €. Die korrekte Antwort lautet daher: Der Kredit wird <strong>abgelehnt</strong>.
         {% endif %}
     </div>
 </div>
@@ -191,7 +192,7 @@ window.addEventListener('DOMContentLoaded', function() {
         {% if en %}
             <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer.
         {% else %}
-            <strong>Erläuterung:</strong> Um den Schieberegler zu aktivieren, klicken Sie bitte zunächst irgendwo auf den Regler – dann erscheint der Schiebeknopf. Sie können die gewünschte Position anklicken oder ziehen, um anzugeben, wie sicher Sie sich bei Ihrer Antwort sind.
+            <strong>Erläuterung:</strong> Um die Skala zu aktivieren, klicken Sie bitte zunächst irgendwo auf die Skala. Dann können Sie die gewünschte Position auf der Skala anklicken oder den Schieberegler dorthin ziehen, um anzugeben, wie sicher Sie sich bezüglich der Richtigkeit Ihrer Antwort sind.
         {% endif %}
     </div>
 </div>

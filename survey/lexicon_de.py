@@ -10,7 +10,7 @@ class Lexicon:
     loan_duration = "Kreditlaufzeit"
     credit_history = "Kreditwürdigkeit"
     employment_status = "Beschäftigung"
-    income = "Einkommen"
+    income = "Gehalt"
     marital_status = "Familienstand"
     assets = "Vermögen"  # Total savings, investments, or property owned
     liabilities = "Verbindlichkeiten"  # Existing financial obligations (e.g., other loans, credit card debt)
@@ -112,12 +112,12 @@ class Lexicon:
     state_label = "In welchem Bundesland leben Sie?"
 
 
-    confidence_level_label = "Auf einer Skala von 0 (überhaupt nicht sicher) bis 100 (absolut sicher), wie sicher sind Sie in Ihrer Antwort?"
+    confidence_level_label = "Auf einer Skala von 0 (überhaupt nicht sicher) bis 100 (absolut sicher): Wie sicher sind Sie sich, dass Ihre Antwort zur Vergabe des Kredits korrekt ist?"
     value_label_prefix = "Wert:"
     value_label_suffix = "/100"
     move_slider_warning = "Bitte verschieben Sie den Regler, um Ihre Sicherheit anzugeben."
 
-    question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren Profildaten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
+    question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren persönlichen Daten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
     please_select_correct_answers = "Bitte wählen Sie die richtigen Antworten aus."
     attention_check_label = "Dies ist eine Aufmerksamkeitsprüfung. Bitte wählen Sie entsprechend der Anweisung die linke Antwort aus (Genehmigt)."
     attention_check_label_confidence = "Dies ist eine Aufmerksamkeitsfrage. Bitte wählen Sie die äußerste rechte Option (Sehr sicher)."
