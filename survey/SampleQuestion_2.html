@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', function() {
         {% if en %}
     Below is another example question and explanation.
         {% else %}
-            Unten finden Sie eine Beispielaufgabe und eine Erläuterung.
+            Unten finden Sie eine Beispielaufgabe und eine Erklärung dazu.
         {% endif %}
 
 </div>
@@ -137,21 +137,21 @@ window.addEventListener('DOMContentLoaded', function() {
 <div class="form-container">
         {{ formfield 'question_loan_sample2' }}
   <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
-      {% if en %}
-    <strong>Explanation:</strong> The decision tree first evaluates the <strong>loan amount</strong>, which is <strong>20.000 €</strong>. Since this is higher than 5.000 €, the decision tree follows the <strong>right branch</strong>.
+    {{ if en }}
+    <strong>Explanation:</strong> The decision tree first evaluates the <strong>loan amount</strong>. In this example, it is <strong>€20,000</strong>. Since the loan amount is higher than €5,000, the decision tree follows the <strong>right branch</strong>.
 
-    Next, it evaluates <strong>credit history</strong>, which in the profile is marked as <strong>Good</strong>. Since a good credit history meets the bank's requirement, the evaluation continues.
+    Next, it evaluates <strong>creditworthiness</strong>, which is listed in your personal data as <strong>Good</strong>. Since good creditworthiness meets the bank’s requirements for approving the loan, the evaluation continues.
 
-    Finally, the decision tree assesses <strong>employment status</strong>, which is <strong>Stable</strong>. Given that stable employment fulfills the bank's conditions, the correct decision is that the loan would be <strong>approved</strong>.
-{% else %}
-    <strong>Erläuterung:</strong> Der Entscheidungsbaum bewertet zuerst den <strong>Kreditbetrag</strong>, welcher <strong>20.000 €</strong> beträgt. Da dieser Betrag höher als 5.000 € ist, folgt der Entscheidungsbaum dem <strong>rechten Zweig</strong>.
+    Finally, the decision tree assesses your <strong>employment status</strong> (i.e., whether you currently have a job), which is listed as <strong>Employed</strong>. Because employment meets the bank’s conditions, the correct decision is that the loan would be <strong>approved</strong>.
+    {{ else }}
+    <strong>Erläuterung:</strong> Der Entscheidungsbaum bewertet zuerst den <strong>Betrag des Kredits</strong>. Dieser beträgt in diesem Beispiel <strong>20.000 €</strong>. Da dieser Betrag des Kredits höher als <strong>5.000 €</strong> ist, folgt der Entscheidungsbaum dem <strong>rechten Zweig</strong>.
 
-    Als Nächstes wird die <strong>Kreditwürdigkeit</strong> bewertet, die im Profil als <strong>Gut</strong> angegeben ist. Da eine gute Kreditwürdigkeit die Anforderungen der Bank erfüllt, geht die Bewertung weiter.
+    Als Nächstes wird die <strong>Kreditwürdigkeit</strong> bewertet, die in Ihren persönlichen Daten als <strong>Gut</strong> angegeben ist. Da eine gute Kreditwürdigkeit die Anforderungen der Bank für die Genehmigung des Kredits erfüllt, geht die Bewertung der Vergabe des Kredits weiter.
 
-    Schließlich bewertet der Entscheidungsbaum den <strong>Beschäftigungsstatus</strong>, der als <strong>Stabil</strong> angegeben ist. Da eine stabile Beschäftigung die Bedingungen der Bank erfüllt, lautet die korrekte Entscheidung, dass der Kredit <strong>genehmigt</strong> wird.
-{% endif %}
+    Schließlich bewertet der Entscheidungsbaum den <strong>Beschäftigungsstatus</strong> (d.h. ob Sie derzeit einen Job haben oder nicht), der als <strong>Berufstätig</strong> angegeben ist. Da <strong>Berufstätigkeit</strong> die Bedingungen der Bank erfüllt, lautet die korrekte Entscheidung, dass der Kredit <strong>genehmigt</strong> wird.
+    {{ endif }}
+</div>
 
-    </div>
 </div>
 
 <div class="form-container">
@@ -191,7 +191,7 @@ window.addEventListener('DOMContentLoaded', function() {
             {{ if en }}
                 <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer.
             {{ else }}
-                <strong>Erläuterung:</strong> Um den Schieberegler zu aktivieren, klicken Sie bitte zunächst irgendwo auf den Schieberegler – dann erscheint der Reglerknopf. Sie können dann die gewünschte Position anklicken oder ziehen, um anzugeben, wie sicher Sie sich bei Ihrer Antwort sind.
+                <strong>Erläuterung:</strong> Um die Skala zu aktivieren, klicken Sie bitte zunächst irgendwo auf die Skala. Dann können Sie die gewünschte Position auf der Skala anklicken oder den Schieberegler dorthin ziehen, um anzugeben, wie sicher Sie sich bezüglich der Richtigkeit Ihrer Antwort sind.
             {{ endif }}
         </div>
 </div>

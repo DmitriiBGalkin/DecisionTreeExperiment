@@ -117,7 +117,7 @@ class Lexicon:
     value_label_suffix = "/100"
     move_slider_warning = "Bitte verschieben Sie den Regler, um Ihre Sicherheit anzugeben."
 
-    question_loan_sample1_label = "Basierend auf dem dargestellten Entscheidungsbaum und Ihren persönlichen Daten, wird dieser Kreditantrag genehmigt oder abgelehnt?"
+    question_loan_sample1_label = "Wird dieser Antrag auf einen Kredit basierend auf dem dargestellten Entscheidungsbaum und Ihren persönlichen Daten genehmigt oder abgelehnt?"
     please_select_correct_answers = "Bitte wählen Sie die richtigen Antworten aus."
     attention_check_label = "Dies ist eine Aufmerksamkeitsprüfung. Bitte wählen Sie entsprechend der Anweisung die linke Antwort aus (Genehmigt)."
     attention_check_label_confidence = "Dies ist eine Aufmerksamkeitsfrage. Bitte wählen Sie die äußerste rechte Option (Sehr sicher)."
