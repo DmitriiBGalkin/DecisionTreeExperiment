@@ -9,10 +9,16 @@
     }
 
     /* Responsive: 1 column on smaller screens */
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
         .survey-layout {
             grid-template-columns: 1fr;
         }
+    }
+    .survey-layout > div,
+    .survey-layout > p,
+    .survey-layout > * {
+        width: 100%;          /* ensure children don't overflow their parent */
+        box-sizing: border-box; /* padding/borders included in width calculation */
     }
 
     .survey-section-title {
@@ -25,17 +31,29 @@
     }
 
     .box {
-        padding: 15px; /* reduced padding */
+        padding: 15px;
         background-color: #f9f9f9;
         border-radius: 8px;
         border: 1px solid #ddd;
-        margin-bottom: 15px; /* reduced margin */
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+    input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 600px) {
+    .container-flex {
+        display: flex;
+        flex-direction: column;
     }
 
-    /* Optional: ensure children inside grid can shrink nicely */
-    .survey-layout > * {
-        min-width: 0;
+    .survey-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
+}
 </style>
 
 {{ endblock }}
@@ -100,7 +118,7 @@
         <div class="survey-section-title">
             {{ if en }}Participation Quality{{ else }}Teilnahmequalität{{ endif }}
         </div>
-        <div style="grid-column: span 2;">
+        <div style="grid-column: span 2; max-width: 70%">
                     {{ formfield 'serious_participation' }}
         </div>
 

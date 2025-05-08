@@ -96,11 +96,13 @@ class Lexicon:
 
     # Serious Participation
     participation_label = (
-        "Es wäre sehr hilfreich, wenn Sie uns an dieser Stelle mitteilen könnten, ob Sie ernsthaft teilgenommen haben, "
-        "so dass wir Ihre Antworten für unsere wissenschaftliche Analyse nutzen können, oder ob Sie sich nur durchgeklickt haben, "
+        "Es wäre sehr hilfreich, wenn Sie uns an dieser Stelle mitteilen könnten, ob Sie die Studie ernst und aufmerksam bearbeitet haben, "
+        "sodass wir Ihre Antworten für unsere wissenschaftliche Analyse nutzen können, oder ob Sie sich nur durchgeklickt haben, "
         "um einen Blick auf die Studie zu werfen.\n"
-        "Auch wenn Sie sich nur durchgeklickt haben, werden Sie Ihre Teilnahmeentschädigung erhalten "
-        "und es werden Ihnen durch diese Angabe keinerlei Nachteile entstehen!"
+        "Auch wenn Sie sich nur durchgeklickt haben, erhalten Sie selbstverständlich Ihre Teilnahmeentschädigung, "
+        "und Ihnen entstehen dadurch keinerlei Nachteile. "
+        "Wir freuen uns an dieser Stelle über Ihre Ehrlichkeit."
+
     )
     participation_serious = "Ich habe ernsthaft teilgenommen!"
     participation_not_serious = "Ich habe mich nur durchgeklickt, bitte werfen Sie meine Daten weg!"
