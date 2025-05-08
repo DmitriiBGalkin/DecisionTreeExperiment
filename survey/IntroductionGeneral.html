@@ -9,33 +9,36 @@
 {{ block content }}
 <div class="box">
     {{ if en }}
+
         <p>
             This study is part of the <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i> project, conducted by
-            <b>Zeppelin University</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
+            <b>Zeppelin University Friedrichshafen</b> and the <b>German Research Center for Artificial Intelligence (DFKI)</b>.
         </p>
+
         <p>
-            This experiment focuses on understanding decision trees. Decision trees are simple models that help make decisions based on rules.
+            The study investigates how the general public understands decision trees. Decision trees are simple models that represent algorithmic (AI) decisions using easy-to-understand rules.
         </p>
+
         <p>
-            The experiment consists of the following phases:
+            The study consists of the following parts:
         </p>
         <ol>
-            <li><b>Introduction:</b> A short explanation of what decision trees are and how they work.</li>
-            <li><b>Practice Session:</b> Example questions to get familiar with the task.</li>
-            <li><b>Main Study:</b> Questions based on different decision trees.</li>
-            <li><b>Demographics & Feedback:</b> A short survey.</li>
+            <li><b>Introduction:</b> A brief explanation of what a decision tree is and how it can help explain the functioning of algorithms (AI).</li>
+            <li><b>Practice Session:</b> Example questions to help you become familiar with the kind of tasks you'll solve in the main study.</li>
+            <li><b>Main Study:</b> You'll answer questions based on various decision trees that will be shown to you.</li>
+            <li><b>Short Survey:</b> Basic demographic questions and your feedback.</li>
         </ol>
 
         <p>
-            <b>Remuneration:</b> Your participation fee is determined by Bilendi. In addition, you will receive <b>€{{ C.payment_for_correct_answer|to2 }} per correct answer</b> in the main part of the study.
+            <b>Remuneration:</b> Your base participation fee will be determined by Bilendi. Additionally, you will receive <b>€{{ C.payment_for_correct_answer|to2 }} per correct answer</b> in the main part of the study.
         </p>
 
         <p>
-            The study will take about <b>25 minutes</b>.
+            The study will take approximately <b>25 minutes</b>.
         </p>
 
         <p>
-            Your responses are <b>anonymous</b> and will be used <b>only for research purposes</b>. Data processing follows <b>GDPR regulations</b>.
+            Your responses will remain <b>anonymous</b> and will be used <b>solely for scientific purposes</b>. All data processing complies with the <b>GDPR</b> (General Data Protection Regulation).
         </p>
 
         <div class="box" style="margin-top: 20px;">
@@ -57,41 +60,48 @@
             </details>
         </div>
 
-        <p><b>By clicking "Next", you consent to participate under the stated conditions.</b></p>
+        <p><b>By clicking "Next", you agree to participate under the conditions described above.</b></p>
 
         <p>
-            <b>Participation:</b> If you agree to participate, click <b>"Next"</b>. If not, simply close this window. You will only receive payment if you complete the full questionnaire.
+            <b>Participation:</b> If you agree to take part in the study, click <b>"Next"</b> to continue. If not, simply close this window.
+        </p>
+
+        <p style="margin-top: 1em;">
+            <b>Important:</b> You will only receive payment if you complete <u>all questions in the main study and the final questionnaire</u>.
         </p>
 
     {{ else }}
 
         <p>
             Diese Studie ist Teil des Projekts <i>Transparency of Algorithmic Decision-Making Systems (TrADeMaS)</i>, durchgeführt von der
-            <b>Zeppelin Universität</b> und dem <b>Deutschen Forschungszentrum für Künstliche Intelligenz (DFKI)</b>.
+            <b>Zeppelin Universität Friedrichshafen</b> und dem <b>Deutschen Forschungszentrum für Künstliche Intelligenz (DFKI)</b>.
         </p>
+
         <p>
-            Dieses Experiment befasst sich mit dem Verständnis von Entscheidungsbäumen. Entscheidungsbäume sind einfache Modelle, die Entscheidungen anhand von Regeln darstellen.
+            Diese Studie befasst sich mit dem Verständnis von Entscheidungsbäumen in der allgemeinen Bevölkerung. Entscheidungsbäume sind einfache Modelle, die Entscheidungen von Algorithmen (KI) anhand möglichst einfacher Regeln darstellen.
         </p>
+
         <p>
-            Das Experiment besteht aus den folgenden Phasen:
+            Die Studie besteht aus den folgenden Teilen:
         </p>
         <ol>
-            <li><b>Einführung:</b> Kurze Erklärung zu Entscheidungsbäumen und deren Funktionsweise.</li>
-            <li><b>Übungsteil:</b> Beispielaufgaben zum Kennenlernen der Aufgabe.</li>
-            <li><b>Hauptstudie:</b> Beantwortung von Fragen zu verschiedenen Entscheidungsbäumen.</li>
-            <li><b>Demografie & Feedback:</b> Kurze Umfrage zu demografischen Angaben und Feedback.</li>
+            <li><b>Eine Einführung:</b> Eine kurze Erklärung, was ein Entscheidungsbaum ist und wie er dazu dienen kann, das Funktionieren von Algorithmen (KI) zu erklären.</li>
+            <li><b>Einen Übungsteil:</b> Beispielaufgaben zum Kennenlernen der Aufgabe, die Sie in der Hauptstudie bearbeiten sollen.</li>
+            <li><b>Die Hauptstudie:</b> Fragen zu verschiedenen Entscheidungsbäumen, die Ihnen angezeigt werden.</li>
+            <li><b>Eine kurze Umfrage</b></li>
         </ol>
 
+
         <p>
-            <b>Vergütung:</b> Die Teilnahmevergütung wird durch Bilendi festgelegt. Zusätzlich erhalten Sie <b>€{{ C.payment_for_correct_answer|to2 }} pro richtiger Antwort</b> im Hauptteil der Studie.
+            <b>Bezahlung:</b> Die Bezahlung für die Teilnahme an unserer Studie wird Ihnen durch Bilendi mitgeteilt. Zusätzlich erhalten Sie <b>{{ C.payment_for_correct_answer|to2 }} € </b>  pro richtig beantworteter Frage im Hauptteil der Studie.
         </p>
 
         <p>
-            Die Studie dauert ungefähr <b>25 Minuten</b>.
+            Die Studie selbst dauert ungefähr <b>25 Minuten</b>.
         </p>
 
         <p>
-            Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für wissenschaftliche Zwecke</b> verwendet. Die Verarbeitung erfolgt gemäß der <b>DSGVO</b>.
+            Ihre Antworten bleiben <b>anonym</b> und werden <b>ausschließlich für wissenschaftliche Zwecke</b> verwendet. Die Verarbeitung erfolgt gemäß der <b>DSGVO</b> (Datenschutz-Grundverordnung).
         </p>
 
         <div class="box" style="margin-top: 20px;">
@@ -116,7 +126,11 @@
         <p><b>Mit dem Klick auf „Weiter“ erklären Sie sich mit der Teilnahme unter den genannten Bedingungen einverstanden.</b></p>
 
         <p>
-            <b>Teilnahme:</b> Wenn Sie teilnehmen möchten, klicken Sie bitte auf <b>"Weiter"</b>. Wenn nicht, schließen Sie bitte das Browserfenster. Die Vergütung erhalten Sie nur bei vollständiger Teilnahme.
+            <b>Teilnahme:</b> Wenn Sie an unserer Studie teilnehmen möchten, klicken Sie bitte auf <b>„Weiter“</b>, um fortzufahren. Wenn nicht, schließen Sie bitte jetzt einfach das Browserfenster.
+        </p>
+
+        <p style="margin-top: 1em;">
+            <b>Wichtig:</b> Sie erhalten Ihre Bezahlung für die Teilnahme an unserer Studie nur, wenn Sie <u>alle Fragen in der Hauptstudie und den Fragebogen am Ende der Studie vollständig abschließen</u>.
         </p>
 
     {{ endif }}
