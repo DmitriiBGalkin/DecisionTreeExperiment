@@ -8,131 +8,146 @@
 
 {{ block content }}
 <div class="box">
-    {% if en %}
+    {{ if en }}
         <p>
             In the era of artificial intelligence, many important decisions—such as loan approvals—are made by advanced AI models.
-            Some of these models function as <b>"black boxes"</b>, meaning that their decision-making process is complex and difficult for humans to interpret.
-            To address this challenge, laws have been introduced by the <b>EU Commission</b>, granting people the right to understand how such decisions are made.
+            Some of these models function as so-called <b>"black boxes"</b>. This means that their decision-making processes are complex and often difficult—or even impossible—for people to understand.
         </p>
 
         <p>
-            One way to explain such decisions is through <b>decision trees</b>.
-            A decision tree breaks down decisions step by step.
+            To address this problem, laws have been introduced by the <b>EU Commission</b> that aim to give people—i.e., the general public—the ability to better understand decisions made by AI systems, such as why a bank approves or rejects a loan.
         </p>
 
         <p>
-            Below is a simple diagram showing the elements of a decision tree.
-        </p>
-    {% else %}
-        <p>
-            In der Ära der künstlichen Intelligenz werden viele wichtige Entscheidungen – wie beispielsweise Kreditgenehmigungen – von hochentwickelten KI-Modellen getroffen.
-            Einige dieser Modelle funktionieren als <b>"Black Boxes"</b>, das heißt, ihre Entscheidung ist komplex und für Menschen schwer nachvollziehbar.
-            Um diesem Problem entgegenzuwirken, wurden Gesetze von der <b>EU-Kommission</b> eingeführt, die es Menschen ermöglichen sollen, die Entscheidung einer Bank besser zu verstehen.
+            One way to make such credit decisions more understandable is through so-called <b>decision trees</b>.
+            A decision tree presents an AI decision in a strongly simplified, step-by-step manner. The goal is to help you better understand why your loan was approved or rejected.
+            In other words, it aims to give you as a customer more transparency into how the decision was made.
+            This study is conducted to explore that possibility.
         </p>
 
         <p>
-            Eine Möglichkeit, solche Entscheidungen verständlich darzustellen, sind <b>Entscheidungsbäume</b>.
-            Ein Entscheidungsbaum zeigt die Entscheidung Schritt für Schritt.
+            Below is a simple diagram that shows you the parts of a decision tree to give you an idea of what a decision tree actually is.
+        </p>
+    {{ else }}
+        <p>
+            In der Ära der Künstlichen Intelligenz werden viele wichtige Entscheidungen – wie beispielsweise die Genehmigung eines Kredits – von hochentwickelten Algorithmen oder Künstlichen Intelligenz-Modellen getroffen.
         </p>
 
         <p>
-            Unten sehen Sie eine einfache Abbildung, die die Bestandteile eines Entscheidungsbaums zeigt.
+            Einige dieser Modelle funktionieren als sogenannte <b>"Black Boxes"</b> („Schwarze Schachteln“). Damit drückt man aus, dass ihre Entscheidungen kompliziert sind und für Menschen schwer bis gar nicht nachvollziehbar und verständlich.
         </p>
-    {% endif %}
+
+        <p>
+            Um diesem Problem entgegenzuwirken, wurden Gesetze von der <b>EU-Kommission</b> eingeführt, die es Menschen, d. h. der Bevölkerung, ermöglichen sollen, die Entscheidungen – beispielsweise von Banken bei der Genehmigung oder Ablehnung von Krediten durch Künstliche Intelligenz – besser zu verstehen.
+        </p>
+
+        <p>
+            Eine Möglichkeit, solche Entscheidungen zur Genehmigung oder Ablehnung von Krediten verständlich darzustellen, sind sogenannte <b>Entscheidungsbäume</b>.
+            Ein Entscheidungsbaum zeigt Ihnen die Entscheidung einer Künstlichen Intelligenz in stark vereinfachter Form Schritt für Schritt. Damit soll Ihr Verständnis darüber, wieso Ihnen ein Kredit genehmigt oder abgelehnt worden ist, erhöht werden.
+            Das heißt, Ihnen als Kundin oder Kunde soll eine größere Transparenz über die getroffene Entscheidung ermöglicht werden. Um diese Möglichkeit zu untersuchen, führen wir diese Studie durch.
+        </p>
+
+        <p>
+            Unten sehen Sie eine einfache Abbildung, die Ihnen die einzelnen Bestandteile eines Entscheidungsbaums zeigt, um Ihnen eine Vorstellung davon zu geben, was ein Entscheidungsbaum eigentlich ist.
+        </p>
+    {{ endif }}
 </div>
 
-<!-- First SVG: showing tree parts -->
+<!-- First SVG: decision tree elements -->
 <div class="sample-responsive-svg">
     {{ include svg_template_model }}
 </div>
 
-<!-- Explanation of tree parts (new box) -->
+<!-- Explanation of tree structure -->
 <div class="box">
-    {% if en %}
+    {{ if en }}
         <p>
-            A decision tree begins at the <b>root node</b>.
-            Each <b>decision node</b> represents a rule or question.
-            A <b>branch</b> connects nodes or leads to a <b>leaf node</b> and shows the possible conditions resulting from the rule.
-            A <b>leaf node</b> represents the <b>final decision</b> based on the sequence of rules.
+            A decision tree begins, like every tree, at the <b>root</b>.
+            Each <b>node</b> in the decision tree represents a rule or question on which a decision is based.
+            A <b>branch</b> connects the nodes or leads to a <b>leaf</b>. The branch shows which conditions result from the rule.
+            A <b>leaf</b> represents the final decision.
         </p>
+
         <p>
-            Below you will see a decision tree that a bank might show you for explanation, along with a description of it.
+            Below is a decision tree that a bank might show you to explain why a loan was approved or rejected by an AI system.
+            It is meant to give you, as a customer, more transparency about how the decision was made.
         </p>
-    {% else %}
+    {{ else }}
         <p>
-            Ein Entscheidungsbaum beginnt am <b>Wurzelknoten</b>.
-            Jeder <b>Entscheidungsknoten</b> stellt eine Regel oder Frage dar.
-            Ein <b>Zweig</b> verbindet Knoten miteinander oder führt zu einem <b>Blattknoten</b> und zeigt dabei, welche möglichen Bedingungen sich aus der Regel ergeben.
-            Ein <b>Blattknoten</b> stellt die <b>endgültige Entscheidung</b> dar, die auf der Regelkette basiert.
+            Ein Entscheidungsbaum beginnt – wie jeder Baum – an der <b>Wurzel</b>.
+            Jeder <b>Knoten</b> des Entscheidungsbaums stellt eine Regel oder Frage dar, anhand derer eine Entscheidung getroffen wird.
+            Ein <b>Zweig</b> verbindet die Knoten miteinander oder führt zu einem <b>Blatt</b>. Dabei zeigt der Zweig, welche möglichen Bedingungen sich aus der Regel ergeben.
+            Ein <b>Blatt</b> stellt die <b>endgültige Entscheidung</b> dar.
         </p>
+
         <p>
-            Im Folgenden sehen Sie einen Entscheidungsbaum, den Ihnen eine Bank zur Erklärung zeigen könnte, zusammen mit einer Beschreibung.
+            Im Folgenden sehen Sie einen Entscheidungsbaum, den Ihnen eine Bank zur Erklärung ihrer Genehmigung bzw. Ablehnung eines Kredits durch eine Künstliche Intelligenz zeigen könnte.
+            Damit soll Ihnen mehr Transparenz über die Entscheidung der Künstlichen Intelligenz über die Vergabe des Kredits – als Kundin bzw. Kunde – ermöglicht werden.
         </p>
-    {% endif %}
+    {{ endif }}
 </div>
 
-<!-- Second SVG: actual decision tree -->
+<!-- Second SVG: full decision tree -->
 <div class="sample-responsive-svg">
     {{ include svg_template }}
 </div>
-
-<!-- Full description of the decision tree logic -->
+<!-- Detailed walkthrough of the tree -->
 <div class="box">
-    {% if en %}
+    {{ if en }}
         <p>
-            Suppose a bank provides you with the decision tree shown above as an explanation for its loan approval process.
-            According to this decision tree, the bank first evaluates the loan you have applied for, which is represented by the topmost node.
+            Suppose a bank presents you with the decision tree shown above to explain how your loan application was processed.
+            According to this tree, the bank first evaluates the <b>loan amount</b>, which appears at the top of the tree.
         </p>
 
         <ul>
             <li>
-                If the loan amount is less than €5,000 (left branch), the bank then considers the applicant's creditworthiness.
+                If the <b>loan amount</b> is less than €5,000 (left branch), the bank then assesses the applicant’s <b>creditworthiness</b>.
                 <ul>
-                    <li>If the creditworthiness is assessed as <b>good</b>, the loan will be <b>approved</b>.</li>
-                    <li>Otherwise the loan will be <b>rejected</b>.</li>
+                    <li>If the creditworthiness is assessed as good, the loan will be <b>approved</b>.</li>
+                    <li>Otherwise, the loan will be <b>rejected</b>.</li>
                 </ul>
             </li>
             <li>
-                If the loan amount is €5,000 or higher (right branch), the next step the bank takes is to assess the applicant's <b>salary</b>.
+                If the <b>loan amount</b> is €5,000 or more (right branch), the bank evaluates the applicant’s <b>income</b>.
                 <ul>
-                    <li>If the salary is at least <b>€100,000</b>, the loan will be <b>approved</b>.</li>
-                    <li>Otherwise the loan will be <b>rejected</b>.</li>
+                    <li>If the income is at least €100,000, the loan will be <b>approved</b>.</li>
+                    <li>If the income is less than €100,000, the loan will be <b>rejected</b>.</li>
                 </ul>
             </li>
         </ul>
 
         <p>
-            This decision tree is designed to help you understand how your bank makes a decision about your loan.
+            This decision tree is intended to help you understand how your bank reaches a decision about your loan application.
         </p>
-
-    {% else %}
+    {{ else }}
         <p>
-            Angenommen, eine Bank stellt Ihnen den oben dargestellten <b>Entscheidungsbaum</b> als Erklärung für ihren Kreditvergabeprozess bereit.
-            Laut diesem Entscheidungsbaum bewertet die Bank zunächst den <b>Kredit, den Sie beantragt haben</b>, der im obersten Knoten dargestellt wird.
+            Angenommen, eine Bank stellt Ihnen den oben dargestellten Entscheidungsbaum als Erklärung für ihre Kreditvergabe dar.
+            Laut diesem Entscheidungsbaum bewertet die Bank zunächst den <b>Betrag des Kredits</b>, der im obersten Knoten dargestellt wird.
         </p>
 
         <ul>
             <li>
-                Wenn der Betrag des Kredits unter 5.000 € liegt (linker Zweig), betrachtet die Bank anschließend die Kreditwürdigkeit des Antragstellers.
+                Wenn der <b>Betrag des Kredits</b> unter 5.000 € liegt (linker Zweig), betrachtet die Bank anschließend die <b>Kreditwürdigkeit</b> des Antragstellers.
                 <ul>
-                    <li>Wenn die Kreditwürdigkeit als <b>gut</b> eingestuft wird, wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Wenn die Kreditwürdigkeit als gut eingestuft wird, wird der Kredit <b>genehmigt</b>.</li>
                     <li>Andernfalls wird der Kredit <b>abgelehnt</b>.</li>
                 </ul>
             </li>
             <li>
-                Wenn der Betrag des Kredits 5.000 € beträgt oder höher ist (rechter Zweig), bewertet die Bank als nächsten Schritt das <b>Gehalt</b> des Antragstellers.
+                Wenn der <b>Betrag des Kredits</b> 5.000 € oder mehr beträgt (rechter Zweig), bewertet die Bank im nächsten Schritt das <b>Gehalt</b> des Antragstellers.
                 <ul>
-                    <li>Wenn das Gehalt mindestens <b>100.000 €</b> beträgt, wird der Kredit <b>genehmigt</b>.</li>
-                    <li>Andernfalls wird der Kredit <b>abgelehnt</b>.</li>
+                    <li>Wenn das Gehalt mindestens 100.000 € beträgt, wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Beträgt das Gehalt weniger als 100.000 €, wird der Kredit <b>abgelehnt</b>.</li>
                 </ul>
             </li>
         </ul>
 
         <p>
-            Dieser Entscheidungsbaum soll Ihnen helfen zu verstehen, wie Ihre Bank eine Entscheidung über Ihren Kredit trifft.
+            Dieser Entscheidungsbaum soll Ihnen helfen zu verstehen, wie Ihre Bank eine Entscheidung über Ihren Antrag auf Zuweisung eines Kredits trifft.
         </p>
-    {% endif %}
+    {{ endif }}
 </div>
+
 
 <div class="form-container">
     {{ formfield 'familiarity_with_decision_trees' }}
