@@ -9,7 +9,7 @@ class Lexicon:
     loan_amount = "Kreditbetrag"
     loan_duration = "Kreditlaufzeit"
     credit_history = "Kreditwürdigkeit"
-    employment_status = "Beschäftigung"
+    employment_status = "Berufstätigkeit"
     income = "Gehalt"
     marital_status = "Familienstand"
     assets = "Vermögen"  # Total savings, investments, or property owned
