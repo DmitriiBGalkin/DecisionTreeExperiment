@@ -93,7 +93,12 @@
 
 
         <p>
-            <b>Bezahlung:</b> Die Bezahlung für die Teilnahme an unserer Studie wird Ihnen durch Bilendi mitgeteilt. Zusätzlich erhalten Sie <b>{{ C.payment_for_correct_answer|to2 }} € </b>  pro richtig beantworteter Frage im Hauptteil der Studie.
+            <b>Bezahlung:</b>
+            {{ if session.config.student_debug }}
+            {{else}}
+             Die Bezahlung für die Teilnahme an unserer Studie wird Ihnen durch Bilendi mitgeteilt.
+            {{ endif }}
+             Zusätzlich erhalten Sie <b>{{ C.payment_for_correct_answer|to2 }} € </b>  pro richtig beantworteter Frage im Hauptteil der Studie.
         </p>
 
         <p>

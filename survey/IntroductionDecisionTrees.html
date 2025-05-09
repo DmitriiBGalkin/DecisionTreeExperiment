@@ -76,7 +76,7 @@
         <p>
             Ein Entscheidungsbaum beginnt – wie jeder Baum – an der <b>Wurzel</b>.
             Jeder <b>Knoten</b> des Entscheidungsbaums stellt eine Regel oder Frage dar, anhand derer eine Entscheidung getroffen wird.
-            Ein <b>Zweig</b> verbindet die Knoten miteinander oder führt zu einem <b>Blatt</b>. Dabei zeigt der Zweig, welche möglichen Bedingungen sich aus der Regel ergeben.
+            Ein <b>Zweig</b> verbindet die Knoten miteinander oder führt zu einem <b>Blatt</b>.In einem Entscheidungsknoten wird eine Frage geprüft. Je nach Ergebnis dieser Prüfung führen Zweige zu den nächsten Knoten oder Blättern
             Ein <b>Blatt</b> stellt die <b>endgültige Entscheidung</b> dar.
         </p>
 
@@ -122,22 +122,22 @@
     {{ else }}
         <p>
             Angenommen, eine Bank stellt Ihnen den oben dargestellten Entscheidungsbaum als Erklärung für ihre Kreditvergabe dar.
-            Laut diesem Entscheidungsbaum bewertet die Bank zunächst den <b>Betrag des Kredits</b>, der im obersten Knoten dargestellt wird.
+            Laut diesem Entscheidungsbaum bewertet die Bank zunächst den <b>Kreditbetrag (Betrag des Kredits)</b>, der im obersten Knoten dargestellt wird.
         </p>
 
         <ul>
             <li>
-                Wenn der <b>Betrag des Kredits</b> unter 5.000 € liegt (linker Zweig), betrachtet die Bank anschließend die <b>Kreditwürdigkeit</b> des Antragstellers.
+                Wenn der <b>Kreditbetrag</b> unter 5.000 € liegt (linker Zweig), betrachtet die Bank anschließend die <b>Kreditwürdigkeit</b> des Antragstellers.
                 <ul>
                     <li>Wenn die Kreditwürdigkeit als gut eingestuft wird, wird der Kredit <b>genehmigt</b>.</li>
                     <li>Andernfalls wird der Kredit <b>abgelehnt</b>.</li>
                 </ul>
             </li>
             <li>
-                Wenn der <b>Betrag des Kredits</b> 5.000 € oder mehr beträgt (rechter Zweig), bewertet die Bank im nächsten Schritt das <b>Gehalt</b> des Antragstellers.
+                Wenn der <b>Kreditbetrag</b> 5.000 € oder mehr beträgt (rechter Zweig), bewertet die Bank im nächsten Schritt das <b>Gehalt</b> des Antragstellers.
                 <ul>
-                    <li>Wenn das Gehalt mindestens 100.000 € beträgt, wird der Kredit <b>genehmigt</b>.</li>
-                    <li>Beträgt das Gehalt weniger als 100.000 €, wird der Kredit <b>abgelehnt</b>.</li>
+                    <li>Bei einem Gehalt von 100.000 € und mehr wird der Kredit <b>genehmigt</b>.</li>
+                    <li>Bei einem Gehalt von unter 100.000 € wird der Kredit <b>abgelehnt</b>.</li>
                 </ul>
             </li>
         </ul>
