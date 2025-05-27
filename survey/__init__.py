@@ -1,4 +1,6 @@
 from otree.api import *
+
+from onlySurveyAndResults import page_sequence
 from settings import LANGUAGE_CODE
 import random
 import json
@@ -16,7 +18,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 21
+    NUM_ROUNDS = 1
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -62,7 +64,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal
     )
 
-
     is_correct = models.BooleanField(initial=False)
     total_correct_answers=models.IntegerField()
 
@@ -70,7 +71,6 @@ class Player(BasePlayer):
         blank=True,
         label=Lexicon.confidence_level_label
     )
-
 
     familiarity_with_decision_trees = models.IntegerField(
         choices=[
@@ -107,42 +107,8 @@ class Player(BasePlayer):
         label=Lexicon.question_loan_sample1_label,
         widget=widgets.RadioSelectHorizontal,
     )
-
     #Creating time-stamps for each page:
     interaction_times = models.LongStringField(blank=True)
-
-    IntroductionGeneral_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    IntroductionDecisionTrees_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    InstructionsSample_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    SampleQuestion_1_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    SampleQuestion_2_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    PreMainStudy_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    Tree_Question_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    PostMainStudy_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
 
 def confidence_level_error_message(player, value):
     if value is None:
@@ -157,7 +123,7 @@ def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         easy_trees = list(range(11))         # Tree_1 to Tree_11
         hard_trees = list(range(11, 21))     # Tree_12 to Tree_21
-
+        subsession.session.current_participants = 0
         for player in subsession.get_players():
             participant = player.participant
             use_random = subsession.session.config.get('random_order', False)
@@ -185,20 +151,9 @@ def creating_session(subsession: Subsession):
             participant.treeOrder = full_order
             print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 
-# PAGES
 
-class PreStudyInfo(Page):
-    def is_displayed(player):
-        return player.session.config.get('student_debug', False) and player.round_number == 1
-
-    @staticmethod
-    def vars_for_template(player: Player):
-        return dict(
-            Lexicon=Lexicon,
-            **which_language)
 class IntroductionGeneral(Page):
     form_model = 'player'
-    form_fields = ['IntroductionGeneral_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -207,13 +162,11 @@ class IntroductionGeneral(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
-    # @staticmethod
-    # def before_next_page(player, timeout_happened):
-    #     player.IntroductionGeneral_TS = time.time()
+
 
 class IntroductionDecisionTrees(Page):
     form_model = 'player'
-    form_fields = ['familiarity_with_decision_trees','IntroductionDecisionTrees_SF']
+    form_fields = ['familiarity_with_decision_trees']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -230,7 +183,6 @@ class IntroductionDecisionTrees(Page):
 
 class InstructionsSample(Page):
     form_model = 'player'
-    form_fields = ['InstructionsSample_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -245,7 +197,7 @@ class InstructionsSample(Page):
 
 class SampleQuestion_1(Page):
     form_model = "player"
-    form_fields = ["question_loan_sample1","confidence_level_sample1", 'SampleQuestion_1_SF']
+    form_fields = ["question_loan_sample1","confidence_level_sample1"]
 
     @staticmethod
     def is_displayed(player):
@@ -266,7 +218,7 @@ class SampleQuestion_1(Page):
 
 class SampleQuestion_2(Page):
     form_model = "player"
-    form_fields = ["question_loan_sample2", "confidence_level_sample2", 'SampleQuestion_2_SF']
+    form_fields = ["question_loan_sample2", "confidence_level_sample2"]
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -285,7 +237,6 @@ class SampleQuestion_2(Page):
     #     player.SampleQuestion_2_TS = time.time()
 class PreMainStudy(Page):
     form_model = "player"
-    form_fields = ['PreMainStudy_SF']
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -299,7 +250,7 @@ class PreMainStudy(Page):
     #     player.PreMainStudy_TS = time.time()
 class Tree_Question(Page):
     form_model = "player"
-    form_fields = ["question_loan", "confidence_level","Tree_Question_SF","interaction_times"]
+    form_fields = ["question_loan", "confidence_level","interaction_times"]
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -326,7 +277,6 @@ class Tree_Question(Page):
 
 class PostMainStudy(Page):
     form_model = 'player'
-    form_fields = ["PostMainStudy_SF"]
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
@@ -356,19 +306,12 @@ class TEST_Tree_Question(Page):
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
-    @staticmethod
-    def before_next_page(player: Player, timeout_happened):
-        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[player.round_number - 1][1])
-        player.payoff = player.is_correct * C.payment_for_correct_answer
-        print(player.is_correct)
-        print(C.payment_for_correct_answer)
-        print(player.payoff)
-
 
 
 
 #Actual sequence
-page_sequence = [PreStudyInfo, IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
-
+#Testing
+page_sequence = [TEST_Tree_Question]
 

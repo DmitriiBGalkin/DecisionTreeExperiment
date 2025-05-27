@@ -8,8 +8,6 @@
 
 {{ block content }}
 <div class="box">
-    {% if session.config.student_debug %}
-
         {{ if en }}
             <p>
                 Thank you for completing the study! 🎉
@@ -102,44 +100,5 @@
                 Sie können dieses Fenster jetzt schließen. Vielen Dank nochmals für Ihre Teilnahme!
             </p>
         {{ endif }}
-
-    {% else %}
-
-        {{ if en }}
-            <p>
-                Thank you for completing the study! 🎉
-            </p>
-
-            <p>
-                Your responses have been recorded successfully.
-            </p>
-
-            <p>
-                If you have any further questions, you can email <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a>.
-            </p>
-
-            <p>
-                You may now close this window. Thank you once again for your participation!
-            </p>
-
-        {{ else }}
-            <p>
-                Vielen Dank für Ihre Teilnahme an der Studie! 🎉
-            </p>
-
-            <p>
-                Ihre Antworten wurden erfolgreich gespeichert.
-            </p>
-
-            <p>
-                Bei weiteren Fragen können Sie eine E-Mail an <a href="mailto:dmitrii.galkin@zu.de">dmitrii.galkin@zu.de</a> senden.
-            </p>
-
-            <p>
-                Sie können dieses Fenster jetzt schließen. Vielen Dank nochmals für Ihre Teilnahme!
-            </p>
-        {{ endif }}
-
-    {% endif %}
 </div>
 {{ endblock }}

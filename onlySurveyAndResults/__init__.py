@@ -136,14 +136,6 @@ class Player(BasePlayer):
     # Results_TS = models.FloatField()
 
 
-    Survey_Demographics_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
-    Results_SF = models.LongStringField(
-        label=Lexicon.feedback_label_SF,
-        blank=True,
-    )
 
 
 class Survey_Demographics(Page):
@@ -157,14 +149,18 @@ class Survey_Demographics(Page):
             **which_language)
     form_model = 'player'
     form_fields = ['gender', 'age', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
-                   'feedback',"Survey_Demographics_SF"]
-    # @staticmethod
-    # def before_next_page(player: Player, timeout_happened):
-    #     player.Survey_Demographics_TS = time.time()
+                   'feedback']
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        session = player.session
+        subsession = player.subsession
+        participant = player.participant
+        player.subsession.session.current_participants = player.subsession.session.current_participants + 1
+        print(player.subsession.session.current_participants)
+
 
 class Results(Page):
     form_model = 'player'
-    form_fields = ["Results_SF"]
     @staticmethod
     def is_displayed(player):
         return player.round_number == C.NUM_ROUNDS
