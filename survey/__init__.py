@@ -17,7 +17,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 2
+    NUM_ROUNDS = 21
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
