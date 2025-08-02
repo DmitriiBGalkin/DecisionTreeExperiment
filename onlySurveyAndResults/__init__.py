@@ -37,23 +37,23 @@ class Player(BasePlayer):
         ],
         label=Lexicon.gender_label
     )
-    age = models.IntegerField(
-        label=Lexicon.age_label,
-        min=18,
-        max=100
-    )
-    education_level = models.StringField(
+    # age = models.IntegerField(
+    #     label=Lexicon.age_label,
+    #     min=18,
+    #     max=100
+    # )
+    education_level = models.IntegerField(
         choices=[
-            Lexicon.education_schueler,
-            Lexicon.education_hauptschule,
-            Lexicon.education_mittlere_reife,
-            Lexicon.education_lehre,
-            Lexicon.education_fachabitur,
-            Lexicon.education_abitur,
-            Lexicon.education_bachelor,
-            Lexicon.education_master,
-            Lexicon.education_phd,
-            Lexicon.education_other,
+            (1, Lexicon.education_schueler),
+            (2, Lexicon.education_hauptschule),
+            (3, Lexicon.education_mittlere_reife),
+            (4, Lexicon.education_lehre),
+            (5, Lexicon.education_fachabitur),
+            (6, Lexicon.education_abitur),
+            (7, Lexicon.education_bachelor),
+            (8, Lexicon.education_master),
+            (9, Lexicon.education_phd),
+            (10, Lexicon.education_other),
         ],
         label=Lexicon.education_label
     )
@@ -148,7 +148,7 @@ class Survey_Demographics(Page):
             Lexicon=Lexicon,
             **which_language)
     form_model = 'player'
-    form_fields = ['gender', 'age', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
+    form_fields = ['gender', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
                    'feedback']
     @staticmethod
     def before_next_page(player: Player, timeout_happened):

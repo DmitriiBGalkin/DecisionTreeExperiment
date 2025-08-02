@@ -58,6 +58,8 @@ class Lexicon:
     age_error_message = "Please enter a valid age between 18 and 100."
 
     # Education
+    education_prescreener = "What is the highest level of education you have completed?"
+
     education_label = "What is the highest level of education you have completed?"
 
     education_schueler = "Still in school"
@@ -138,3 +140,6 @@ class Lexicon:
     label_leaf_node = "Final Decision"
 
     salary = "Salary"
+    no_education = "No formal education"
+    vocational_education = "Vocational or technical education"
+    higher_education = "University or higher education"

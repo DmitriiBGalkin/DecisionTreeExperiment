@@ -65,6 +65,7 @@ class Lexicon:
     age_error_message = "Bitte geben Sie ein gültiges Alter zwischen 18 und 100 Jahren ein."
 
     # Education
+    education_prescreener= "Welchen höchsten Bildungsabschluss Sie erworben haben?"
     education_label = "Welchen Bildungsabschluss haben Sie? Bitte wählen Sie den höchsten Abschluss, den Sie bisher erreicht haben."
 
     education_schueler = "Noch Schüler"
@@ -148,3 +149,6 @@ class Lexicon:
     label_leaf_node = "Endgültige Entscheidung"
 
     salary = "Gehalt"
+    no_education = "Ohne beruflichen Bildungsabschluss"
+    vocational_education = "Lehre/Berufsausbildung im dualen System"
+    higher_education = "Universitäts- oder Hochschulbildung"

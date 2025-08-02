@@ -3,7 +3,7 @@ from otree.api import *
 from onlySurveyAndResults import page_sequence
 from settings import LANGUAGE_CODE
 import random
-import json
+import math
 
 import time
 
@@ -46,6 +46,7 @@ class C(BaseConstants):
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     tree_order=list(range(0, 21))
+    group_distribution = [0.125, 0.175, 0.20, 0.125, 0.175, 0.20] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
 class Subsession(BaseSubsession):
     pass
 
@@ -55,6 +56,30 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    gender = models.IntegerField(
+        choices=[
+            (1, Lexicon.gender_male),
+            (2, Lexicon.gender_female),
+            (3, Lexicon.gender_diverse),
+            (4, Lexicon.gender_no_answer),
+        ],
+        label=Lexicon.gender_label
+    )
+    age = models.IntegerField(
+        label=Lexicon.age_label,
+        min=1,
+        max=100
+    )
+    prescreener_group = models.IntegerField()
+    education_level_prescreener = models.IntegerField(
+        choices=[
+            (1, Lexicon.no_education),
+            (2, Lexicon.vocational_education),
+            (3, Lexicon.higher_education),
+        ],
+        label=Lexicon.education_label
+    )
+
     question_loan = models.BooleanField(
         choices=[
             (True, Lexicon.approved),
@@ -121,9 +146,18 @@ def confidence_level_sample2_error_message(player, value):
         return Lexicon.move_slider_warning
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
+        subsession.session.prescreener_groups_dict = {i: 0 for i in range(6)}
+
         easy_trees = list(range(11))         # Tree_1 to Tree_11
         hard_trees = list(range(11, 21))     # Tree_12 to Tree_21
         subsession.session.current_participants = 0
+        subsession.session.participants_needed = subsession.session.config.get('participants_needed')
+        #print(subsession.session.participants_needed)
+        subsession.session.prescreener_groups_distr = {
+            group_id: math.floor(prop * subsession.session.participants_needed)
+            for group_id, prop in enumerate(C.group_distribution)
+        }
+        print(subsession.session.prescreener_groups_distr)
         for player in subsession.get_players():
             participant = player.participant
             use_random = subsession.session.config.get('random_order', False)
@@ -152,6 +186,56 @@ def creating_session(subsession: Subsession):
             print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 
 
+class Prescreener(Page):
+    form_model = 'player'
+    form_fields = ['age','education_level_prescreener']
+
+    @staticmethod
+    def is_displayed(player):
+        #print('current',player.session.current_participants)
+        return player.round_number == 1
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        #print('max', player.session.participants_needed, 'True?',player.session.current_participants<player.session.participants_needed)
+        return dict(
+            Lexicon=Lexicon,
+            **which_language)
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        age_group = 0 if player.age < 45 else 1
+        player.prescreener_group = age_group * 3 + (player.education_level_prescreener - 1)
+
+
+class RedirectPage(Page):
+    @staticmethod
+    def is_displayed(player):
+        group = player.prescreener_group
+        max_total = player.session.participants_needed
+        group_count = player.session.prescreener_groups_dict.get(group, None)
+        group_count_max = player.session.prescreener_groups_distr.get(group, None)
+        current_participants = player.session.current_participants
+        # print("group", group)
+        # print("round_number == 1:", player.round_number == 1)
+        # print("group_count:", group_count)
+        # print("group_count_max:", group_count_max)
+        # print("group count > group_count_max:", group_count, group_count_max, group_count > group_count_max, )
+        # print("current_participants > max_total:", current_participants, ">", max_total, current_participants > max_total)
+        return (
+            player.round_number == 1
+            and
+            (group_count > group_count_max or player.age < 18 or current_participants>max_total)
+        )
+    def js_vars(player):
+        bilendi_id = player.participant.label
+        if player.age < 18:
+            redirect_url = f"https://survey.maximiles.com/screenout?p=98327_69cadaeb&m={bilendi_id}"
+        else:
+            redirect_url = f"https://survey.maximiles.com/quotasfull?p=98327_21a4610c&m={bilendi_id}"
+            print(redirect_url)
+        return dict(redirect_url=redirect_url)
+
+
 class IntroductionGeneral(Page):
     form_model = 'player'
     @staticmethod
@@ -159,9 +243,10 @@ class IntroductionGeneral(Page):
         return player.round_number == 1
     @staticmethod
     def vars_for_template(player: Player):
-        return dict(
+         return dict(
             Lexicon=Lexicon,
             **which_language)
+
 
 
 class IntroductionDecisionTrees(Page):
@@ -310,8 +395,8 @@ class TEST_Tree_Question(Page):
 
 
 #Actual sequence
-#page_sequence = [IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+# page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
-page_sequence = [TEST_Tree_Question]
+page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral]
 

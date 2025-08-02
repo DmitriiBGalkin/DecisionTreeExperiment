@@ -1,0 +1,44 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+    <div class="btn-container">
+        <button id="custom-next" class="btn btn-primary">Next</button>
+    </div>
+{{ endblock }}
+
+
+
+
+{{ block title }}
+    <h1>{{ Lexicon.welcome_title }}</h1>
+{{ endblock }}
+
+{{ block content }}
+<div class="box">
+    {% if en %}
+        <p>Dear Participant,</p>
+        <p>
+            Before the beginning of this study, please complete this brief survey. This will help us ensure that our sample reflects the general population accurately.
+        </p>
+        <p>
+            Your responses will remain anonymous and will be used solely to determine eligibility for participation.
+        </p>
+    {% else %}
+        <p>Liebe Teilnehmerin, lieber Teilnehmer,</p>
+        <p>
+            bevor die eigentliche Studie beginnt, bitten wir Sie, diese kurze Umfrage zu beantworten. Dies hilft uns, sicherzustellen, dass unsere Stichprobe die allgemeine Bevölkerung genau widerspiegelt.
+        </p>
+        <p>
+            Ihre Antworten bleiben anonym und dienen ausschließlich der Feststellung der Teilnahmeberechtigung.
+        </p>
+    {% endif %}
+</div>
+
+<div class="form-container">
+    {{ formfield 'age' }}
+    {{ formfield 'education_level_prescreener' }}
+</div>
+
+<div class="btn-container">
+{{ next_button }}
+</div>
+{{ endblock }}
