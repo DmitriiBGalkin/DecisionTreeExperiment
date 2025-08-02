@@ -1,19 +1,20 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    dict(
-        name='Survey_without_Random_Order',
-        app_sequence=['survey','onlySurveyAndResults'],
-        num_demo_participants=4,
-        random_order=False,
-        student_debug=True
-    ),
+    # dict(
+    #     name='Survey_without_Random_Order',
+    #     app_sequence=['survey','onlySurveyAndResults'],
+    #     num_demo_participants=4,
+    #     random_order=False,
+    #     student_debug=True
+    # ),
     dict(
         name='Survey_with_Random_Order',
         app_sequence=['survey','onlySurveyAndResults'],
-        num_demo_participants=4,
+        participants_needed=8,
+        num_demo_participants=10,
         random_order=True,
-        student_debug=True
+        student_debug=False
     ),
 ]
 ROOMS = [
@@ -31,11 +32,11 @@ ROOMS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc=""
+    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc="",current_participants=0,participants_needed=8
 )
 
 PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers"]
-SESSION_FIELDS = []
+SESSION_FIELDS = ['participants_needed','prescreener_groups_dict','prescreener_groups_distr','current_participants']
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

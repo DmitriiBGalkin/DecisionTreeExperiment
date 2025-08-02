@@ -86,7 +86,6 @@
         </div>
 
         {{ formfield 'gender' }}
-        {{ formfield 'age' }}
         {{ formfield 'bundesland' }}
 
         <div class="survey-section-title">
@@ -139,6 +138,5 @@
     {{ next_button }}
 </div>
 
-{{ include_sibling 'student_feedback.html' with feedback_field='Survey_Demographics_SF' }}
 
 {{ endblock }}
