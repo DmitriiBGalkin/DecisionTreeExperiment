@@ -3,8 +3,6 @@ from settings import LANGUAGE_CODE
 import random
 import time
 
-from survey import RedirectPage
-
 #LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon

@@ -4,7 +4,6 @@ from onlySurveyAndResults import page_sequence
 from settings import LANGUAGE_CODE
 import random
 import math
-
 import time
 
 #LANGUAGE_CODE = 'en' #this just for testing
@@ -18,7 +17,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 1
+    NUM_ROUNDS = 21
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -184,6 +183,46 @@ def creating_session(subsession: Subsession):
 
             participant.treeOrder = full_order
             # print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+def vars_for_admin_report(subsession):
+    session = subsession.session
+
+    group_counts = session.prescreener_groups_dict
+    group_maxes = session.prescreener_groups_distr
+    current_participants = session.current_participants
+
+    # Define readable labels for each group
+    group_labels = {
+        0: "Low education, age < 45",
+        1: "Mid education, age < 45",
+        2: "High education, age < 45",
+        3: "Low education, age ≥ 45",
+        4: "Mid education, age ≥ 45",
+        5: "High education, age ≥ 45",
+    }
+
+    display_data = []
+    all_group_ids = sorted(set(group_counts.keys()) | set(group_maxes.keys()))
+
+    for group_id in all_group_ids:
+        current = group_counts.get(group_id, 0)
+        max_allowed = group_maxes.get(group_id, 'N/A')
+        label = group_labels.get(group_id, f"Group {group_id}")
+        status = '✅ OK' if max_allowed == 'N/A' or current <= max_allowed else '⚠️ Exceeded'
+
+        display_data.append(dict(
+            group_id=group_id,
+            label=label,
+            current=current,
+            max_allowed=max_allowed,
+            status=status
+        ))
+
+    return dict(
+        round_number=subsession.round_number,
+        group_data=display_data,
+        current_participants=current_participants,
+    )
+
 
 
 class Prescreener(Page):
@@ -333,7 +372,7 @@ class PreMainStudy(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         group_dict = player.session.prescreener_groups_dict
-        group = player.pre_screener_group
+        group = player.prescreener_group
         group_dict[group] += 1
         player.session.prescreener_groups_dict = group_dict  # save it back (not strictly necessary)
 
@@ -402,5 +441,5 @@ class TEST_Tree_Question(Page):
 page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
-#page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral]
+#page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
 

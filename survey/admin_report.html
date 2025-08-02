@@ -1,0 +1,28 @@
+<h2>Prescreener Group Report — Round {{ round_number }}</h2>
+
+<p><strong>Current total participants:</strong> {{ current_participants }}</p>
+
+<table border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Group ID</th>
+            <th>Description</th>
+            <th>Current Count</th>
+            <th>Max Allowed</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in group_data %}
+        <tr>
+            <td>{{ row.group_id }}</td>
+            <td>{{ row.label }}</td>
+            <td>{{ row.current }}</td>
+            <td>{{ row.max_allowed }}</td>
+            <td style="color: {% if row.status == '⚠️ Exceeded' %}red{% else %}green{% endif %};">
+                {{ row.status }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
