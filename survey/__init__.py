@@ -17,7 +17,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 21
+    NUM_ROUNDS = 2
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -249,6 +249,8 @@ class Prescreener(Page):
 class ScreenOutPage(Page):
     @staticmethod
     def is_displayed(player):
+        if player.round_number != 1:
+            return False
         group = player.prescreener_group
         max_total = player.session.participants_needed
         group_count = player.session.prescreener_groups_dict.get(group, None)

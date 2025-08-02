@@ -66,8 +66,22 @@
             <p>
             </p>
         {{ endif }}
-<div class="btn-container">
-    {{ next_button "Click here to finish the survey" if en else "Hier klicken, um die Umfrage zu beenden" }}
+
+    <div style="text-align: center; margin-top: 3em;font-size: 1.25em;">
+        {% if en %}
+            Click here to finish the survey
+        {% else %}
+            Hier klicken, um die Umfrage zu beenden
+        {% endif %}
+    </div>
+
+<div class="btn-container" style="text-align: center;">
+
+    <div>
+        {{ next_button }}
+    </div>
+
 </div>
+
 
 {{ endblock }}
