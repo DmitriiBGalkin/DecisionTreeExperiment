@@ -153,7 +153,7 @@ def creating_session(subsession: Subsession):
         subsession.session.participants_needed = subsession.session.config.get('participants_needed')
         #print(subsession.session.participants_needed)
         subsession.session.prescreener_groups_distr = {
-            group_id: math.floor(prop * subsession.session.participants_needed)
+            group_id: round(prop * subsession.session.participants_needed)
             for group_id, prop in enumerate(C.group_distribution)
         }
         print(subsession.session.prescreener_groups_distr)
