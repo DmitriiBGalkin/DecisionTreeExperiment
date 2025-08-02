@@ -3,6 +3,8 @@ from settings import LANGUAGE_CODE
 import random
 import time
 
+from survey import RedirectPage
+
 #LANGUAGE_CODE = 'en' #this just for testing
 if LANGUAGE_CODE == 'de':
     from .lexicon_de import Lexicon
@@ -175,7 +177,14 @@ class Results(Page):
     #     player.Results_TS = time.time()
 
 
+class RedirectPage(Page):
+    @staticmethod
+    def is_displayed(player):
+        return
+    def js_vars(player):
+        bilendi_id = player.participant.label
+        redirect_url = f"https://survey.maximiles.com/complete?p=98327_8107c9fe&m={bilendi_id}"
+        return dict(redirect_url=redirect_url)
 
-
-page_sequence = [Survey_Demographics, Results]
+page_sequence = [Survey_Demographics, Results, RedirectPageFinal]
 

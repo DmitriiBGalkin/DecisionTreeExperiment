@@ -183,7 +183,7 @@ def creating_session(subsession: Subsession):
                 full_order = list(range(21))
 
             participant.treeOrder = full_order
-            print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+            # print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 
 
 class Prescreener(Page):
@@ -330,9 +330,13 @@ class PreMainStudy(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
-    # @staticmethod
-    # def before_next_page(player, timeout_happened):
-    #     player.PreMainStudy_TS = time.time()
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        group_dict = player.session.prescreener_groups_dict
+        group = player.pre_screener_group
+        group_dict[group] += 1
+        player.session.prescreener_groups_dict = group_dict  # save it back (not strictly necessary)
+
 class Tree_Question(Page):
     form_model = "player"
     form_fields = ["question_loan", "confidence_level","interaction_times"]
@@ -395,8 +399,8 @@ class TEST_Tree_Question(Page):
 
 
 #Actual sequence
-# page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+page_sequence = [Prescreener, RedirectPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
-page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral]
+#page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral]
 

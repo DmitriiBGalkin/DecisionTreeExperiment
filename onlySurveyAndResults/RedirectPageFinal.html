@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% block title %}Weiterleitung...{% endblock %}
+
+{% block content %}
+    <div style="text-align: center; padding-top: 50px;">
+        <h2>Sie werden weitergeleitet...</h2>
+        <p>Wenn Sie nicht automatisch weitergeleitet werden, <a id="manual-link" href="#">klicken Sie hier</a>.</p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const redirectUrl = js_vars.redirect_url;
+            console.log("Redirecting to:", redirectUrl);
+            document.getElementById("manual-link").href = redirectUrl;
+            window.location.href = redirectUrl;
+        };
+    </script>
+{% endblock %}
