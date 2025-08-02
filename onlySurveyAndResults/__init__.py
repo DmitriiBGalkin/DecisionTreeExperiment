@@ -177,7 +177,7 @@ class Results(Page):
     #     player.Results_TS = time.time()
 
 
-class RedirectPage(Page):
+class FinalRedirect(Page):
     @staticmethod
     def is_displayed(player):
         return
@@ -186,5 +186,5 @@ class RedirectPage(Page):
         redirect_url = f"https://survey.maximiles.com/complete?p=98327_8107c9fe&m={bilendi_id}"
         return dict(redirect_url=redirect_url)
 
-page_sequence = [Survey_Demographics, Results, RedirectPageFinal]
+page_sequence = [Survey_Demographics, Results, FinalRedirect]
 
