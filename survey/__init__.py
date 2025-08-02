@@ -207,7 +207,7 @@ class Prescreener(Page):
         player.prescreener_group = age_group * 3 + (player.education_level_prescreener - 1)
 
 
-class RedirectPage(Page):
+class ScreenOutPage(Page):
     @staticmethod
     def is_displayed(player):
         group = player.prescreener_group
@@ -399,7 +399,7 @@ class TEST_Tree_Question(Page):
 
 
 #Actual sequence
-page_sequence = [Prescreener, RedirectPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
 #page_sequence = [Prescreener,RedirectPage,  IntroductionGeneral]
