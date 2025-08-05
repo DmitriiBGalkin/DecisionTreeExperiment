@@ -181,7 +181,7 @@ class FinalRedirect(Page):
         return True
     def js_vars(player):
         bilendi_id = player.participant.label
-        redirect_url = f"https://survey.maximiles.com/complete?p=98327_8107c9fe&m={bilendi_id}"
+        redirect_url = f"https://survey.maximiles.com/complete?p=148124_4f493a3f&m={bilendi_id}"
         return dict(redirect_url=redirect_url)
 
 page_sequence = [Survey_Demographics, Results, FinalRedirect]
