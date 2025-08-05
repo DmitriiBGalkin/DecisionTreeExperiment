@@ -45,7 +45,7 @@ class C(BaseConstants):
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     tree_order=list(range(0, 21))
-    group_distribution = [0.125, 0.175, 0.20, 0.125, 0.175, 0.20] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
+    group_distribution = [0.125, 0.2, 0.175, 0.125, 0.2, 0.175] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
 class Subsession(BaseSubsession):
     pass
 
@@ -156,7 +156,7 @@ def creating_session(subsession: Subsession):
             group_id: round(prop * subsession.session.participants_needed)
             for group_id, prop in enumerate(C.group_distribution)
         }
-        print(subsession.session.prescreener_groups_distr)
+        # print(subsession.session.prescreener_groups_distr)
         for player in subsession.get_players():
             participant = player.participant
             use_random = subsession.session.config.get('random_order', False)
@@ -252,7 +252,7 @@ class ScreenOutPage(Page):
         if player.round_number != 1:
             return False
         group = player.prescreener_group
-        max_total = player.session.participants_needed
+        max_total = player.session.participants_needed - 1
         group_count = player.session.prescreener_groups_dict.get(group, None)
         group_count_max = player.session.prescreener_groups_distr.get(group, None)
         current_participants = player.session.current_participants
@@ -273,7 +273,7 @@ class ScreenOutPage(Page):
             redirect_url = f"https://survey.maximiles.com/screenout?p=98327_69cadaeb&m={bilendi_id}"
         else:
             redirect_url = f"https://survey.maximiles.com/quotasfull?p=98327_21a4610c&m={bilendi_id}"
-            print(redirect_url)
+            # print(redirect_url)
         return dict(redirect_url=redirect_url)
 
 
@@ -388,7 +388,7 @@ class Tree_Question(Page):
         tree_number = player.participant.treeOrder[round_number-1]
         tree_template = C.TREE_ANSWERS[tree_number][0]
         number_of_rounds=C.NUM_ROUNDS
-        print('tree number',tree_number,'round number',player.round_number,tree_template)
+        # print('tree number',tree_number,'round number',player.round_number,tree_template)
         return dict(
             svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
@@ -401,9 +401,9 @@ class Tree_Question(Page):
         tree_number = player.participant.treeOrder[round_number-1]
         player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number][1])
         player.payoff = player.is_correct * C.payment_for_correct_answer
-        print(player.is_correct)
-        print(C.payment_for_correct_answer)
-        print(player.payoff)
+        # print(player.is_correct)
+        # print(C.payment_for_correct_answer)
+        # print(player.payoff)
 
 class PostMainStudy(Page):
     form_model = 'player'
@@ -423,19 +423,19 @@ class PostMainStudy(Page):
 
 
 
-class TEST_Tree_Question(Page):
-    form_model = "player"
-    form_fields = ["question_loan", "confidence_level"]
-    @staticmethod
-    def vars_for_template(player: Player):
-        round_index = player.round_number - 1  # zero-indexed
-        tree_template = C.TREE_ANSWERS[round_index][0]
-        number_of_rounds=C.NUM_ROUNDS
-        return dict(
-            svg_template='survey/Trees/TREE_TEST.html',
-            Lexicon=Lexicon,
-            number_of_rounds=number_of_rounds,
-            **which_language)
+# class TEST_Tree_Question(Page):
+#     form_model = "player"
+#     form_fields = ["question_loan", "confidence_level"]
+#     @staticmethod
+#     def vars_for_template(player: Player):
+#         round_index = player.round_number - 1  # zero-indexed
+#         tree_template = C.TREE_ANSWERS[round_index][0]
+#         number_of_rounds=C.NUM_ROUNDS
+#         return dict(
+#             svg_template='survey/Trees/TREE_TEST.html',
+#             Lexicon=Lexicon,
+#             number_of_rounds=number_of_rounds,
+#             **which_language)
 
 
 
