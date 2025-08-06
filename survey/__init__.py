@@ -45,7 +45,7 @@ class C(BaseConstants):
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     tree_order=list(range(0, 21))
-    group_distribution = [0.125, 0.2, 0.175, 0.125, 0.2, 0.175] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
+    group_distribution = [0.166, 0.166, 0.166, 0.166, 0.166, 0.166] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
 class Subsession(BaseSubsession):
     pass
 
@@ -252,9 +252,9 @@ class ScreenOutPage(Page):
         if player.round_number != 1:
             return False
         group = player.prescreener_group
-        max_total = player.session.participants_needed - 1
+        max_total = player.session.participants_needed
         group_count = player.session.prescreener_groups_dict.get(group, None)
-        group_count_max = player.session.prescreener_groups_distr.get(group, None)
+        group_count_max = player.session.prescreener_groups_distr.get(group, None)-1
         current_participants = player.session.current_participants
         # print("group", group)
         # print("round_number == 1:", player.round_number == 1)
