@@ -31,7 +31,7 @@ class Lexicon:
     denied = "Denied"
     #Decision Tree Question
     decision_tree_title = "Understanding Decision Trees"
-    familiarity_with_decision_trees_label = "Have you previously encountered decision trees or similar diagrammatic tools (e.g., flowcharts) for representing decision-making processes in your personal, educational, or professional life?"
+    familiarity_with_decision_trees_label = "Have you previously encountered decision trees for representing decision-making processes in your personal, educational, or professional life?"
     familiarity_with_decision_trees_1 = "Not at all"
     familiarity_with_decision_trees_2 = "Rarely"
     familiarity_with_decision_trees_3 = "Occasionally"

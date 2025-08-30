@@ -13,8 +13,9 @@ SESSION_CONFIGS = [
         app_sequence=['survey','onlySurveyAndResults'],
         participants_needed=8,
         num_demo_participants=10,
-        random_order=True,
-        student_debug=False
+        random_order_block=False,
+        student_debug=False,
+        min_total_time=110
     ),
 ]
 ROOMS = [
@@ -32,10 +33,10 @@ ROOMS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc="",current_participants=0,participants_needed=8
+    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc="",current_participants=0,participants_needed=8,random_order_block=False, min_total_time=110
 )
 
-PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers"]
+PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers","speeder"]
 SESSION_FIELDS = ['participants_needed','prescreener_groups_dict','prescreener_groups_distr','current_participants']
 
 # ISO-639 code

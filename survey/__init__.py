@@ -17,7 +17,7 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 21
+    NUM_ROUNDS = 2
     # List of tree filenames and correct answers
     TREE_ANSWERS = [
         ['Tree_1.html', True],
@@ -44,7 +44,7 @@ class C(BaseConstants):
     ]
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
-    tree_order=list(range(0, 21))
+    #tree_order=list(range(1, 22))
     group_distribution = [0.166, 0.166, 0.166, 0.166, 0.166, 0.166] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
 class Subsession(BaseSubsession):
     pass
@@ -133,6 +133,7 @@ class Player(BasePlayer):
     )
     #Creating time-stamps for each page:
     interaction_times = models.LongStringField(blank=True)
+    per_page_time=models.IntegerField(blank=True)
 
 def confidence_level_error_message(player, value):
     if value is None:
@@ -147,8 +148,8 @@ def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
         subsession.session.prescreener_groups_dict = {i: 0 for i in range(6)}
 
-        easy_trees = list(range(11))         # Tree_1 to Tree_11
-        hard_trees = list(range(11, 21))     # Tree_12 to Tree_21
+        easy_trees = list(range(1,12))         # Tree_1 to Tree_11
+        hard_trees = list(range(12, 22))     # Tree_12 to Tree_21
         subsession.session.current_participants = 0
         subsession.session.participants_needed = subsession.session.config.get('participants_needed')
         #print(subsession.session.participants_needed)
@@ -159,9 +160,9 @@ def creating_session(subsession: Subsession):
         # print(subsession.session.prescreener_groups_distr)
         for player in subsession.get_players():
             participant = player.participant
-            use_random = subsession.session.config.get('random_order', False)
+            use_random_block = subsession.session.config.get('random_order_block', False)
 
-            if use_random:
+            if use_random_block:
                 # Randomly assign whether participant sees easy or hard trees first
                 easy_first = random.choice([True, False])
                 participant.easyFirst = easy_first
@@ -177,9 +178,10 @@ def creating_session(subsession: Subsession):
                     full_order = hard_part + easy_part
 
             else:
-                # Fixed order from 0 to 20 (Tree_1.html to Tree_21.html)
-                participant.easyFirst = True  # or set to None if not used
-                full_order = list(range(21))
+                # Fixed order from 1 to 21 (Tree_1.html to Tree_21.html)
+                participant.easyFirst = False  # or set to None if not used
+                full_order = list(range(1, 22))
+                random.shuffle(full_order)
 
             participant.treeOrder = full_order
             # print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
@@ -380,15 +382,15 @@ class PreMainStudy(Page):
 
 class Tree_Question(Page):
     form_model = "player"
-    form_fields = ["question_loan", "confidence_level","interaction_times"]
+    form_fields = ["question_loan", "confidence_level","interaction_times","per_page_time"]
 
     @staticmethod
     def vars_for_template(player: Player):
         round_number = player.round_number
-        tree_number = player.participant.treeOrder[round_number-1]
-        tree_template = C.TREE_ANSWERS[tree_number][0]
+        tree_number_in_list = player.participant.treeOrder[round_number-1]-1
+        tree_template = C.TREE_ANSWERS[tree_number_in_list][0]
         number_of_rounds=C.NUM_ROUNDS
-        # print('tree number',tree_number,'round number',player.round_number,tree_template)
+        # print('tree number',tree_number_in_list,'round number',player.round_number,tree_template)
         return dict(
             svg_template=f'survey/Trees/{tree_template}',
             Lexicon=Lexicon,
@@ -398,8 +400,8 @@ class Tree_Question(Page):
     def before_next_page(player: Player, timeout_happened):
         # player.Tree_Question_TS = time.time()
         round_number = player.round_number
-        tree_number = player.participant.treeOrder[round_number-1]
-        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number][1])
+        tree_number_in_list = player.participant.treeOrder[round_number-1]-1 #so that the list starts at 0 and ends at 21
+        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number_in_list][1])
         player.payoff = player.is_correct * C.payment_for_correct_answer
         # print(player.is_correct)
         # print(C.payment_for_correct_answer)
@@ -412,7 +414,15 @@ class PostMainStudy(Page):
         return player.round_number == C.NUM_ROUNDS
     @staticmethod
     def vars_for_template(player: Player):
-        player.participant.total_correct_answers = sum(p.is_correct for p in player.in_all_rounds())
+        all_rounds_query=player.in_all_rounds()
+        # print(all_rounds_query)
+        player.participant.total_correct_answers = sum(p.is_correct for p in all_rounds_query)
+        total_time=sum(p.per_page_time for p in all_rounds_query)
+        threshold = player.session.config.get('min_total_time')
+        player.participant.speeder=total_time<threshold
+        # print('total time',total_time)
+        # print('threshold',threshold)
+        # print(player.participant.speeder)
         return dict(
             Lexicon=Lexicon,
             **which_language)
@@ -423,19 +433,15 @@ class PostMainStudy(Page):
 
 
 
-# class TEST_Tree_Question(Page):
-#     form_model = "player"
-#     form_fields = ["question_loan", "confidence_level"]
-#     @staticmethod
-#     def vars_for_template(player: Player):
-#         round_index = player.round_number - 1  # zero-indexed
-#         tree_template = C.TREE_ANSWERS[round_index][0]
-#         number_of_rounds=C.NUM_ROUNDS
-#         return dict(
-#             svg_template='survey/Trees/TREE_TEST.html',
-#             Lexicon=Lexicon,
-#             number_of_rounds=number_of_rounds,
-#             **which_language)
+class test_all_trees(Page):
+    def vars_for_template(self):
+        trees = [{'path': f'survey/Trees/Tree_{i}.html', 'label': f'Tree_{i}'} for i in range(1, 22)]
+        first_six = trees[:6]
+        next_fifteen = trees[6:]  # 3 rows of 5
+        return dict(first_six=first_six, next_fifteen=next_fifteen,
+                    Lexicon=Lexicon,
+                    **which_language
+                    )
 
 
 
@@ -445,3 +451,4 @@ page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionD
 #Testing
 #page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
 
+#page_sequence=[test_all_trees]

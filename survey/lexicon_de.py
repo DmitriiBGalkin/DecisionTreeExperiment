@@ -43,7 +43,7 @@ class Lexicon:
     not_nicht = "Nicht"
     # Decision Tree Section
     decision_tree_title = "Verständnis von Entscheidungsbäumen"
-    familiarity_with_decision_trees_label = "Sind Sie in Ihrem persönlichen, akademischen oder beruflichen Umfeld bereits mit Entscheidungsbäumen oder ähnlichen grafischen Darstellungen (z. B. Flussdiagrammen) zur Abbildung von Entscheidungsprozessen in Berührung gekommen?"
+    familiarity_with_decision_trees_label = "Sind Sie in Ihrem persönlichen, akademischen oder beruflichen Umfeld bereits mit Entscheidungsbäumen zur Abbildung von Entscheidungsprozessen in Berührung gekommen?"
 
     familiarity_with_decision_trees_1 = "Überhaupt nicht"
     familiarity_with_decision_trees_2 = "Selten"

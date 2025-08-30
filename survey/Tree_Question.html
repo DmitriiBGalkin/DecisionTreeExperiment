@@ -132,6 +132,7 @@ window.addEventListener('DOMContentLoaded', function() {
     // Save all data on form submission
     const submitButton = document.querySelector('button.otree-btn-next');
     const interactionInput = document.getElementById('interaction_times');
+    const perPageInput = document.getElementById('per_page_time'); // ✅ add this line
 
     if (submitButton && interactionInput) {
         submitButton.addEventListener('click', () => {
@@ -143,7 +144,12 @@ window.addEventListener('DOMContentLoaded', function() {
                 next_click: now
             };
             interactionInput.value = JSON.stringify(log);
-            console.log("✅ Form interaction log:", log);
+
+            // ✅ save page time in seconds
+        perPageInput.value = Math.round(now / 1000);
+
+        console.log("✅ Form interaction log:", log);
+        console.log("⏱️ Page time (s):", perPageInput.value);
         });
     } else {
         console.warn("⚠️ Missing submit button or interaction_times input");
@@ -163,6 +169,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 {{ block content }}
 <input type="hidden" name="interaction_times" id="interaction_times">
+<input type="hidden" name="per_page_time" id="per_page_time">
 
 <div class="box">
     <h4>{{ if en }}Decision Tree Task{{ else }}Entscheidungsbaum-Aufgabe{{ endif }} ({{ player.round_number }}/{{ number_of_rounds }}).</h4>

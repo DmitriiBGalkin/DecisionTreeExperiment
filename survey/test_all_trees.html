@@ -1,0 +1,149 @@
+{{ block style }}
+    <link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+<style>
+    html, body { margin:0; background:#fff; color:#111; font-family:Arial, sans-serif; }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 24px 16px 64px; }
+    h1 { margin: 8px 0 24px; font-size: 26px; font-weight: 700; }
+
+    /* Grids */
+    .grid-6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* Tree cell styling */
+.tree-cell {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Thumbnail area for SVG */
+.thumb {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  padding: 8px;
+  height: 420px;  /* huge vertical space for the SVG */
+}
+
+/* SVG scaling */
+.thumb svg {
+  width: 600px;   /* large width */
+  max-width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+.caption {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+    .caption {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    /* Print: keep the grid shapes; you can add page breaks if needed */
+    @media print {
+      body { background:#fff; }
+    }
+  /* 1) Let the oTree page use the full width */
+.otree-body,
+.otree-body.container {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* 2) Make the grids fill the available width (no 80% cap) */
+.wrap { max-width: 100% !important; }
+
+/* 3) Let each SVG grow with its cell (no fixed thumb height) */
+.thumb {
+  height: auto;          /* remove the cap */
+  padding: 12px;
+  overflow: visible;     /* no internal clipping */
+}
+
+/* 4) Force the embedded SVGs to scale up fully */
+.thumb svg {
+  width: 100% !important;   /* fill the cell width */
+  max-width: 1200px;        /* allow them to get BIG; raise if you want more */
+  height: auto !important;
+}
+
+/* 5) Give the grid bigger cells by reducing columns on normal screens.
+      (Keeps your 6/5 layout only on very wide monitors) */
+@media (max-width: 2400px) {
+  .grid-6 { grid-template-columns: repeat(2, 2fr); } /* was 6 */
+  .grid-5 { grid-template-columns: repeat(2, 2fr); } /* was 5 */
+}
+@media (max-width: 1800px) {
+  .grid-6 { grid-template-columns: repeat(2, 2fr); }
+  .grid-5 { grid-template-columns: repeat(2, 2fr); }
+}
+@media (max-width: 1280px) {
+  .grid-6 { grid-template-columns: repeat(2, 2fr); }
+  .grid-5 { grid-template-columns: repeat(2, 2fr); }
+}
+@media (max-width: 800px) {
+  .grid-6 { grid-template-columns: 2fr; }
+  .grid-5 { grid-template-columns: 2fr; }
+}
+
+  </style>
+
+{{ endblock }}
+
+
+
+{{ block content }}
+<div class="grid-6">
+  {{ for t in first_six }}
+    <div class="tree-cell" id="{{ t.label }}">
+      <div class="thumb">
+        {{ include t.path }}
+      </div>
+      <div class="caption">{{ t.label }}</div>
+    </div>
+  {{ endfor }}
+</div>
+
+<!-- Rows 2–4: 3 rows × 5 trees = 15 -->
+<div class="grid-5">
+  {{ for t in next_fifteen }}
+    <div class="tree-cell" id="{{ t.label }}">
+      <div class="thumb">
+        {{ include t.path }}
+      </div>
+      <div class="caption">{{ t.label }}</div>
+    </div>
+  {{ endfor }}
+</div>
+  </div>
+
+</body>
+{{ endblock }}
