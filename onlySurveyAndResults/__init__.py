@@ -152,11 +152,15 @@ class Survey_Demographics(Page):
                    'feedback']
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        session = player.session
-        subsession = player.subsession
-        participant = player.participant
-        player.subsession.session.current_participants = player.subsession.session.current_participants + 1
-        print(player.subsession.session.current_participants)
+        if not player.participant.speeder:
+            groups = player.session.prescreener_groups_dict
+            group_id = player.participant.prescreener_group  # the integer 0–5
+            groups[group_id]['current'] += 1
+            # optional: write back, but not strictly required
+            player.session.prescreener_groups_dict = groups
+            # If you want to print total participants:
+            current_total = sum(g['current'] for g in groups.values())
+            print("Current participants:", current_total)
 
 
 class Results(Page):

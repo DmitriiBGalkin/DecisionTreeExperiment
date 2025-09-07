@@ -69,7 +69,6 @@ class Player(BasePlayer):
         min=1,
         max=100
     )
-    prescreener_group = models.IntegerField()
     education_level_prescreener = models.IntegerField(
         choices=[
             (1, Lexicon.no_education),
@@ -146,15 +145,15 @@ def confidence_level_sample2_error_message(player, value):
         return Lexicon.move_slider_warning
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
-        subsession.session.prescreener_groups_dict = {i: 0 for i in range(6)}
-
         easy_trees = list(range(1,12))         # Tree_1 to Tree_11
         hard_trees = list(range(12, 22))     # Tree_12 to Tree_21
-        subsession.session.current_participants = 0
         subsession.session.participants_needed = subsession.session.config.get('participants_needed')
         #print(subsession.session.participants_needed)
-        subsession.session.prescreener_groups_distr = {
-            group_id: round(prop * subsession.session.participants_needed)
+        subsession.session.prescreener_groups_dict = {
+            group_id: {
+                'current': 0,
+                'max_allowed': round(prop * subsession.session.participants_needed)
+            }
             for group_id, prop in enumerate(C.group_distribution)
         }
         # print(subsession.session.prescreener_groups_distr)
@@ -184,15 +183,11 @@ def creating_session(subsession: Subsession):
                 random.shuffle(full_order)
 
             participant.treeOrder = full_order
+            participant.prescreener_group=0
             # print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 def vars_for_admin_report(subsession):
-    session = subsession.session
+    groups = subsession.session.prescreener_groups_dict or {}
 
-    group_counts = session.prescreener_groups_dict
-    group_maxes = session.prescreener_groups_distr
-    current_participants = session.current_participants
-
-    # Define readable labels for each group
     group_labels = {
         0: "Low education, age < 45",
         1: "Mid education, age < 45",
@@ -203,28 +198,29 @@ def vars_for_admin_report(subsession):
     }
 
     display_data = []
-    all_group_ids = sorted(set(group_counts.keys()) | set(group_maxes.keys()))
-
-    for group_id in all_group_ids:
-        current = group_counts.get(group_id, 0)
-        max_allowed = group_maxes.get(group_id, 'N/A')
+    for group_id in sorted(groups.keys()):
+        g = groups[group_id]
+        current = g['current']
+        max_allowed = g['max_allowed']
         label = group_labels.get(group_id, f"Group {group_id}")
-        status = '✅ OK' if max_allowed == 'N/A' or current <= max_allowed else '⚠️ Exceeded'
-
+        status = '✅ OK' if current <= max_allowed else '⚠️ Exceeded'
         display_data.append(dict(
             group_id=group_id,
             label=label,
             current=current,
             max_allowed=max_allowed,
-            status=status
+            status=status,
         ))
+
+    current_total = sum(x['current'] for x in groups.values())
+    max_total     = sum(x['max_allowed'] for x in groups.values())
 
     return dict(
         round_number=subsession.round_number,
         group_data=display_data,
-        current_participants=current_participants,
+        current_participants=current_total,
+        participants_needed=max_total,
     )
-
 
 
 class Prescreener(Page):
@@ -233,19 +229,17 @@ class Prescreener(Page):
 
     @staticmethod
     def is_displayed(player):
-        #print('current',player.session.current_participants)
         return player.round_number == 1
 
     @staticmethod
     def vars_for_template(player: Player):
-        #print('max', player.session.participants_needed, 'True?',player.session.current_participants<player.session.participants_needed)
         return dict(
             Lexicon=Lexicon,
             **which_language)
     @staticmethod
     def before_next_page(player, timeout_happened):
         age_group = 0 if player.age < 45 else 1
-        player.prescreener_group = age_group * 3 + (player.education_level_prescreener - 1)
+        player.participant.prescreener_group = age_group * 3 + (player.education_level_prescreener - 1)
 
 
 class ScreenOutPage(Page):
@@ -253,21 +247,27 @@ class ScreenOutPage(Page):
     def is_displayed(player):
         if player.round_number != 1:
             return False
-        group = player.prescreener_group
-        max_total = player.session.participants_needed
-        group_count = player.session.prescreener_groups_dict.get(group, None)
-        group_count_max = player.session.prescreener_groups_distr.get(group, None)-1
-        current_participants = player.session.current_participants
-        # print("group", group)
-        # print("round_number == 1:", player.round_number == 1)
-        # print("group_count:", group_count)
-        # print("group_count_max:", group_count_max)
-        # print("group count > group_count_max:", group_count, group_count_max, group_count > group_count_max, )
-        # print("current_participants > max_total:", current_participants, ">", max_total, current_participants > max_total)
+        group_id = player.participant.prescreener_group  # or player.participant.prescreener_group
+        groups = player.session.prescreener_groups_dict or {}
+
+
+        g = groups.get(group_id)
+        current_total = sum(x['current'] for x in groups.values())
+        max_total = sum(x['max_allowed'] for x in groups.values())
+
+        reached_group_quota = g['current'] >= g['max_allowed']
+        reached_total_quota = current_total >= max_total
+        underage = player.age < 18
+        print("group_of_participant", group_id)
+        print("round_number == 1:", player.round_number == 1)
+        print("groups:", groups)
+        print("current_total:", current_total)
+        print("group count > group_count_max:", g['current'] ,'>', g['max_allowed'], reached_group_quota )
+        print("current_participants > max_total:", current_total, ">", max_total, current_total > max_total)
         return (
             player.round_number == 1
             and
-            (group_count > group_count_max or player.age < 18 or current_participants>max_total)
+            reached_group_quota or reached_total_quota or underage
         )
     def js_vars(player):
         bilendi_id = player.participant.label
@@ -305,9 +305,9 @@ class IntroductionDecisionTrees(Page):
             svg_template='survey/Trees/Tree_Sample_Desc.html',
             Lexicon=Lexicon,
             **which_language)
-    # @staticmethod
-    # def before_next_page(player, timeout_happened):
-    #     player.IntroductionDecisionTrees_TS = time.time()
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        player.participant.server_timestamp_start = time.time()
 
 class InstructionsSample(Page):
     form_model = 'player'
@@ -373,12 +373,7 @@ class PreMainStudy(Page):
         return dict(
             Lexicon=Lexicon,
             **which_language)
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        group_dict = player.session.prescreener_groups_dict
-        group = player.prescreener_group
-        group_dict[group] += 1
-        player.session.prescreener_groups_dict = group_dict  # save it back (not strictly necessary)
+
 
 class Tree_Question(Page):
     form_model = "player"
@@ -415,18 +410,26 @@ class PostMainStudy(Page):
     @staticmethod
     def vars_for_template(player: Player):
         all_rounds_query=player.in_all_rounds()
-        # print(all_rounds_query)
+        total_time_server=time.time() - player.participant.server_timestamp_start
+        print(all_rounds_query,"total_time_server",total_time_server)
         player.participant.total_correct_answers = sum(p.is_correct for p in all_rounds_query)
         total_time=sum(p.per_page_time for p in all_rounds_query)
         threshold = player.session.config.get('min_total_time')
         player.participant.speeder=total_time<threshold
-        # print('total time',total_time)
-        # print('threshold',threshold)
-        # print(player.participant.speeder)
+        print('total time',total_time)
+        print('total_time_server',total_time_server)
+        print('threshold',threshold)
+        print('Speeder', player.participant.speeder)
         return dict(
             Lexicon=Lexicon,
             **which_language)
 
+    # @staticmethod
+    # def before_next_page(player, timeout_happened):
+    #     group_dict = player.session.prescreener_groups_dict
+    #     group = player.prescreener_group
+    #     group_dict[group] += 1
+    #     player.session.prescreener_groups_dict = group_dict  # save it back (not strictly necessary)
     # @staticmethod
     # def before_next_page(player: Player, timeout_happened):
     #     player.Survey_Demographics_TS = time.time()
