@@ -12,7 +12,7 @@
   </style>
 
   <!-- Level 1: Root Node -->
-  <ellipse cx="450" cy="60" rx="80" ry="30" fill="#cce5ff" stroke="black" stroke-width="2"/>
+  <ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-root-fill, none);" />
   <text x="450" y="60" class="node-text">{{ Lexicon.loan_amount }}</text>
 
   <!-- Level 1 Branches -->
@@ -22,10 +22,10 @@
   <text x="540" y="110" class="branch-text-right">10.000 {{ Lexicon.and_more }}</text>
 
   <!-- Level 2 Nodes -->
-  <ellipse cx="250" cy="150" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="250" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="250" y="150" class="node-text">{{ Lexicon.income }}</text>
 
-  <ellipse cx="650" cy="150" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="650" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="650" y="150" class="node-text">{{ Lexicon.credit_history }}</text>
 
   <!-- Level 2 Branches -->
@@ -40,10 +40,10 @@
   <text x="710" y="200" class="branch-text-right">{{ Lexicon.credit_history_good }}</text>
 
   <!-- Level 3 Nodes -->
-  <ellipse cx="150" cy="250" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="150" cy="250" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="150" y="250" class="node-text">{{ Lexicon.assets }}</text>
 
-  <ellipse cx="750" cy="250" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="750" cy="250" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="750" y="250" class="node-text">{{ Lexicon.employment_status }}</text>
 
   <!-- Level 3 Branches -->
@@ -58,22 +58,22 @@
   <text x="800" y="305" class="branch-text-right">{{ Lexicon.employment_stable }}</text>
 
   <!-- Level 4 Leaf Nodes -->
-  <rect x="20" y="330" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="20" y="330" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="70" y="355" class="node-text">{{ Lexicon.denied }}</text>
 
-  <rect x="180" y="330" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="180" y="330" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="230" y="355" class="node-text">{{ Lexicon.approved }}</text>
 
-  <rect x="625" y="330" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="625" y="330" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="675" y="355" class="node-text">{{ Lexicon.denied }}</text>
 
-  <rect x="780" y="330" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="780" y="330" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="830" y="355" class="node-text">{{ Lexicon.approved }}</text>
 
   <!-- One intermediate outcome directly from income branch (approved/denied) -->
-  <rect x="310" y="220" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="310" y="220" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="360" y="245" class="node-text">{{ Lexicon.approved }}</text>
 
-  <rect x="500" y="220" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="500" y="220" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="550" y="245" class="node-text">{{ Lexicon.denied }}</text>
 </svg>

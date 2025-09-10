@@ -303,3 +303,15 @@ input[type=range]::-moz-range-thumb:hover {
   background-color: #666;
 }
 
+
+/* ===== Decision-tree SVG palette ===== */
+:root {
+  --tree-root-fill:    #fff4cc;
+  --tree-assets-fill:  #fff4cc;
+  --tree-denied-fill:  #accccc;
+  --tree-approved-fill:#accccc;
+
+  --tree-stroke:       #000;
+  --tree-stroke-w:     2;
+  --tree-text:         #000;
+}

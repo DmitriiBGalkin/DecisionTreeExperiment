@@ -11,7 +11,7 @@
   </style>
 
   <!-- Level 1: Loan Amount -->
-  <ellipse cx="650" cy="60" rx="80" ry="30" fill="#cce5ff" stroke="black" stroke-width="2"/>
+  <ellipse cx="650" cy="60" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-root-fill, none);" />
   <text x="650" y="60" class="node-text">{{ Lexicon.loan_amount }}</text>
 
   <!-- Loan Amount Branches -->
@@ -23,7 +23,7 @@
   <!-- LEFT SIDE: Small Loan Path -->
 
   <!-- Level 2: Credit History -->
-  <ellipse cx="350" cy="150" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="350" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="350" y="150" class="node-text">{{ Lexicon.credit_history }}</text>
 
   <line x1="350" y1="180" x2="250" y2="250" stroke="black" stroke-width="2"/>
@@ -32,11 +32,11 @@
   <text x="400" y="200" class="branch-text-right">{{ Lexicon.credit_history_good }} {{ Lexicon.or_oder }} {{ Lexicon.credit_history_excellent }}</text>
 
   <!-- Right path = Approved -->
-  <rect x="400" y="225" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="400" y="225" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="450" y="250" class="node-text">{{ Lexicon.approved }}</text>
 
   <!-- Left path: Check Liabilities -->
-  <ellipse cx="250" cy="250" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="250" cy="250" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="250" y="250" class="node-text">{{ Lexicon.liabilities }}</text>
 
   <line x1="250" y1="280" x2="175" y2="360" stroke="black" stroke-width="2"/>
@@ -44,16 +44,16 @@
   <text x="210" y="300" class="branch-text-left">{{ Lexicon.above }} 10.000</text>
   <text x="295" y="300" class="branch-text-right">{{ Lexicon.below }} 10.000</text>
 
-  <rect x="125" y="325" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="125" y="325" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="175" y="350" class="node-text">{{ Lexicon.denied }}</text>
 
-  <rect x="280" y="325" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="280" y="325" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="330" y="350" class="node-text">{{ Lexicon.approved }}</text>
 
   <!-- RIGHT SIDE: Large Loan Path -->
 
   <!-- Level 2: Employment Status -->
-  <ellipse cx="950" cy="150" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="950" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="950" y="150" class="node-text">{{ Lexicon.employment_status }}</text>
 
   <line x1="950" y1="180" x2="850" y2="250" stroke="black" stroke-width="2"/>
@@ -62,11 +62,11 @@
   <text x="1000" y="200" class="branch-text-right">{{ Lexicon.employment_stable }}</text>
 
   <!-- Left = Denied -->
-  <rect x="800" y="225" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="800" y="225" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="850" y="250" class="node-text">{{ Lexicon.denied }}</text>
 
   <!-- Right: Check Assets -->
-  <ellipse cx="1050" cy="250" rx="80" ry="30" fill="#fff4cc" stroke="black" stroke-width="2"/>
+  <ellipse cx="1050" cy="250" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
   <text x="1050" y="250" class="node-text">{{ Lexicon.assets }}</text>
 
   <line x1="1050" y1="280" x2="975" y2="360" stroke="black" stroke-width="2"/>
@@ -74,9 +74,9 @@
   <text x="1020" y="300" class="branch-text-left">{{ Lexicon.below }} 20.000</text>
   <text x="1080" y="300" class="branch-text-right">20.000 {{ Lexicon.and_more }}</text>
 
-  <rect x="925" y="325" width="100" height="50" fill="#ffcccc" stroke="black" stroke-width="2"/>
+  <rect x="925" y="325" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
   <text x="975" y="350" class="node-text">{{ Lexicon.denied }}</text>
 
-  <rect x="1080" y="325" width="100" height="50" fill="#ccffcc" stroke="black" stroke-width="2"/>
+  <rect x="1080" y="325" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
   <text x="1130" y="350" class="node-text">{{ Lexicon.approved }}</text>
 </svg>
