@@ -17,7 +17,7 @@
     </defs>
 
   <!-- Level 1: Root Node -->
-  <ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-root-fill, none);" />
+  <ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-root-fill, #ffffff);" />
 
 
 
@@ -26,8 +26,8 @@
   <line x1="450" y1="90" x2="650" y2="150" stroke="black" stroke-width="2"/>
 
   <!-- Level 2 Nodes -->
-  <ellipse cx="250" cy="155" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
-  <ellipse cx="650" cy="155" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, none);" />
+  <ellipse cx="250" cy="155" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
+  <ellipse cx="650" cy="155" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
   <!-- Level 2 Branches -->
   <line x1="250" y1="185" x2="175" y2="260" stroke="black" stroke-width="2"/>
   <line x1="250" y1="185" x2="325" y2="260" stroke="black" stroke-width="2"/>
@@ -37,15 +37,15 @@
 
 
   <!-- Level 3 Leaf Nodes -->
-  <rect x="125" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
+  <rect x="125" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
 
-  <rect x="300" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
-
-
-  <rect x="525" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, none);" />
+  <rect x="300" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, #ffffff);" />
 
 
-  <rect x="700" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, none);" />
+  <rect x="525" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
+
+
+  <rect x="700" y="260" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, #ffffff);" />
 
   <text x="810" y="60" class="branch-text-right_desc">{{ Lexicon.root_node }}: {{ Lexicon.label_root_node }}</text>
   <text x="810" y="120" class="branch-text-right_desc">{{ Lexicon.decision_node }}: {{ Lexicon.label_decision_node }}</text>
