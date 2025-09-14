@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="120 0 850 350" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.1em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Loan Amount -->
+<ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="450" y="60">{{ Lexicon.loan_amount }}</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="450" x2="250" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="450" x2="650" y1="90" y2="150"></line>
+<text class="branch-text-left" x="370" y="105">{{ Lexicon.below }} 10.000</text>
+<text class="branch-text-right" x="540" y="110"> 10.000 {{ Lexicon.and_more }}</text>
+<!-- Level 2 Nodes: Employment -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="190" y="125"></rect>
+<text class="node-text" x="240" y="150">{{ Lexicon.approved }}</text>
+<ellipse cx="650" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="650" y="150">{{ Lexicon.residence }}</text>
+<!-- Level 2 Branches -->
+<line stroke="black" stroke-width="2" x1="650" x2="575" y1="180" y2="260"></line>
+<line stroke="black" stroke-width="2" x1="650" x2="725" y1="180" y2="260"></line>
+<text class="branch-text-left" x="600" y="215">{{ Lexicon.residence_rented }} {{ Lexicon.or_oder }} {{ Lexicon.residence_mortgage }}</text>
+<text class="branch-text-right" x="700" y="215">{{ Lexicon.residence_homeowner }}</text>
+<!-- Level 3 Leaves -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="525" y="260"></rect>
+<text class="node-text" x="575" y="285">{{ Lexicon.denied }}</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="700" y="260"></rect>
+<text class="node-text" x="750" y="285">{{ Lexicon.approved }}</text>
+</svg>
+</body>
+</html>

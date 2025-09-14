@@ -435,6 +435,24 @@ class PostMainStudy(Page):
     #     player.Survey_Demographics_TS = time.time()
 
 
+class TestUpdatingTreesAB(Page):
+    def vars_for_template(self):
+        # Adjust the include path if your files live elsewhere
+        rows = [
+            {
+                "i": i,
+                "a_path": f"survey/updating_trees/Tree_{i}a.html",
+                "r_path": f"survey/updating_trees/Tree_{i}r.html",
+                "a_label": f"Tree_{i}a",
+                "r_label": f"Tree_{i}r",
+            }
+            for i in range(1, 22)
+        ]
+        return dict(
+            rows=rows,
+            Lexicon=Lexicon,
+            **which_language
+        )
 
 class test_all_trees(Page):
     def vars_for_template(self):
@@ -446,12 +464,20 @@ class test_all_trees(Page):
                     **which_language
                     )
 
-
+class an_updating_trees(Page):
+    def vars_for_template(self):
+        return dict(Lexicon=Lexicon,
+                    **which_language
+                    )
 
 #Actual sequence
-page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+#page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
 #page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
 
 #page_sequence=[test_all_trees]
+
+#page_sequence=[an_updating_trees]
+
+page_sequence = [TestUpdatingTreesAB]

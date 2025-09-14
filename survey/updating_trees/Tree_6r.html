@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="-20 0 980 400" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.1em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Kreditbetrag -->
+<ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="450" y="60">{{ Lexicon.loan_amount }}</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="450" x2="200" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="450" x2="700" y1="90" y2="150"></line>
+<text class="branch-text-left" x="350" y="105">{{ Lexicon.below }} 15.000</text>
+<text class="branch-text-right" x="550" y="105">15.000 {{ Lexicon.and_more }}</text>
+<!-- Level 2 Nodes -->
+<ellipse cx="200" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="200" y="150">{{ Lexicon.income }}</text>
+<ellipse cx="700" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="700" y="150">{{ Lexicon.residence }}</text>
+<!-- Level 2 Branches -->
+<line stroke="black" stroke-width="2" x1="200" x2="100" y1="180" y2="250"></line>
+<line stroke="black" stroke-width="2" x1="200" x2="300" y1="180" y2="250"></line>
+<line stroke="black" stroke-width="2" x1="700" x2="600" y1="180" y2="250"></line>
+<line stroke="black" stroke-width="2" x1="700" x2="800" y1="180" y2="250"></line>
+<text class="branch-text-left" x="140" y="215">40.000 {{ Lexicon.and_more }}</text>
+<text class="branch-text-right" x="260" y="215">{{ Lexicon.below }} 40.000</text>
+<text class="branch-text-left" x="640" y="215">{{ Lexicon.residence_homeowner }}</text>
+<text class="branch-text-right" x="770" y="215">{{ Lexicon.residence_rented }} {{ Lexicon.or_oder }}  {{ Lexicon.residence_mortgage }}</text>
+<!-- Level 3 Outcomes -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="50" y="250"></rect>
+<text class="node-text" x="100" y="275">{{ Lexicon.approved }}</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="275" y="250"></rect>
+<text class="node-text" x="325" y="275">{{ Lexicon.denied }}</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="550" y="250"></rect>
+<text class="node-text" x="600" y="275">{{ Lexicon.approved }}</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="775" y="250"></rect>
+<text class="node-text" x="825" y="275">{{ Lexicon.denied }}</text>
+</svg>
+</body>
+</html>

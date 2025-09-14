@@ -1,0 +1,147 @@
+{{ block style }}
+<link rel="stylesheet" type="text/css" href="{{ static 'survey/global_style.css' }}">
+<style>
+  /* General Page Layout */
+  .otree-body { max-width: 100%; margin: 0 auto; }
+  .otree-body.container { max-width: 80%; margin-left: auto; margin-right: auto; }
+  body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.4; }
+  .page-header { padding-top: 0; }
+
+  h1 {
+    font-size: 24px;
+    margin-top: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background: #fff;
+  }
+
+  /* Layout: left stack of tables + right profile panel */
+  .page-wrap {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    gap: 0;
+  }
+  .tables-stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    box-sizing: border-box;
+    background: #f7f7f7;
+  }
+  .profile-panel {
+    flex: 0 0 320px;
+    background: #ffffff;
+    border-left: 1px solid #e5e7eb;
+    padding: 16px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+  }
+  .profile-panel__title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 10px;
+    color: #111827;
+  }
+
+  /* One “table” per tree index (A left, R right) */
+  .tree-table {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .tree-table__title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 12px;
+    color: #111827;
+  }
+
+  /* Exactly two columns for A/R */
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cell {
+    border: 1px dashed #d1d5db;
+    border-radius: 10px;
+    background: #fafafa;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    overflow: auto;
+  }
+
+  .cell-head {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin: 2px 2px 8px;
+  }
+
+  /* Make embedded SVGs scale nicely */
+  .cell svg {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    background: #fff;
+  }
+
+  /* Mobile: stack A over R */
+  @media (max-width: 900px) {
+    .two-cols { grid-template-columns: 1fr; }
+    .profile-panel { position: static; height: auto; border-left: none; }
+  }
+</style>
+{{ endblock }}
+
+{{ block content }}
+<h1>{{ if en }}All Updating Trees (A/R side-by-side){{ else }}Alle Entscheidungsbäume (A/R nebeneinander){{ endif }}</h1>
+
+<div class="page-wrap">
+
+  <!-- LEFT: all 21 A/R pairs -->
+  <div class="tables-stack">
+    {{ for r in rows }}
+      <section class="tree-table" id="tree-{{ r.i }}">
+        <h3 class="tree-table__title">
+          {{ if en }}Tree {{ r.i }}{{ else }}Baum {{ r.i }}{{ endif }}
+        </h3>
+
+        <div class="two-cols">
+          <!-- A on the left -->
+          <div class="cell">
+            <div class="cell-head">A</div>
+            {{ include r.a_path }}
+          </div>
+
+          <!-- R on the right -->
+          <div class="cell">
+            <div class="cell-head">R</div>
+            {{ include r.r_path }}
+          </div>
+        </div>
+      </section>
+    {{ endfor }}
+  </div>
+
+  <!-- RIGHT: profile info -->
+  <aside class="profile-panel">
+    <h3 class="profile-panel__title">
+      {{ if en }}Profile Information{{ else }}Profilinformationen{{ endif }}
+    </h3>
+    {{ include 'survey/Table_Profile_Information.html' }}
+  </aside>
+
+</div>
+{{ endblock }}

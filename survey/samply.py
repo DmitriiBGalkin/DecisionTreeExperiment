@@ -1,31 +1,29 @@
-# import os
-#
-# def combine_tree_files(folder_path, n, output_file='Combined_Trees.html'):
-#     combined_content = ""
-#
-#     for i in range(1, n + 1):
-#         filename = f"Tree_{i}.html"
-#         file_path = os.path.join(folder_path, filename)
-#
-#         try:
-#             with open(file_path, 'r', encoding='utf-8') as f:
-#                 content = f.read()
-#                 combined_content += f"\n<!-- Start of {filename} -->\n"
-#                 combined_content += content
-#                 combined_content += f"\n<!-- End of {filename} -->\n"
-#         except FileNotFoundError:
-#             print(f"Warning: {filename} not found, skipping.")
-#
-#     with open(output_file, 'w', encoding='utf-8') as f:
-#         f.write(combined_content)
-#
-#     print(f"Combined content written to '{output_file}'")
-#
-#
-# combine_tree_files(folder_path=r'.\Trees', n=20)
+"""
+Generate tree HTML files named tree_2a.html, tree_2r.html, ..., tree_21a.html, tree_21r.html
+into a folder called 'updated_trees'.
 
-import pdfkit
+It uses 'Tree_Question.html' as a template (must be in the same folder as this script).
+"""
 
-# If you're exporting a live local page:
-pdfkit.from_url('http://localhost:8000/p/7lgkcci2/DecisionTreeExperiment/PreStudyInfo/1', 'output.pdf')
+from pathlib import Path
 
+def main():
+    base_dir = Path(__file__).parent
+    out_dir = base_dir / "updated_trees"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    template_path = base_dir / "Tree_Question.html"
+    if not template_path.exists():
+        raise FileNotFoundError("Tree_Question.html not found in the script folder")
+
+    template = template_path.read_text(encoding="utf-8")
+
+    for n in range(2, 22):  # 2 to 21 inclusive
+        for suffix in ("a", "r"):
+            fname = f"tree_{n}{suffix}.html"
+            (out_dir / fname).write_text(template, encoding="utf-8")
+
+    print(f"Created {len(list(out_dir.iterdir()))} files in {out_dir.resolve()}")
+
+if __name__ == "__main__":
+    main()

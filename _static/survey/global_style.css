@@ -308,8 +308,8 @@ input[type=range]::-moz-range-thumb:hover {
 :root {
   --tree-root-fill:    #fff4cc;
   --tree-assets-fill:  #fff4cc;
-  --tree-denied-fill:  #accccc;
-  --tree-approved-fill:#accccc;
+  --tree-denied-fill:  #D3D3D3;
+  --tree-approved-fill:#acaccc;
 
   --tree-stroke:       #000;
   --tree-stroke-w:     2;
