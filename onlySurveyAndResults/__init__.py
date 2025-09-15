@@ -17,7 +17,6 @@ class C(BaseConstants):
     NUM_ROUNDS = 1
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
-    tree_order=list(range(0, 21))
 class Subsession(BaseSubsession):
     pass
 

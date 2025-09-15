@@ -309,7 +309,7 @@ input[type=range]::-moz-range-thumb:hover {
   --tree-root-fill:    #fff4cc;
   --tree-assets-fill:  #fff4cc;
   --tree-denied-fill:  #D3D3D3;
-  --tree-approved-fill:#acaccc;
+  --tree-approved-fill:#D3D3D3;
 
   --tree-stroke:       #000;
   --tree-stroke-w:     2;

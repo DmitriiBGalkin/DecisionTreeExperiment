@@ -1,82 +1,95 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset='utf-8'></head>
-<body>
-<svg preserveaspectratio="xMinYMid meet" style="background-color: white;" viewbox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
-<style>
+<svg
+  viewBox="100 0 1150 550"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMinYMid meet"
+  style="background-color: white;"
+>
+  <style>
     .node-text { font-size: 1.1em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
     .branch-text-left { font-size: 1em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
     .branch-text-right { font-size: 1em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
   </style>
-<!-- Level 1: Employment -->
-<ellipse cx="600" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
-<text class="node-text" x="600" y="60">{{ Lexicon.employment_status }}</text>
-<!-- Level 1 Branches -->
-<line stroke="black" stroke-width="2" x1="600" x2="300" y1="90" y2="150"></line>
-<line stroke="black" stroke-width="2" x1="600" x2="900" y1="90" y2="150"></line>
-<text class="branch-text-left" x="470" y="105">{{ Lexicon.employment_unemployed }}</text>
-<text class="branch-text-right" x="730" y="105">{{ Lexicon.employment_stable }}</text>
-<!-- Level 2: Income -->
-<ellipse cx="300" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="300" y="150">{{ Lexicon.assets }}</text>
-<ellipse cx="900" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="900" y="150">{{ Lexicon.income }}</text>
-<!-- Level 2 Branches -->
-<line stroke="black" stroke-width="2" x1="300" x2="200" y1="180" y2="250"></line>
-<line stroke="black" stroke-width="2" x1="300" x2="400" y1="180" y2="250"></line>
-<text class="branch-text-left" x="250" y="200">{{ Lexicon.below }} 15.000</text>
-<text class="branch-text-right" x="350" y="200">15.000 {{ Lexicon.and_more }}</text>
-<line stroke="black" stroke-width="2" x1="900" x2="800" y1="180" y2="250"></line>
-<line stroke="black" stroke-width="2" x1="900" x2="1000" y1="180" y2="250"></line>
-<text class="branch-text-left" x="850" y="200">{{ Lexicon.below }} 40.000</text>
-<text class="branch-text-right" x="950" y="200">40.000 {{ Lexicon.and_more }}</text>
-<!-- Direct leaves for low income -->
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="150" y="225"></rect>
-<text class="node-text" x="200" y="250">{{ Lexicon.denied }}</text>
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="750" y="225"></rect>
-<text class="node-text" x="800" y="250">{{ Lexicon.denied }}</text>
-<!-- Level 3: Loan Amount -->
-<ellipse cx="400" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="400" y="250">{{ Lexicon.loan_amount }}</text>
-<ellipse cx="1000" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="1000" y="250">{{ Lexicon.loan_amount }}</text>
-<!-- Level 3 Branches -->
-<line stroke="black" stroke-width="2" x1="400" x2="330" y1="280" y2="340"></line>
-<line stroke="black" stroke-width="2" x1="400" x2="470" y1="280" y2="340"></line>
-<text class="branch-text-left" x="360" y="305">{{ Lexicon.below }} 15.000</text>
-<text class="branch-text-right" x="440" y="305">15.000 {{ Lexicon.and_more }}</text>
-<line stroke="black" stroke-width="2" x1="1000" x2="925" y1="280" y2="340"></line>
-<line stroke="black" stroke-width="2" x1="1000" x2="1075" y1="280" y2="340"></line>
-<text class="branch-text-left" x="955" y="305">{{ Lexicon.below }} 25.000</text>
-<text class="branch-text-right" x="1045" y="305">25.000 {{ Lexicon.and_more }}</text>
-<!-- Level 4: Credit History -->
-<ellipse cx="325" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="325" y="360">{{ Lexicon.credit_history }}</text>
-<ellipse cx="925" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
-<text class="node-text" x="925" y="360">{{ Lexicon.credit_history }}</text>
-<!-- Level 4 Branches -->
-<line stroke="black" stroke-width="2" x1="325" x2="250" y1="390" y2="460"></line>
-<line stroke="black" stroke-width="2" x1="325" x2="400" y1="390" y2="460"></line>
-<text class="branch-text-left" x="275" y="420">{{ Lexicon.credit_history_bad }} {{ Lexicon.or_oder }} {{ Lexicon.credit_history_good }} </text>
-<text class="branch-text-right" x="370" y="420"> {{ Lexicon.credit_history_excellent }}</text>
-<line stroke="black" stroke-width="2" x1="925" x2="850" y1="390" y2="460"></line>
-<line stroke="black" stroke-width="2" x1="925" x2="1000" y1="390" y2="460"></line>
-<text class="branch-text-left" x="875" y="420">{{ Lexicon.credit_history_bad }}  {{ Lexicon.or_oder }} {{ Lexicon.credit_history_good }} </text>
-<text class="branch-text-right" x="975" y="420">{{ Lexicon.credit_history_excellent }}</text>
-<!-- Final Leaves from credit history -->
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="200" y="460"></rect>
-<text class="node-text" x="250" y="485">{{ Lexicon.denied }}</text>
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="375" y="460"></rect>
-<text class="node-text" x="425" y="485">{{ Lexicon.approved }}</text>
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="800" y="460"></rect>
-<text class="node-text" x="850" y="485">{{ Lexicon.denied }}</text>
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="975" y="460"></rect>
-<text class="node-text" x="1025" y="485">{{ Lexicon.approved }}</text>
-<!-- New leaves for right branches of loan_amount -->
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="445" y="335"></rect>
-<text class="node-text" x="495" y="360">{{ Lexicon.denied }}</text>
-<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="1050" y="335"></rect>
-<text class="node-text" x="1100" y="360">{{ Lexicon.denied }}</text>
+
+  <!-- Level 1: Loan Amount -->
+  <ellipse cx="625" cy="60" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-root-fill, #ffffff);" />
+  <text x="625" y="60" class="node-text">{{ Lexicon.loan_amount }}</text>
+
+  <!-- Level 1 Branches -->
+  <line x1="625" y1="90" x2="325" y2="150" stroke="black" stroke-width="2"/>
+  <line x1="625" y1="90" x2="925" y2="150" stroke="black" stroke-width="2"/>
+  <text x="500" y="105" class="branch-text-left">{{ Lexicon.below }} 25.000</text>
+  <text x="750" y="105" class="branch-text-right">25.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Left Path Level 2: Credit History -->
+  <ellipse cx="325" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="325" y="150" class="node-text">{{ Lexicon.credit_history }}</text>
+
+  <!-- Right Path Level 2: Income -->
+  <ellipse cx="925" cy="150" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="925" y="150" class="node-text">{{ Lexicon.income }}</text>
+
+  <!-- Credit History Branches -->
+  <line x1="325" y1="180" x2="225" y2="260" stroke="black" stroke-width="2"/>
+  <line x1="325" y1="180" x2="425" y2="260" stroke="black" stroke-width="2"/>
+  <text x="275" y="205" class="branch-text-left">{{ Lexicon.credit_history_bad }}</text>
+  <text x="375" y="205" class="branch-text-right">{{ Lexicon.credit_history_good }} {{ Lexicon.or_oder }} {{ Lexicon.credit_history_excellent }}</text>
+
+  <!-- Left Leaf: Denied -->
+  <rect x="175" y="235" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="225" y="260" class="node-text">{{ Lexicon.denied }}</text>
+
+  <!-- Level 3 (from good credit): Employment -->
+  <ellipse cx="425" cy="260" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="425" y="260" class="node-text">{{ Lexicon.assets }}</text>
+
+  <line x1="425" y1="290" x2="350" y2="370" stroke="black" stroke-width="2"/>
+  <line x1="425" y1="290" x2="500" y2="370" stroke="black" stroke-width="2"/>
+  <text x="385" y="315" class="branch-text-left">{{ Lexicon.below }} 20.000</text>
+  <text x="468" y="315" class="branch-text-right">20.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Employment Leaves / New Level -->
+  <!-- Unemployed = Denied (unchanged) -->
+  <rect x="300" y="345" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="350" y="370" class="node-text">{{ Lexicon.denied }}</text>
+
+  <!-- NEW Level under 'employment_stable': Liabilities -->
+  <ellipse cx="520" cy="370" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="520" y="370" class="node-text">{{ Lexicon.credit_history }}</text>
+
+  <line x1="520" y1="400" x2="470" y2="470" stroke="black" stroke-width="2"/>
+  <line x1="520" y1="400" x2="570" y2="470" stroke="black" stroke-width="2"/>
+  <text x="490" y="420" class="branch-text-left">{{ Lexicon.credit_history_good }}</text>
+  <text x="550" y="420" class="branch-text-right">{{ Lexicon.credit_history_excellent }}</text>
+
+  <rect x="400" y="450" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="450" y="475" class="node-text">{{ Lexicon.denied }}</text>
+
+  <rect x="555" y="450" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="605" y="475" class="node-text">{{ Lexicon.approved }}</text>
+
+  <!-- Income Branches -->
+  <line x1="925" y1="180" x2="825" y2="260" stroke="black" stroke-width="2"/>
+  <line x1="925" y1="180" x2="1025" y2="260" stroke="black" stroke-width="2"/>
+  <text x="875" y="205" class="branch-text-left">{{ Lexicon.below }} 40.000</text>
+  <text x="975" y="205" class="branch-text-right">40.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Low income = Denied -->
+  <rect x="775" y="235" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="825" y="260" class="node-text">{{ Lexicon.denied }}</text>
+
+  <!-- Level 3 (from high income): Assets -->
+  <ellipse cx="1025" cy="260" rx="80" ry="30" stroke="black" stroke-width="2"  style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1025" y="260" class="node-text">{{ Lexicon.assets }}</text>
+
+  <line x1="1025" y1="290" x2="950" y2="370" stroke="black" stroke-width="2"/>
+  <line x1="1025" y1="290" x2="1100" y2="370" stroke="black" stroke-width="2"/>
+  <text x="985" y="315" class="branch-text-left">{{ Lexicon.below }} 15.000</text>
+  <text x="1065" y="315" class="branch-text-right">15.000 {{ Lexicon.and_more }}</text>
+
+  <!-- Assets Leaves -->
+  <rect x="900" y="345" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="950" y="370" class="node-text">{{ Lexicon.denied }}</text>
+
+  <rect x="1055" y="345" width="100" height="50" stroke="black" stroke-width="2"  style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1105" y="370" class="node-text">{{ Lexicon.approved }}</text>
 </svg>
-</body>
-</html>

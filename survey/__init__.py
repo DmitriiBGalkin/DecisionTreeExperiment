@@ -17,31 +17,31 @@ which_language[LANGUAGE_CODE[:2]] = True
 class C(BaseConstants):
     NAME_IN_URL = "DecisionTreeExperiment"
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 2
-    # List of tree filenames and correct answers
-    TREE_ANSWERS = [
-        ['Tree_1.html', True],
-        ['Tree_2.html', True],
-        ['Tree_3.html', False],
-        ['Tree_4.html', True],
-        ['Tree_5.html', True],
-        ['Tree_6.html', False],
-        ['Tree_7.html', False],
-        ['Tree_8.html', True],
-        ['Tree_9.html', True],
-        ['Tree_10.html', False],
-        ['Tree_11.html', False],
-        ['Tree_12.html', True],
-        ['Tree_13.html', False],
-        ['Tree_14.html', True],
-        ['Tree_15.html', False],
-        ['Tree_16.html', True],
-        ['Tree_17.html', True],
-        ['Tree_18.html', True],
-        ['Tree_19.html', True],
-        ['Tree_20.html', False],
-        ['Tree_21.html', True]
-    ]
+    NUM_ROUNDS = 21
+    # # List of tree filenames and correct answers
+    # TREE_ANSWERS = [
+    #     ['Tree_1.html', True],
+    #     ['Tree_2.html', True],
+    #     ['Tree_3.html', False],
+    #     ['Tree_4.html', True],
+    #     ['Tree_5.html', True],
+    #     ['Tree_6.html', False],
+    #     ['Tree_7.html', False],
+    #     ['Tree_8.html', True],
+    #     ['Tree_9.html', True],
+    #     ['Tree_10.html', False],
+    #     ['Tree_11.html', False],
+    #     ['Tree_12.html', True],
+    #     ['Tree_13.html', False],
+    #     ['Tree_14.html', True],
+    #     ['Tree_15.html', False],
+    #     ['Tree_16.html', True],
+    #     ['Tree_17.html', True],
+    #     ['Tree_18.html', True],
+    #     ['Tree_19.html', True],
+    #     ['Tree_20.html', False],
+    #     ['Tree_21.html', True]
+    # ]
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     #tree_order=list(range(1, 22))
@@ -182,9 +182,10 @@ def creating_session(subsession: Subsession):
                 full_order = list(range(1, 22))
                 random.shuffle(full_order)
 
+            full_order = [(n, random.choice(['a', 'r'])) for n in full_order]
             participant.treeOrder = full_order
             participant.prescreener_group=0
-            # print(f'Random Order: {use_random} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+            print(f'Random Order: {use_random_block} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 def vars_for_admin_report(subsession):
     groups = subsession.session.prescreener_groups_dict or {}
 
@@ -382,21 +383,20 @@ class Tree_Question(Page):
     @staticmethod
     def vars_for_template(player: Player):
         round_number = player.round_number
-        tree_number_in_list = player.participant.treeOrder[round_number-1]-1
-        tree_template = C.TREE_ANSWERS[tree_number_in_list][0]
+        num, variant = player.participant.treeOrder[round_number - 1]
         number_of_rounds=C.NUM_ROUNDS
         # print('tree number',tree_number_in_list,'round number',player.round_number,tree_template)
         return dict(
-            svg_template=f'survey/Trees/{tree_template}',
+            svg_template=f'survey/updating_trees/Tree_{num}{variant}.html',
             Lexicon=Lexicon,
             number_of_rounds=number_of_rounds,
             **which_language)
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
-        # player.Tree_Question_TS = time.time()
         round_number = player.round_number
-        tree_number_in_list = player.participant.treeOrder[round_number-1]-1 #so that the list starts at 0 and ends at 21
-        player.is_correct = int(player.question_loan == C.TREE_ANSWERS[tree_number_in_list][1])
+        num, variant = player.participant.treeOrder[round_number - 1]
+        expected = (variant == 'a')  # 'a' => accept/True, 'r' => reject/False
+        player.is_correct = int(player.question_loan == expected)
         player.payoff = player.is_correct * C.payment_for_correct_answer
         # print(player.is_correct)
         # print(C.payment_for_correct_answer)
@@ -446,7 +446,7 @@ class TestUpdatingTreesAB(Page):
                 "a_label": f"Tree_{i}a",
                 "r_label": f"Tree_{i}r",
             }
-            for i in range(1, 22)
+            for i in range(1,22)
         ]
         return dict(
             rows=rows,
@@ -471,7 +471,7 @@ class an_updating_trees(Page):
                     )
 
 #Actual sequence
-#page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
 #page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
@@ -480,4 +480,4 @@ class an_updating_trees(Page):
 
 #page_sequence=[an_updating_trees]
 
-page_sequence = [TestUpdatingTreesAB]
+#page_sequence = [TestUpdatingTreesAB]
