@@ -151,6 +151,7 @@ class Survey_Demographics(Page):
                    'feedback']
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
+        print('speeder',player.participant.speeder)
         if not player.participant.speeder:
             groups = player.session.prescreener_groups_dict
             group_id = player.participant.prescreener_group  # the integer 0–5
@@ -160,6 +161,16 @@ class Survey_Demographics(Page):
             # If you want to print total participants:
             current_total = sum(g['current'] for g in groups.values())
             print("Current participants:", current_total)
+
+
+class SpeederRedirect(Page):
+    @staticmethod
+    def is_displayed(player):
+        return player.participant.speeder
+    def js_vars(player):
+        bilendi_id = player.participant.label
+        redirect_url = f"https://survey.maximiles.com/speeder?p=98327&m={bilendi_id}"
+        return dict(redirect_url=redirect_url)
 
 
 class Results(Page):
@@ -187,5 +198,4 @@ class FinalRedirect(Page):
         redirect_url = f"https://survey.maximiles.com/complete?p=148124_4f493a3f&m={bilendi_id}"
         return dict(redirect_url=redirect_url)
 
-page_sequence = [Survey_Demographics, Results, FinalRedirect]
-
+page_sequence = [Survey_Demographics, SpeederRedirect, Results,  FinalRedirect]

@@ -185,7 +185,7 @@ def creating_session(subsession: Subsession):
             full_order = [(n, random.choice(['a', 'r'])) for n in full_order]
             participant.treeOrder = full_order
             participant.prescreener_group=0
-            print(f'Random Order: {use_random_block} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+            #print(f'Random Order: {use_random_block} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
 def vars_for_admin_report(subsession):
     groups = subsession.session.prescreener_groups_dict or {}
 
@@ -259,12 +259,12 @@ class ScreenOutPage(Page):
         reached_group_quota = g['current'] >= g['max_allowed']
         reached_total_quota = current_total >= max_total
         underage = player.age < 18
-        print("group_of_participant", group_id)
-        print("round_number == 1:", player.round_number == 1)
-        print("groups:", groups)
-        print("current_total:", current_total)
-        print("group count > group_count_max:", g['current'] ,'>', g['max_allowed'], reached_group_quota )
-        print("current_participants > max_total:", current_total, ">", max_total, current_total > max_total)
+        # print("group_of_participant", group_id)
+        # print("round_number == 1:", player.round_number == 1)
+        # print("groups:", groups)
+        # print("current_total:", current_total)
+        # print("group count > group_count_max:", g['current'] ,'>', g['max_allowed'], reached_group_quota )
+        # print("current_participants > max_total:", current_total, ">", max_total, current_total > max_total)
         return (
             player.round_number == 1
             and
@@ -414,8 +414,8 @@ class PostMainStudy(Page):
         print(all_rounds_query,"total_time_server",total_time_server)
         player.participant.total_correct_answers = sum(p.is_correct for p in all_rounds_query)
         total_time=sum(p.per_page_time for p in all_rounds_query)
-        threshold = player.session.config.get('min_total_time')
-        player.participant.speeder=total_time<threshold
+        threshold = player.session.config.get('min_total_time_sec')
+        player.participant.speeder=(total_time<threshold)
         print('total time',total_time)
         print('total_time_server',total_time_server)
         print('threshold',threshold)

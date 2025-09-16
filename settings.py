@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
         num_demo_participants=10,
         random_order_block=False,
         student_debug=False,
-        min_total_time=10
+        min_total_time_sec=10
     ),
 ]
 ROOMS = [
@@ -33,7 +33,7 @@ ROOMS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=1.00, participation_fee=2.00,student_debug=False, doc="",current_participants=0,participants_needed=8,random_order_block=False, min_total_time=30
+    real_world_currency_per_point=1.00, participation_fee=0.00,student_debug=False, doc="",current_participants=0,participants_needed=8,random_order_block=False, min_total_time_sec=105
 )
 
 PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers","server_timestamp_start","server_timestamp_end","speeder","prescreener_group"]
