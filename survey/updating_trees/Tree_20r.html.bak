@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8"></head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMinYMid meet" style="background-color: white;" viewbox="200 0 1620 650">
+<svg xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMinYMid meet" style="background-color: white;" viewbox="200 0 1550 650">
   <style>
     .node-text { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
     .branch-text-left { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
@@ -16,8 +16,8 @@
   
   <line x1="960" y1="90" x2="530" y2="150" stroke="black" stroke-width="2" />
   <line x1="960" y1="90" x2="1390" y2="150" stroke="black" stroke-width="2" />
-  <text x="800" y="100" class="branch-text-left">{{ Lexicon.below }} 15.000</text>
-  <text x="1120" y="100" class="branch-text-right">15.000 {{ Lexicon.and_more }}</text>
+  <text x="800" y="100" class="branch-text-left">{{ Lexicon.below }} 20.000</text>
+  <text x="1120" y="100" class="branch-text-right">20.000 {{ Lexicon.and_more }}</text>
 
 
   <ellipse cx="530" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
@@ -35,9 +35,9 @@
 
 
   <line x1="1390" y1="180" x2="1230" y2="250" stroke="black" stroke-width="2" />
-  <line x1="1390" y1="180" x2="1570" y2="250" stroke="black" stroke-width="2" />
+  <line x1="1390" y1="180" x2="1520" y2="250" stroke="black" stroke-width="2" />
   <text x="1325" y="200" class="branch-text-left">{{ Lexicon.below }} 50.000</text>
-  <text x="1505" y="200" class="branch-text-right">50.000 {{ Lexicon.and_more }}</text>
+  <text x="1455" y="200" class="branch-text-right">50.000 {{ Lexicon.and_more }}</text>
 
 
   <ellipse cx="400" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
@@ -51,33 +51,15 @@
   <ellipse cx="1210" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
   <text x="1210" y="250" class="node-text">{{ Lexicon.assets }}</text>
   <line x1="1210" y1="280" x2="1100" y2="350" stroke="black" stroke-width="2" />
-  <line x1="1210" y1="280" x2="1240" y2="350" stroke="black" stroke-width="2" />
+  <line x1="1210" y1="280" x2="1210" y2="350" stroke="black" stroke-width="2" />
   <text x="1150" y="310" class="branch-text-left">{{ Lexicon.below }} 15.000</text>
-  <text x="1240" y="310" class="branch-text-right">15.000 {{ Lexicon.and_more }}</text>
+  <text x="1220" y="310" class="branch-text-right">15.000 {{ Lexicon.and_more }}</text>
 
   <rect x="1050" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
   <text x="1100" y="360" class="node-text">{{ Lexicon.denied }}</text>
 
-
-  <ellipse cx="1260" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
-  <text x="1260" y="360" class="node-text">{{ Lexicon.loan_amount }}</text>
-    <line x1="1260" y1="390" x2="1210" y2="445" stroke="black" stroke-width="2" />
-  <line x1="1260" y1="390" x2="1310" y2="445" stroke="black" stroke-width="2" />
-
-  <text x="1220" y="420" class="branch-text-left">18.000 {{ Lexicon.and_more }}</text>
-  <text x="1300" y="420" class="branch-text-right">{{ Lexicon.below }} 18.000</text>
-
-
-  <rect x="1160" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
-  <text x="1210" y="470" class="node-text">{{ Lexicon.denied }}</text>
-  <rect x="1270" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
-  <text x="1320" y="470" class="node-text">{{ Lexicon.approved }}</text>
-
-
-
-
-  <ellipse cx="1570" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
-  <text x="1570" y="250" class="node-text">{{ Lexicon.credit_history }}</text>
+  <ellipse cx="1520" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1520" y="250" class="node-text">{{ Lexicon.income }}</text>
 
 
 
@@ -93,10 +75,10 @@
   <text x="850" y="310" class="branch-text-right">{{ Lexicon.employment_stable }}</text>
 
 
-  <line x1="1570" y1="280" x2="1470" y2="360" stroke="black" stroke-width="2" />
-  <line x1="1570" y1="280" x2="1670" y2="360" stroke="black" stroke-width="2" />
-  <text x="1520" y="310" class="branch-text-left">{{ Lexicon.credit_history_bad }}</text>
-  <text x="1620" y="310" class="branch-text-right">{{ Lexicon.credit_history_good }} {{ Lexicon.or_oder }} {{ Lexicon.credit_history_excellent }}</text>
+  <line x1="1520" y1="280" x2="1420" y2="360" stroke="black" stroke-width="2" />
+  <line x1="1520" y1="280" x2="1620" y2="360" stroke="black" stroke-width="2" />
+  <text x="1470" y="310" class="branch-text-left">{{ Lexicon.below }} 55.000</text>
+  <text x="1570" y="310" class="branch-text-right">55.000 {{ Lexicon.and_more }}</text>
 
 
 
@@ -114,11 +96,11 @@
   <text x="890" y="360" class="node-text">{{ Lexicon.credit_history }}</text>
 
 
-  <rect x="1420" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
-  <text x="1470" y="360" class="node-text">{{ Lexicon.denied }}</text>
+  <rect x="1370" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1420" y="360" class="node-text">{{ Lexicon.denied }}</text>
 
-  <ellipse cx="1670" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
-  <text x="1670" y="360" class="node-text">{{ Lexicon.loan_amount }}</text>
+  <ellipse cx="1620" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1620" y="360" class="node-text">{{ Lexicon.liabilities }}</text>
 
 
 
@@ -134,10 +116,10 @@
   <text x="940" y="420" class="branch-text-right">{{ Lexicon.credit_history_excellent }}</text>
 
 
-  <line x1="1670" y1="390" x2="1610" y2="470" stroke="black" stroke-width="2" />
-  <line x1="1670" y1="390" x2="1730" y2="470" stroke="black" stroke-width="2" />
-  <text x="1640" y="420" class="branch-text-left">30.000 {{ Lexicon.and_more }} </text>
-  <text x="1700" y="420" class="branch-text-right">{{ Lexicon.below }} 30.000</text>
+  <line x1="1620" y1="390" x2="1560" y2="470" stroke="black" stroke-width="2" />
+  <line x1="1620" y1="390" x2="1680" y2="470" stroke="black" stroke-width="2" />
+  <text x="1590" y="420" class="branch-text-left">12.000 {{ Lexicon.and_more }} </text>
+  <text x="1650" y="420" class="branch-text-right">{{ Lexicon.below }} 12.000</text>
 
 
 
@@ -162,10 +144,10 @@
   <text x="910" y="595" class="node-text">{{ Lexicon.denied }}</text>
 
 
-  <rect x="1560" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
-  <text x="1610" y="470" class="node-text">{{ Lexicon.denied }}</text>
-  <rect x="1690" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
-  <text x="1740" y="470" class="node-text">{{ Lexicon.approved }}</text>
+  <rect x="1510" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1560" y="470" class="node-text">{{ Lexicon.denied }}</text>
+  <rect x="1640" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1690" y="470" class="node-text">{{ Lexicon.approved }}</text>
 </svg>
 </body>
 </html>

@@ -180,7 +180,7 @@ def creating_session(subsession: Subsession):
                 # Fixed order from 1 to 21 (Tree_1.html to Tree_21.html)
                 participant.easyFirst = False  # or set to None if not used
                 full_order = list(range(1, 22))
-                random.shuffle(full_order)
+                #random.shuffle(full_order)
 
             full_order = [(n, random.choice(['a', 'r'])) for n in full_order]
             participant.treeOrder = full_order
@@ -471,7 +471,7 @@ class an_updating_trees(Page):
                     )
 
 #Actual sequence
-page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+#page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
 #page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
@@ -480,4 +480,4 @@ page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionD
 
 #page_sequence=[an_updating_trees]
 
-#page_sequence = [TestUpdatingTreesAB]
+page_sequence = [TestUpdatingTreesAB]

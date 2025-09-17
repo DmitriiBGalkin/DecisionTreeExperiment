@@ -27,15 +27,15 @@ import xml.etree.ElementTree as ET
 # CONFIG — EDIT THESE
 # =========================
 
-INPUT_FILE  = Path("updating_trees/Tree_21a.html")
-OUTPUT_FILE = Path("updating_trees/Tree_21a.html")  # set same as INPUT_FILE to overwrite
+INPUT_FILE  = Path("updating_trees/Tree_20r.html")
+OUTPUT_FILE = Path("updating_trees/Tree_20r.html")  # set same as INPUT_FILE to overwrite
 MAKE_BACKUP = True  # if overwriting INPUT_FILE, keep a .bak
 
 # Coordinate filters (set to None to disable a bound)
 # Example: 100 < x < 500 and y > 100
-X_MIN = 1000.0
-X_MAX = 1200.0
-Y_MIN = 365.0
+X_MIN = 1400.0
+X_MAX = 1800.0
+Y_MIN = 100.0
 Y_MAX = None
 
 # Inclusive/exclusive bounds (False => strict > / <)
@@ -48,7 +48,7 @@ INCLUSIVE_BOUNDS = False
 REQUIRE_BOTH_AXES_FOR_ENDPOINTS = False
 
 # Shift amounts
-DX = -50.0
+DX = 50.0
 DY = 0.0
 
 # Number formatting
