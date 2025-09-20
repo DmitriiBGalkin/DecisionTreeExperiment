@@ -471,7 +471,7 @@ class an_updating_trees(Page):
                     )
 
 #Actual sequence
-#page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
+page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral, IntroductionDecisionTrees, InstructionsSample,SampleQuestion_1, SampleQuestion_2, PreMainStudy, Tree_Question, PostMainStudy]
 
 #Testing
 #page_sequence = [Prescreener, ScreenOutPage,  IntroductionGeneral]
@@ -480,4 +480,6 @@ class an_updating_trees(Page):
 
 #page_sequence=[an_updating_trees]
 
-page_sequence = [TestUpdatingTreesAB]
+#page_sequence = [TestUpdatingTreesAB]
+
+#page_sequence = [Tree_Question, PostMainStudy]
