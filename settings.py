@@ -15,7 +15,7 @@ SESSION_CONFIGS = [
         num_demo_participants=10,
         random_order_block=False,
         student_debug=False,
-        min_total_time_sec=10
+        min_total_time_sec=105
     ),
 ]
 ROOMS = [
