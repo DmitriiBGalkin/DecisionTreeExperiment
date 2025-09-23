@@ -37,7 +37,7 @@ SESSION_CONFIG_DEFAULTS = dict(
 )
 
 PARTICIPANT_FIELDS = ["treeOrder","easyFirst","total_correct_answers","server_timestamp_start","server_timestamp_end","speeder","prescreener_group"]
-SESSION_FIELDS = ['participants_needed','prescreener_groups_dict']
+SESSION_FIELDS = ['speeder_counter','participants_needed','prescreener_groups_dict']
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
