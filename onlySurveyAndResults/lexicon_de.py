@@ -65,8 +65,8 @@ class Lexicon:
     age_error_message = "Bitte geben Sie ein gültiges Alter zwischen 18 und 100 Jahren ein."
 
     # Education
-    education_label = "Welchen Bildungsabschluss haben Sie? Bitte wählen Sie den höchsten Abschluss, den Sie bisher erreicht haben."
 
+    education_label = "Welchen Bildungsabschluss haben Sie? Bitte wählen Sie den höchsten Abschluss, den Sie bisher erreicht haben."
     education_schueler = "Noch Schüler"
     education_hauptschule = "Volks- oder Hauptschulabschluss (inkl. Quali)"
     education_mittlere_reife = "Mittlere Reife / Realschulabschluss oder gleichwertig"
@@ -78,6 +78,10 @@ class Lexicon:
     education_phd = "Promotion / Doktortitel"
     education_other = "Anderer Abschluss (bitte angeben)"
 
+    education_currently_a_student_label = "Sind Sie derzeit Schüler:in oder Student:in?"
+    # Yes/No
+    yes = "Ja"
+    no = "Nein"
 
     study_label = "Was ist (oder war) Ihr Studienfach?"
     study_none = "Kein Studium / Nicht zutreffend"
@@ -136,3 +140,15 @@ class Lexicon:
     income_band_8 = "70.000 € oder mehr"
 
     feedback_label_SF = "Bitte hinterlassen Sie Kommentare, Feedback oder Verbesserungsvorschläge oder teilen Sie uns mit, falls Sie Fehler im Experiment gefunden haben."
+
+    # Vertrauen in Entscheidungsbäume
+    trust_decision_trees_label = (
+        "Auf Grundlage Ihrer Erfahrungen mit Entscheidungsbäumen in dieser Studie: "
+        "In welchem Maße würden Sie Entscheidungsbäumen als Erklärung für Kreditentscheidungen vertrauen?"
+    )
+
+    trust_decision_trees_1 = "Überhaupt nicht"
+    trust_decision_trees_2 = "Wenig"
+    trust_decision_trees_3 = "Mittelmäßig"
+    trust_decision_trees_4 = "Ziemlich stark"
+    trust_decision_trees_5 = "Vollständig"

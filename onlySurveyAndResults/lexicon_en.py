@@ -71,6 +71,12 @@ class Lexicon:
     education_phd = "Doctorate / PhD"
     education_other = "Other (please specify)"
 
+    education_currently_a_student_label = "Are you currently a pupil or a student?"
+    # Yes/No
+    yes = "Yes"
+    no = "No"
+
+
     study_label = "What is your (current or past) field of study?"
     study_none = "I did not study / not applicable"
     study_engineering = "Engineering"
@@ -124,3 +130,14 @@ class Lexicon:
     income_band_8 = "€70,000 or more"
 
     feedback_label_SF = "Please leave any comments, feedback, suggestions, or let us know if you found any mistakes in the experiment."
+    # Trust in Decision Trees
+    trust_decision_trees_label = (
+        "Based on your experience with decision trees in this study, "
+        "to what extent would you trust decision trees as an explanation for loan application decisions?"
+    )
+
+    trust_decision_trees_1 = "Not at all"
+    trust_decision_trees_2 = "Slightly"
+    trust_decision_trees_3 = "Moderately"
+    trust_decision_trees_4 = "Quite a lot"
+    trust_decision_trees_5 = "Completely"

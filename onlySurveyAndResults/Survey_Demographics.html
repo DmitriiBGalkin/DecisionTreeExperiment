@@ -80,6 +80,10 @@
 
     <!-- Survey Questions -->
     <div class="box survey-layout">
+        <div class="survey-section-title">
+          {{ if en }}Trust in AI{{ else }}Vertrauen in KI{{ endif }}
+        </div>
+        {{ formfield 'trust_decision_trees' }}
 
         <div class="survey-section-title">
             {{ if en }}Personal Information{{ else }}Persönliche Angaben{{ endif }}
@@ -91,12 +95,13 @@
         <div class="survey-section-title">
             {{ if en }}Education{{ else }}Bildungsweg{{ endif }}
         </div>
-
+        {{ formfield 'education_currently_a_student_label' }}
+        <p>
         {{ formfield 'education_level' }}
         {{ formfield 'education_level_other' }}
         {{ formfield 'field_of_study' }}
         {{ formfield 'field_of_study_other' }}
-
+        </p>
         <div class="survey-section-title">
             {{ if en }}Income & Social Status{{ else }}Einkommen & Sozialer Status{{ endif }}
         </div>

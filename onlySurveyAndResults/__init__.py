@@ -26,6 +26,18 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    trust_decision_trees = models.IntegerField(
+        choices=[
+            (1, Lexicon.trust_decision_trees_1),
+            (2, Lexicon.trust_decision_trees_2),
+            (3, Lexicon.trust_decision_trees_3),
+            (4, Lexicon.trust_decision_trees_4),
+            (5, Lexicon.trust_decision_trees_5),
+        ],
+        label=Lexicon.trust_decision_trees_label,
+        widget=widgets.RadioSelectHorizontal
+    )
+
     # Survey Questions
     gender = models.IntegerField(
         choices=[
@@ -81,6 +93,12 @@ class Player(BasePlayer):
         label="Falls Sie 'Anderer Abschluss' gewählt haben, bitte angeben:",
         blank=True,  # This allows the field to remain empty
     )
+    education_currently_a_student_label = models.BooleanField(
+        choices=[
+            (1, Lexicon.yes),
+            (2, Lexicon.no),
+        ],
+        label=Lexicon.education_currently_a_student_label)
     serious_participation = models.BooleanField(
         choices=[
             (1, Lexicon.participation_serious),
@@ -147,7 +165,7 @@ class Survey_Demographics(Page):
             Lexicon=Lexicon,
             **which_language)
     form_model = 'player'
-    form_fields = ['gender', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
+    form_fields = ['trust_decision_trees','gender', 'education_level','education_currently_a_student_label', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
                    'feedback']
     @staticmethod
     def before_next_page(player: Player, timeout_happened):
@@ -161,7 +179,9 @@ class Survey_Demographics(Page):
             # If you want to print total participants:
             current_total = sum(g['current'] for g in groups.values())
             print("Current participants:", current_total)
-
+        else:
+            player.session.speeder_counter += 1
+            print("Speeder counter:", player.session.speeder_counter)
 
 class SpeederRedirect(Page):
     @staticmethod

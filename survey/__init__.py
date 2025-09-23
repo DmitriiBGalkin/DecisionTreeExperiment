@@ -145,6 +145,7 @@ def confidence_level_sample2_error_message(player, value):
         return Lexicon.move_slider_warning
 def creating_session(subsession: Subsession):
     if subsession.round_number == 1:
+        subsession.session.speeder_counter = 0   # 👈 initialize here
         easy_trees = list(range(1,12))         # Tree_1 to Tree_11
         hard_trees = list(range(12, 22))     # Tree_12 to Tree_21
         subsession.session.participants_needed = subsession.session.config.get('participants_needed')
@@ -175,17 +176,17 @@ def creating_session(subsession: Subsession):
                     full_order = easy_part + hard_part
                 else:
                     full_order = hard_part + easy_part
-
             else:
                 # Fixed order from 1 to 21 (Tree_1.html to Tree_21.html)
                 participant.easyFirst = False  # or set to None if not used
                 full_order = list(range(1, 22))
-                #random.shuffle(full_order)
-
+                random.shuffle(full_order)
             full_order = [(n, random.choice(['a', 'r'])) for n in full_order]
             participant.treeOrder = full_order
             participant.prescreener_group=0
             #print(f'Random Order: {use_random_block} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+
+
 def vars_for_admin_report(subsession):
     groups = subsession.session.prescreener_groups_dict or {}
 
@@ -216,12 +217,20 @@ def vars_for_admin_report(subsession):
     current_total = sum(x['current'] for x in groups.values())
     max_total     = sum(x['max_allowed'] for x in groups.values())
 
+    threshold = subsession.session.config.get('min_total_time_sec')
+
+    # 👉 Use the session variable directly (fallback to 0 if missing)
+    speeder_count = getattr(subsession.session, 'speeder_counter', 0)
+
     return dict(
         round_number=subsession.round_number,
         group_data=display_data,
         current_participants=current_total,
         participants_needed=max_total,
+        speeder_threshold=threshold,
+        speeder_count=speeder_count,
     )
+
 
 
 class Prescreener(Page):
@@ -411,15 +420,15 @@ class PostMainStudy(Page):
     def vars_for_template(player: Player):
         all_rounds_query=player.in_all_rounds()
         total_time_server=time.time() - player.participant.server_timestamp_start
-        print(all_rounds_query,"total_time_server",total_time_server)
+        # print(all_rounds_query,"total_time_server",total_time_server)
         player.participant.total_correct_answers = sum(p.is_correct for p in all_rounds_query)
         total_time=sum(p.per_page_time for p in all_rounds_query)
         threshold = player.session.config.get('min_total_time_sec')
         player.participant.speeder=(total_time<threshold)
-        print('total time',total_time)
-        print('total_time_server',total_time_server)
-        print('threshold',threshold)
-        print('Speeder', player.participant.speeder)
+        # print('total time',total_time)
+        # print('total_time_server',total_time_server)
+        # print('threshold',threshold)
+        # print('Speeder', player.participant.speeder)
         return dict(
             Lexicon=Lexicon,
             **which_language)

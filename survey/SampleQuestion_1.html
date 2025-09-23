@@ -33,73 +33,207 @@
 {{ block scripts }}
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-    const dummySlider = document.getElementById('dummy_slider');
-    const realSlider = document.getElementById('confidence_slider');
-    const sliderValue = document.getElementById('sliderValue');
+    console.log('✅ JS loaded for Tree_Question with Bootstrap alert handling');
+
+    const dummySlider   = document.getElementById('dummy_slider');
+    const realSlider    = document.getElementById('confidence_slider');
+    const sliderValue   = document.getElementById('sliderValue');
     const sliderWrapper = document.querySelector('.slider-wrapper');
-    const errorMessage = document.querySelector('.error-message');
+    const errorMessage  = document.getElementById('confidence-error');
+
+    const submitButton     = document.querySelector('button.otree-btn-next');
+    const interactionInput = document.getElementById('interaction_times');
+    const perPageInput     = document.getElementById('per_page_time');
+    const form             = document.querySelector('form'); // oTree page form
+
+    if (!dummySlider || !realSlider || !sliderWrapper) {
+        console.error('❌ Missing one of: dummy_slider, confidence_slider, slider-wrapper');
+    }
+    if (!submitButton)     console.warn('⚠️ Submit button not found');
+    if (!interactionInput) console.warn('⚠️ Hidden input #interaction_times not found');
+    if (!perPageInput)     console.warn('⚠️ Hidden input #per_page_time not found');
+    if (!form)             console.warn('⚠️ Form element not found');
 
     let isDragging = false;
-    let hasInteracted = false; // 🔥 new flag to control initial visibility
+    let hasInteracted = false;
+    const t0 = performance.now();
 
-    // Initially hide dummy slider and value
-    dummySlider.style.visibility = 'hidden';
-    sliderValue.innerText = '';
-    sliderValue.style.visibility = 'hidden';
+    let firstSliderTime = null;
+    let lastSliderTime  = null;
+    const radioChanges  = [];
+
+    // initial UI state
+    if (dummySlider) {
+        dummySlider.style.visibility = 'hidden';
+        // mark as pristine so (optional) CSS can hide the thumb until first interaction
+        dummySlider.classList.add('pristine');
+    }
+    if (sliderValue) {
+        sliderValue.innerText = '';
+        sliderValue.style.visibility = 'hidden';
+    }
+
+    // hide empty server-side error
+    if (errorMessage && !errorMessage.textContent.trim()) {
+        errorMessage.classList.add('d-none');
+        console.log('ℹ️ No server-side error: alert hidden');
+    }
+
+    function hideError() {
+        if (errorMessage && !errorMessage.classList.contains('d-none')) {
+            errorMessage.classList.add('d-none');
+            console.log('🧹 Error alert hidden after interaction');
+        }
+    }
+
+    function revealSliderUI() {
+        if (dummySlider) {
+            dummySlider.style.visibility = 'visible';
+            dummySlider.classList.remove('pristine'); // show thumb after first real interaction
+        }
+        if (sliderValue) {
+            sliderValue.style.visibility = 'visible';
+        }
+        hasInteracted = true;
+        console.log('🟢 First time slider shown / interacted');
+    }
 
     function updateSliderFromEvent(e) {
         const rect = sliderWrapper.getBoundingClientRect();
         const clickPos = (e.clientX - rect.left) / rect.width * 100;
         const clampedPos = Math.max(0, Math.min(100, clickPos));
+        const value = Math.round(clampedPos);
 
-        dummySlider.value = Math.round(clampedPos);
-        realSlider.value = dummySlider.value;
-        sliderValue.innerText = dummySlider.value;
+        dummySlider.value = value;
+        realSlider.value = value;
+        sliderValue.innerText = value;
 
-        // Only after first user interaction, show the slider + value
-        if (!hasInteracted) {
-            dummySlider.style.visibility = 'visible';
-            sliderValue.style.visibility = 'visible';
-            hasInteracted = true;
+        if (!hasInteracted) revealSliderUI();
+
+        hideError();
+        clearSliderValidity();
+
+        const now = Math.round(performance.now() - t0);
+        if (firstSliderTime === null) {
+            firstSliderTime = now;
+            console.log(`🟢 First slider interaction at: ${firstSliderTime} ms (value=${value})`);
         }
-
-        if (errorMessage) {
-            errorMessage.style.display = 'none';
-        }
+        lastSliderTime = now;
+        console.log(`↔️ Slider moved at: ${lastSliderTime} ms (value=${value})`);
     }
 
-    sliderWrapper.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        updateSliderFromEvent(e);
-    });
+    // --- Native-like validation for the slider (key change) ---
+    function clearSliderValidity() {
+        if (dummySlider) dummySlider.setCustomValidity('');
+    }
 
-    window.addEventListener('mousemove', function(e) {
-        if (isDragging) {
+    function blockIfSliderMissing(e) {
+        const notChosenYet = !realSlider || realSlider.value === '' || isNaN(Number(realSlider.value));
+        if (notChosenYet) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Localized message (server-templated)
+            dummySlider.setCustomValidity(
+                "{{ if en }}Please choose a confidence value.{{ else }}Bitte wählen Sie einen Sicherheitswert.{{ endif }}"
+            );
+            // ❌ Do NOT reveal slider UI on failed submit (prevents the dot from appearing)
+            // revealSliderUI();
+
+            // Trigger the native popup exactly like radios do
+            dummySlider.reportValidity();
+
+            console.log('⛔ Submission blocked: slider value missing');
+            return true;
+        }
+        return false;
+    }
+    // ----------------------------------------------------------
+
+    // Pointer interactions on the custom slider area
+    if (sliderWrapper) {
+        sliderWrapper.addEventListener('mousedown', function(e) {
+            isDragging = true;
             updateSliderFromEvent(e);
-        }
+        });
+
+        window.addEventListener('mousemove', function(e) {
+            if (isDragging) updateSliderFromEvent(e);
+        });
+
+        window.addEventListener('mouseup', function() {
+            if (isDragging && lastSliderTime !== null) {
+                console.log(`🔴 Drag end at: ${lastSliderTime} ms (value=${dummySlider.value})`);
+            }
+            isDragging = false;
+        });
+    }
+
+    // Dummy slider input (keyboard or pointer)
+    if (dummySlider) {
+        dummySlider.addEventListener('input', function() {
+            realSlider.value = this.value;
+            sliderValue.innerText = this.value;
+
+            if (!hasInteracted) revealSliderUI();
+
+            hideError();
+            clearSliderValidity();
+
+            const now = Math.round(performance.now() - t0);
+            if (firstSliderTime === null) {
+                firstSliderTime = now;
+                console.log(`🟢 First slider interaction at: ${firstSliderTime} ms`);
+            }
+            lastSliderTime = now;
+            console.log(`↔️ Slider input at: ${lastSliderTime} ms (value=${this.value})`);
+        });
+
+        // Clear any custom validity on pointer down / change as well
+        dummySlider.addEventListener('mousedown', clearSliderValidity);
+        dummySlider.addEventListener('change', clearSliderValidity);
+    }
+
+    // radios
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            const time = Math.round(performance.now() - t0);
+            const value = radio.value;
+            radioChanges.push({ value, time });
+            console.log(`🎯 Radio changed to "${value}" at: ${time} ms`);
+        });
     });
 
-    window.addEventListener('mouseup', function() {
-        isDragging = false;
-    });
+    // Submit (use the form submit event so it also catches Enter key, etc.)
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            // Block submission if slider not chosen (native-style popup)
+            if (blockIfSliderMissing(e)) return;
 
-    dummySlider.addEventListener('input', function() {
-        realSlider.value = this.value;
-        sliderValue.innerText = this.value;
+            // persist the interaction log + page time
+            const now = Math.round(performance.now() - t0);
+            const log = {
+                slider_first: firstSliderTime,
+                slider_last: lastSliderTime,
+                radio_changes: radioChanges,
+                next_click: now
+            };
+            if (interactionInput) interactionInput.value = JSON.stringify(log);
+            if (perPageInput)     perPageInput.value     = Math.round(now / 1000);
 
-        if (!hasInteracted) {
-            dummySlider.style.visibility = 'visible';
-            sliderValue.style.visibility = 'visible';
-            hasInteracted = true;
-        }
+            console.log('✅ Form interaction log:', log);
+            console.log('⏱️ Page time (s):', perPageInput ? perPageInput.value : '(missing #per_page_time)');
+        }, { capture: true }); // run before default validation bubbles up
+    }
 
-        if (errorMessage) {
-            errorMessage.style.display = 'none';
-        }
-    });
+    // Optional: keep the button handler only for safety; it will early-return if blocked
+    if (submitButton) {
+        submitButton.addEventListener('click', (e) => {
+            if (blockIfSliderMissing(e)) return;
+            // No extra work; the form 'submit' handler does the logging
+        }, { capture: true });
+    }
 });
 </script>
-
 
 {{ endblock }}
 
@@ -184,22 +318,24 @@ window.addEventListener('DOMContentLoaded', function() {
             <input type="hidden" id="confidence_slider" name="confidence_level_sample1">
         </div>
         <div class="value-display">
-            {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
-            <div class="error-message">{{ formfield_errors 'confidence_level_sample1' }}</div>
+      {{ Lexicon.value_label_prefix }} <span id="sliderValue"></span> {{ Lexicon.value_label_suffix }}
+        <div id="confidence-error" class="alert alert-warning" role="alert">
+  {{ formfield_errors 'confidence_level_sample1' }}
+</div>
+    </div>
         </div>
-    </div>
     <div style="margin: 5px auto; padding: 5px; max-width: 800px; background-color: #eaf7ff; border: 1px solid #b3e0ff; border-radius: 5px; text-align: left;">
-        {% if en %}
-            <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer.
-        {% else %}
-            <strong>Erläuterung:</strong> Um die Skala zu aktivieren, klicken Sie bitte zunächst irgendwo auf die Skala. Dann können Sie die gewünschte Position auf der Skala anklicken oder den Schieberegler dorthin ziehen, um anzugeben, wie sicher Sie sich bezüglich der Richtigkeit Ihrer Antwort sind.
-        {% endif %}
-    </div>
-</div>
+            {{ if en }}
+                <strong>Explanation:</strong> First, to activate the slider, please click anywhere on the slider — then the thumb will appear. You can then drag or click the desired position to indicate how sure you are in your answer.
+            {{ else }}
+                <strong>Erläuterung:</strong> Um die Skala zu aktivieren, klicken Sie bitte zunächst irgendwo auf die Skala. Dann können Sie die gewünschte Position auf der Skala anklicken oder den Schieberegler dorthin ziehen, um anzugeben, wie sicher Sie sich bezüglich der Richtigkeit Ihrer Antwort sind.
+            {{ endif }}
+        </div>
 
-<div class="btn-container">
+
+  <div class="btn-container">
     {{ next_button }}
-</div>
-
+  </div>
 
 {{ endblock }}
+
