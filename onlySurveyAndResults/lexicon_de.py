@@ -78,7 +78,7 @@ class Lexicon:
     education_phd = "Promotion / Doktortitel"
     education_other = "Anderer Abschluss (bitte angeben)"
 
-    education_currently_a_student_label = "Sind Sie derzeit Schüler:in oder Student:in?"
+    education_currently_a_student_label = "Studieren Sie zurzeit oder befinden Sie sich in einer Ausbildung?"
     # Yes/No
     yes = "Ja"
     no = "Nein"

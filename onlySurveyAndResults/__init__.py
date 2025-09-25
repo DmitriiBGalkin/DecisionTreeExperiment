@@ -189,7 +189,7 @@ class SpeederRedirect(Page):
         return player.participant.speeder
     def js_vars(player):
         bilendi_id = player.participant.label
-        redirect_url = f"https://survey.maximiles.com/speeder?p=98327&m={bilendi_id}"
+        redirect_url = f"https://survey.maximiles.com/speeder?p=154054&m={bilendi_id}"
         return dict(redirect_url=redirect_url)
 
 
@@ -215,7 +215,7 @@ class FinalRedirect(Page):
         return True
     def js_vars(player):
         bilendi_id = player.participant.label
-        redirect_url = f"https://survey.maximiles.com/complete?p=148124_4f493a3f&m={bilendi_id}"
+        redirect_url = f"https://survey.maximiles.com/complete?p=154054_7a8d1401&m={bilendi_id}"
         return dict(redirect_url=redirect_url)
 
 page_sequence = [Survey_Demographics, SpeederRedirect, Results,  FinalRedirect]
