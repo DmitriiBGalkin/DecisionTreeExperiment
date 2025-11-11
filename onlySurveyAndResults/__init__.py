@@ -93,16 +93,11 @@ class Player(BasePlayer):
         label="Falls Sie 'Anderer Abschluss' gewählt haben, bitte angeben:",
         blank=True,  # This allows the field to remain empty
     )
-    education_currently_a_student_label = models.BooleanField(
-        choices=[
-            (1, Lexicon.yes),
-            (2, Lexicon.no),
-        ],
-        label=Lexicon.education_currently_a_student_label)
+
     serious_participation = models.BooleanField(
         choices=[
-            (1, Lexicon.participation_serious),
-            (2, Lexicon.participation_not_serious),
+            (True, Lexicon.participation_serious),
+            (False, Lexicon.participation_not_serious),
         ],
         label=Lexicon.participation_label
     )
@@ -165,7 +160,7 @@ class Survey_Demographics(Page):
             Lexicon=Lexicon,
             **which_language)
     form_model = 'player'
-    form_fields = ['trust_decision_trees','gender', 'education_level','education_currently_a_student_label', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
+    form_fields = ['trust_decision_trees','gender', 'education_level', 'education_level_other','field_of_study', 'field_of_study_other','income_band', 'subjective_social_status', 'bundesland', 'serious_participation',
                    'feedback']
     @staticmethod
     def before_next_page(player: Player, timeout_happened):

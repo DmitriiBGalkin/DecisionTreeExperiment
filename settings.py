@@ -16,7 +16,7 @@ SESSION_CONFIGS = [
         random_order_block=False,
         student_debug=False,
         min_total_time_sec=105
-    ),
+    )
 ]
 ROOMS = [
     dict(

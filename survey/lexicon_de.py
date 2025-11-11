@@ -152,3 +152,8 @@ class Lexicon:
     no_education = "Ohne beruflichen Bildungsabschluss"
     vocational_education = "Lehre/Berufsausbildung im dualen System"
     higher_education = "Universitäts- oder Hochschulbildung"
+
+    education_currently_a_student_label = "Studieren Sie zurzeit oder befinden Sie sich in einer Ausbildung?"
+    # Yes/No
+    yes = "Ja"
+    no = "Nein"

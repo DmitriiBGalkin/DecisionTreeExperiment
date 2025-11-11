@@ -69,6 +69,15 @@ class Player(BasePlayer):
         min=1,
         max=100
     )
+    education_currently_a_student_label = models.BooleanField(
+        choices=[
+            (True, Lexicon.yes),
+            (False, Lexicon.no),
+        ],
+        label=Lexicon.education_currently_a_student_label,
+        widget=widgets.RadioSelectHorizontal
+    )
+
     education_level_prescreener = models.IntegerField(
         choices=[
             (1, Lexicon.no_education),
@@ -235,7 +244,7 @@ def vars_for_admin_report(subsession):
 
 class Prescreener(Page):
     form_model = 'player'
-    form_fields = ['age','education_level_prescreener']
+    form_fields = ['age','education_level_prescreener','education_currently_a_student_label']
 
     @staticmethod
     def is_displayed(player):

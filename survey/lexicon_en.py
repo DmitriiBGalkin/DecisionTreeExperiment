@@ -143,3 +143,8 @@ class Lexicon:
     no_education = "No formal education"
     vocational_education = "Vocational or technical education"
     higher_education = "University or higher education"
+
+    education_currently_a_student_label = "Are you currently a pupil or a student?"
+    # Yes/No
+    yes = "Yes"
+    no = "No"
