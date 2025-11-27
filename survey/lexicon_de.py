@@ -157,3 +157,17 @@ class Lexicon:
     # Yes/No
     yes = "Ja"
     no = "Nein"
+
+    # --- NEW: F2+F3 prescreener items ---
+
+    # F2 – University enrollment
+    is_enrolled_university_label = "Sind Sie derzeit an einer Hochschule eingeschrieben?"
+    is_enrolled_university_bachelor = "Ja, im Bachelorstudium"
+    is_enrolled_university_master = "Ja, im Masterstudium"
+    is_enrolled_university_other = "Ja, in einem anderen Studiengang (z.B. Diplom, Staatsexamen, Promotion)"
+    is_enrolled_university_no = "Nein"
+
+    # F3 – Vocational training
+    is_in_vocational_training_label = "Befinden Sie sich derzeit in einer beruflichen Ausbildung (z.B. Ausbildung im Betrieb, Berufsschule)?"
+    is_in_vocational_training_yes = "Ja"
+    is_in_vocational_training_no = "Nein"

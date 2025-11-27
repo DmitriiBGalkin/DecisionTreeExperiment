@@ -45,7 +45,7 @@ class C(BaseConstants):
     payment_for_correct_answer = 0.30
     total_possible = payment_for_correct_answer*(NUM_ROUNDS)
     #tree_order=list(range(1, 22))
-    group_distribution = [0.166, 0.166, 0.166, 0.166, 0.166, 0.166] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
+    group_distribution = [0.33, 0.166, 0.166, 0.166, 0.166] #Change this to affect how the sample is collected: 0: no education <44, 1: some education... 5th - high age high education
 class Subsession(BaseSubsession):
     pass
 
@@ -77,7 +77,39 @@ class Player(BasePlayer):
         label=Lexicon.education_currently_a_student_label,
         widget=widgets.RadioSelectHorizontal
     )
+    is_enrolled_university = models.IntegerField(
+        label=Lexicon.is_enrolled_university_label,
+        choices=[
+            (1, Lexicon.is_enrolled_university_bachelor),
+            (2, Lexicon.is_enrolled_university_master),
+            (3, Lexicon.is_enrolled_university_other),
+            (4, Lexicon.is_enrolled_university_no),
+        ],
+    )
 
+    # F3 – Currently in vocational training
+    is_in_vocational_training = models.BooleanField(
+        label=Lexicon.is_in_vocational_training_label,
+        choices=[
+            (True, Lexicon.is_in_vocational_training_yes),
+            (False, Lexicon.is_in_vocational_training_no),
+        ],
+        widget=widgets.RadioSelectHorizontal
+    )
+    education_level = models.IntegerField(
+        choices=[
+            (1, Lexicon.education_schueler),
+            (2, Lexicon.education_hauptschule),
+            (3, Lexicon.education_mittlere_reife),
+            (4, Lexicon.education_lehre),
+            (5, Lexicon.education_fachabitur),
+            (6, Lexicon.education_abitur),
+            (7, Lexicon.education_bachelor),
+            (8, Lexicon.education_master),
+            (9, Lexicon.education_phd)
+        ],
+        label=Lexicon.education_label
+    )
     education_level_prescreener = models.IntegerField(
         choices=[
             (1, Lexicon.no_education),
@@ -142,6 +174,8 @@ class Player(BasePlayer):
     #Creating time-stamps for each page:
     interaction_times = models.LongStringField(blank=True)
     per_page_time=models.IntegerField(blank=True)
+    #Defining order
+    first_answer_accepted = models.BooleanField(blank=True)
 
 def confidence_level_error_message(player, value):
     if value is None:
@@ -194,18 +228,54 @@ def creating_session(subsession: Subsession):
             participant.treeOrder = full_order
             participant.prescreener_group=0
             #print(f'Random Order: {use_random_block} | EasyFirst: {participant.vars["easyFirst"]} | Tree Order: {full_order}')
+            player.first_answer_accepted = random.choice([True, False])
+            #print("accepted?",player.first_answer_accepted)
+def question_loan_choices(player: Player):
+    base = [
+        (True, Lexicon.approved),
+        (False, Lexicon.denied),
+    ]
+    # If first_answer_accepted is True → [Approved, Denied]
+    # If False → [Denied, Approved]
+    if player.first_answer_accepted:
+        return base
+    else:
+        return list(reversed(base))
+
+
+def question_loan_sample1_choices(player: Player):
+    # same logic as question_loan
+    base = [
+        (True, Lexicon.approved),
+        (False, Lexicon.denied),
+    ]
+    if player.first_answer_accepted:
+        return base
+    else:
+        return list(reversed(base))
+
+
+def question_loan_sample2_choices(player: Player):
+    # same logic as question_loan
+    base = [
+        (True, Lexicon.approved),
+        (False, Lexicon.denied),
+    ]
+    if player.first_answer_accepted:
+        return base
+    else:
+        return list(reversed(base))
 
 
 def vars_for_admin_report(subsession):
     groups = subsession.session.prescreener_groups_dict or {}
 
     group_labels = {
-        0: "Low education, age < 45",
-        1: "Mid education, age < 45",
-        2: "High education, age < 45",
-        3: "Low education, age ≥ 45",
-        4: "Mid education, age ≥ 45",
-        5: "High education, age ≥ 45",
+        0: "Low education (all ages)",
+        1: "Vocational education, age < 45",
+        2: "Vocational education, age ≥ 45",
+        3: "Higher education, age < 45",
+        4: "Higher education, age ≥ 45",
     }
 
     display_data = []
@@ -244,8 +314,14 @@ def vars_for_admin_report(subsession):
 
 class Prescreener(Page):
     form_model = 'player'
-    form_fields = ['age','education_level_prescreener','education_currently_a_student_label']
-
+    form_fields = [
+        'age',
+        'education_level',
+        'is_enrolled_university',
+        'is_in_vocational_training',
+        # keep or drop the old combined question as you like:
+        # 'education_currently_a_student_label',
+    ]
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -257,8 +333,36 @@ class Prescreener(Page):
             **which_language)
     @staticmethod
     def before_next_page(player, timeout_happened):
-        age_group = 0 if player.age < 45 else 1
-        player.participant.prescreener_group = age_group * 3 + (player.education_level_prescreener - 1)
+        edu = player.education_level
+        age = player.age
+        # fine-grained answer 1..9
+        # 3-category mapping:
+        # 1 = No vocational / higher education
+        # 2 = Vocational education
+        # 3 = Higher education
+        if edu in [4]:
+            edu_3cat = 2  # vocational training
+        elif edu in [7, 8, 9]:
+            edu_3cat = 3  # higher education degree
+        else:
+            edu_3cat = 1  # everything else → low education
+        if player.is_enrolled_university in [1, 2, 3]:
+            # currently enrolled at a university => higher education
+            edu_3cat = 3
+            # F3: is_in_vocational_training (1 = yes, 2 = no)
+        elif player.is_in_vocational_training == True:
+            # currently in vocational training => vocational group
+            edu_3cat = 2
+        # store in your original field
+        if edu_3cat == 1:
+            group_id = 0
+            # VOCATIONAL (2) → split by age
+        elif edu_3cat == 2:
+            group_id = 1 if age < 45 else 2
+            # HIGH (3) → split by age
+        else:  # edu_3cat == 3
+            group_id = 3 if age < 45 else 4
+        player.participant.prescreener_group = group_id
 
 
 class ScreenOutPage(Page):
