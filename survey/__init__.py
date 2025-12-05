@@ -395,9 +395,9 @@ class ScreenOutPage(Page):
     def js_vars(player):
         bilendi_id = player.participant.label
         if player.age < 18:
-            redirect_url = f"https://survey.maximiles.com/screenout?p=154054_5cb4a0e8&m={bilendi_id}"
+            redirect_url = f"https://survey.maximiles.com/screenout?p=158041_d00a360c&m={bilendi_id}"
         else:
-            redirect_url = f"https://survey.maximiles.com/quotasfull?p=154054_9791854e&m={bilendi_id}"
+            redirect_url = f"https://survey.maximiles.com/quotasfull?p=158041_c61fed2d&m={bilendi_id}"
             # print(redirect_url)
         return dict(redirect_url=redirect_url)
 
