@@ -342,7 +342,7 @@ class Prescreener(Page):
         # 3 = Higher education
         if edu in [4]:
             edu_3cat = 2  # vocational training
-        elif edu in [7, 8, 9]:
+        elif edu in [5, 6, 7, 8, 9]:
             edu_3cat = 3  # higher education degree
         else:
             edu_3cat = 1  # everything else → low education
