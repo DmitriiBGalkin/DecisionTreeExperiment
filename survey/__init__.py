@@ -271,7 +271,7 @@ def vars_for_admin_report(subsession):
     groups = subsession.session.prescreener_groups_dict or {}
 
     group_labels = {
-        0: "Low education (all ages)",
+        0: "Low education, all ages",
         1: "Vocational education, age < 45",
         2: "Vocational education, age ≥ 45",
         3: "Higher education, age < 45",
