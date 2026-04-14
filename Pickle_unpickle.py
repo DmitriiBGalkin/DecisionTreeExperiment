@@ -3,7 +3,7 @@ import pickle
 import pprint
 
 # 1. PASTE YOUR BASE64 _vars STRING HERE
-encoded = "gASVqQAAAAAAAAB9lCiMD3NwZWVkZXJfY291bnRlcpRLAYwTcGFydGljaXBhbnRzX25lZWRlZJRLEIwXcHJlc2NyZWVuZXJfZ3JvdXBzX2RpY3SUfZQoSwB9lCiMB2N1cnJlbnSUSwCMC21heF9hbGxvd2VklEsFdUsBfZQoaAZLAWgHSwN1SwJ9lChoBksAaAdLA3VLA32UKGgGSwJoB0sDdUsEfZQoaAZLAGgHSwN1dXUu"
+encoded = "gASVqwAAAAAAAAB9lCiMD3NwZWVkZXJfY291bnRlcpRLJowTcGFydGljaXBhbnRzX25lZWRlZJRN3AWMF3ByZXNjcmVlbmVyX2dyb3Vwc19kaWN0lH2UKEsAfZQojAdjdXJyZW50lEtLjAttYXhfYWxsb3dlZJRN7wF1SwF9lChoBksmaAdL+XVLAn2UKGgGS4hoB0v5dUsDfZQoaAZLcmgHS/l1SwR9lChoBkuyaAdL+XV1dS4="
 
 # 2. DECODE + UNPICKLE
 binary_data = base64.b64decode(encoded)
@@ -19,11 +19,11 @@ pprint.pprint(vars_dict)
 # Examples – CHANGE OR DELETE ACCORDING TO WHAT YOU NEED:
 # vars_dict["participants_needed"] = 10
 # vars_dict["speeder_counter"] = 0
-vars_dict["prescreener_groups_dict"][0]["current"] = 0
-vars_dict["prescreener_groups_dict"][1]["current"] = 4
-vars_dict["prescreener_groups_dict"][2]["current"] = 0
-vars_dict["prescreener_groups_dict"][3]["current"] = 4
-vars_dict["prescreener_groups_dict"][4]["current"] = 0
+vars_dict["prescreener_groups_dict"][0]["current"] = 75
+vars_dict["prescreener_groups_dict"][1]["current"] = 38
+vars_dict["prescreener_groups_dict"][2]["current"] = 136
+vars_dict["prescreener_groups_dict"][3]["current"] = 113
+vars_dict["prescreener_groups_dict"][4]["current"] = 178
 
 # 4. RE-PICKLE + BASE64-ENCODE
 new_binary = pickle.dumps(vars_dict, protocol=pickle.HIGHEST_PROTOCOL)

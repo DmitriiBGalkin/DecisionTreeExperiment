@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tree 6</title>
+<style>
+:root {
+  --tree-root-fill: #fff4cc;
+  --tree-assets-fill: #fff4cc;
+  --tree-denied-fill: #D3D3D3;
+  --tree-approved-fill: #D3D3D3;
+  --tree-stroke: #000;
+  --tree-stroke-w: 2;
+  --tree-text: #000;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  font-family: Arial, sans-serif;
+  color: #111827;
+}
+
+.page {
+  padding: 24px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0 0 16px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: white;
+}
+
+@page {
+  margin: 12mm;
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Tree 6</h1>
+    <div class="grid">
+      <section class="card">
+        <h2>A</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="-100 0 1100 450" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Kreditbetrag -->
+<ellipse cx="500" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="500" y="60">Loan Amount</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="500" x2="300" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="500" x2="700" y1="90" y2="150"></line>
+<text class="branch-text-left" x="420" y="105">Below 25.000</text>
+<text class="branch-text-right" x="580" y="105">25.000 and more</text>
+<!-- Right Leaf: Denied -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="620" y="125"></rect>
+<text class="node-text" x="670" y="150">Denied</text>
+<!-- Level 2: Einkommen -->
+<ellipse cx="300" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="300" y="150">Income</text>
+<!-- Level 2 Branches -->
+<line stroke="black" stroke-width="2" x1="300" x2="200" y1="180" y2="250"></line>
+<line stroke="black" stroke-width="2" x1="300" x2="400" y1="180" y2="250"></line>
+<text class="branch-text-left" x="240" y="215">40.000 and more </text>
+<text class="branch-text-right" x="360" y="215">Below 40.000</text>
+<!-- Left Leaf: Approved -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="150" y="250"></rect>
+<text class="node-text" x="200" y="275">Approved</text>
+<!-- Level 3: Kreditwürdigkeit -->
+<ellipse cx="400" cy="275" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="400" y="275">Credit History</text>
+<!-- Level 3 Branches -->
+<line stroke="black" stroke-width="2" x1="400" x2="325" y1="305" y2="375"></line>
+<line stroke="black" stroke-width="2" x1="400" x2="475" y1="305" y2="375"></line>
+<text class="branch-text-left" x="350" y="335">Good or Excellent</text>
+<text class="branch-text-right" x="450" y="335">Bad</text>
+<!-- Leaves -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="275" y="375"></rect>
+<text class="node-text" x="325" y="400">Approved</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="450" y="375"></rect>
+<text class="node-text" x="500" y="400">Denied</text>
+</svg>
+</body>
+</html>
+      </section>
+      <section class="card">
+        <h2>R</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="-100 0 1100 450" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Kreditbetrag -->
+<ellipse cx="500" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="500" y="60">Loan Amount</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="500" x2="300" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="500" x2="700" y1="90" y2="150"></line>
+<text class="branch-text-left" x="420" y="105">Below 25.000</text>
+<text class="branch-text-right" x="580" y="105">25.000 and more</text>
+<!-- Right Leaf: Denied -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="620" y="125"></rect>
+<text class="node-text" x="670" y="150">Denied</text>
+<!-- Level 2: Einkommen -->
+<ellipse cx="300" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="300" y="150">Income</text>
+<!-- Level 2 Branches -->
+<line stroke="black" stroke-width="2" x1="300" x2="200" y1="180" y2="250"></line>
+<line stroke="black" stroke-width="2" x1="300" x2="400" y1="180" y2="250"></line>
+<text class="branch-text-left" x="240" y="215">Below 50.000 </text>
+<text class="branch-text-right" x="360" y="215">50.000 and more</text>
+<!-- Left Leaf: Approved -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="150" y="250"></rect>
+<text class="node-text" x="200" y="275">Denied</text>
+<!-- Level 3: Kreditwürdigkeit -->
+<ellipse cx="400" cy="275" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="400" y="275">Credit History</text>
+<!-- Level 3 Branches -->
+<line stroke="black" stroke-width="2" x1="400" x2="325" y1="305" y2="375"></line>
+<line stroke="black" stroke-width="2" x1="400" x2="475" y1="305" y2="375"></line>
+<text class="branch-text-left" x="350" y="335">Excellent</text>
+<text class="branch-text-right" x="450" y="335">Good or Bad</text>
+<!-- Leaves -->
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="275" y="375"></rect>
+<text class="node-text" x="325" y="400">Approved</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="450" y="375"></rect>
+<text class="node-text" x="500" y="400">Denied</text>
+</svg>
+</body>
+</html>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

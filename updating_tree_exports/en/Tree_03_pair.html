@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tree 3</title>
+<style>
+:root {
+  --tree-root-fill: #fff4cc;
+  --tree-assets-fill: #fff4cc;
+  --tree-denied-fill: #D3D3D3;
+  --tree-approved-fill: #D3D3D3;
+  --tree-stroke: #000;
+  --tree-stroke-w: 2;
+  --tree-text: #000;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  font-family: Arial, sans-serif;
+  color: #111827;
+}
+
+.page {
+  padding: 24px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0 0 16px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: white;
+}
+
+@page {
+  margin: 12mm;
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Tree 3</h1>
+    <div class="grid">
+      <section class="card">
+        <h2>A</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="-100 0 1100 350" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.1em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Root Node -->
+<ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="450" y="60">Employment</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="450" x2="250" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="450" x2="650" y1="90" y2="150"></line>
+<text class="branch-text-left" x="360" y="105">Unemployed</text>
+<text class="branch-text-right" x="540" y="105">Employed</text>
+<!-- Level 2 Nodes -->
+<ellipse cx="250" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="250" y="150">Loan Amount</text>
+<ellipse cx="650" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="650" y="150">Loan Amount</text>
+<!-- Level 2 Branches -->
+<!-- Left side (Unemployed) -->
+<line stroke="black" stroke-width="2" x1="250" x2="150" y1="180" y2="250"></line>
+<text class="branch-text-left" x="190" y="215">Below 3.000</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="100" y="250"></rect>
+<text class="node-text" x="150" y="275">Approved</text>
+<line stroke="black" stroke-width="2" x1="250" x2="350" y1="180" y2="250"></line>
+<text class="branch-text-right" x="310" y="215">3.000 and more</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="300" y="250"></rect>
+<text class="node-text" x="350" y="275">Denied</text>
+<!-- Right side (Stable) -->
+<line stroke="black" stroke-width="2" x1="650" x2="550" y1="180" y2="250"></line>
+<text class="branch-text-left" x="590" y="215">Below 25.000</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="500" y="250"></rect>
+<text class="node-text" x="550" y="275">Approved</text>
+<line stroke="black" stroke-width="2" x1="650" x2="750" y1="180" y2="250"></line>
+<text class="branch-text-right" x="710" y="215">25.000 and more</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="700" y="250"></rect>
+<text class="node-text" x="750" y="275">Denied</text>
+</svg>
+</body>
+</html>
+      </section>
+      <section class="card">
+        <h2>R</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset='utf-8'></head>
+<body>
+<svg preserveaspectratio="xMinYMid  meet" style="background-color: white;" viewbox="-100 0 1100 350" xmlns="http://www.w3.org/2000/svg">
+<style>
+    .node-text { font-size: 1.1em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+<!-- Level 1: Root Node -->
+<ellipse cx="450" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);"></ellipse>
+<text class="node-text" x="450" y="60">Employment</text>
+<!-- Level 1 Branches -->
+<line stroke="black" stroke-width="2" x1="450" x2="250" y1="90" y2="150"></line>
+<line stroke="black" stroke-width="2" x1="450" x2="650" y1="90" y2="150"></line>
+<text class="branch-text-left" x="360" y="105">Unemployed</text>
+<text class="branch-text-right" x="540" y="105">Employed</text>
+<!-- Level 2 Nodes -->
+<ellipse cx="250" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="250" y="150">Loan Amount</text>
+<ellipse cx="650" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);"></ellipse>
+<text class="node-text" x="650" y="150">Loan Amount</text>
+<!-- Level 2 Branches -->
+<!-- Left side (Unemployed) -->
+<line stroke="black" stroke-width="2" x1="250" x2="150" y1="180" y2="250"></line>
+<text class="branch-text-left" x="190" y="215">Below 3.000</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="100" y="250"></rect>
+<text class="node-text" x="150" y="275">Approved</text>
+<line stroke="black" stroke-width="2" x1="250" x2="350" y1="180" y2="250"></line>
+<text class="branch-text-right" x="310" y="215">3.000 and more</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="300" y="250"></rect>
+<text class="node-text" x="350" y="275">Denied</text>
+<!-- Right side (Stable) -->
+<line stroke="black" stroke-width="2" x1="650" x2="550" y1="180" y2="250"></line>
+<text class="branch-text-left" x="590" y="215">Below 15.000</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" width="100" x="500" y="250"></rect>
+<text class="node-text" x="550" y="275">Approved</text>
+<line stroke="black" stroke-width="2" x1="650" x2="750" y1="180" y2="250"></line>
+<text class="branch-text-right" x="710" y="215">15.000 and more</text>
+<rect height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" width="100" x="700" y="250"></rect>
+<text class="node-text" x="750" y="275">Denied</text>
+</svg>
+</body>
+</html>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

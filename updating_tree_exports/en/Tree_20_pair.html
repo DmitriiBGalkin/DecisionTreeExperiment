@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tree 20</title>
+<style>
+:root {
+  --tree-root-fill: #fff4cc;
+  --tree-assets-fill: #fff4cc;
+  --tree-denied-fill: #D3D3D3;
+  --tree-approved-fill: #D3D3D3;
+  --tree-stroke: #000;
+  --tree-stroke-w: 2;
+  --tree-text: #000;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+  font-family: Arial, sans-serif;
+  color: #111827;
+}
+
+.page {
+  padding: 24px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0 0 16px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: white;
+}
+
+@page {
+  margin: 12mm;
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Tree 20</h1>
+    <div class="grid">
+      <section class="card">
+        <h2>A</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMinYMid meet" style="background-color: white;" viewbox="200 0 1620 650">
+  <style>
+    .node-text { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+
+
+  <ellipse cx="960" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);" />
+  <text x="960" y="60" class="node-text">Loan Amount</text>
+
+
+  <line x1="960" y1="90" x2="530" y2="150" stroke="black" stroke-width="2" />
+  <line x1="960" y1="90" x2="1390" y2="150" stroke="black" stroke-width="2" />
+  <text x="800" y="100" class="branch-text-left">Below 15.000</text>
+  <text x="1120" y="100" class="branch-text-right">15.000 and more</text>
+
+
+  <ellipse cx="530" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="530" y="150" class="node-text">Credit History</text>
+
+
+  <ellipse cx="1390" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1390" y="150" class="node-text">Income</text>
+
+
+  <line x1="530" y1="180" x2="400" y2="250" stroke="black" stroke-width="2" />
+  <line x1="530" y1="180" x2="810" y2="250" stroke="black" stroke-width="2" />
+  <text x="460" y="200" class="branch-text-left">Bad</text>
+  <text x="640" y="200" class="branch-text-right">Good or Excellent</text>
+
+
+  <line x1="1390" y1="180" x2="1230" y2="250" stroke="black" stroke-width="2" />
+  <line x1="1390" y1="180" x2="1570" y2="250" stroke="black" stroke-width="2" />
+  <text x="1325" y="200" class="branch-text-left">Below 50.000</text>
+  <text x="1505" y="200" class="branch-text-right">50.000 and more</text>
+
+
+  <ellipse cx="400" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="400" y="250" class="node-text">Assets</text>
+
+
+  <ellipse cx="810" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="810" y="250" class="node-text">Employment</text>
+
+
+  <ellipse cx="1210" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1210" y="250" class="node-text">Assets</text>
+  <line x1="1210" y1="280" x2="1100" y2="350" stroke="black" stroke-width="2" />
+  <line x1="1210" y1="280" x2="1240" y2="350" stroke="black" stroke-width="2" />
+  <text x="1150" y="310" class="branch-text-left">Below 15.000</text>
+  <text x="1240" y="310" class="branch-text-right">15.000 and more</text>
+
+  <rect x="1050" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1100" y="360" class="node-text">Denied</text>
+
+
+  <ellipse cx="1260" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1260" y="360" class="node-text">Loan Amount</text>
+    <line x1="1260" y1="390" x2="1210" y2="445" stroke="black" stroke-width="2" />
+  <line x1="1260" y1="390" x2="1310" y2="445" stroke="black" stroke-width="2" />
+
+  <text x="1220" y="420" class="branch-text-left">21.000 and more</text>
+  <text x="1300" y="420" class="branch-text-right">Below 21.000</text>
+
+
+  <rect x="1160" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1210" y="470" class="node-text">Denied</text>
+  <rect x="1270" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1320" y="470" class="node-text">Approved</text>
+
+
+
+
+  <ellipse cx="1570" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1570" y="250" class="node-text">Credit History</text>
+
+
+
+  <line x1="400" y1="280" x2="300" y2="360" stroke="black" stroke-width="2" />
+  <line x1="400" y1="280" x2="500" y2="360" stroke="black" stroke-width="2" />
+  <text x="340" y="310" class="branch-text-left">Below 6.000</text>
+  <text x="450" y="310" class="branch-text-right">6.000 and more</text>
+
+
+  <line x1="810" y1="280" x2="730" y2="360" stroke="black" stroke-width="2" />
+  <line x1="810" y1="280" x2="890" y2="360" stroke="black" stroke-width="2" />
+  <text x="770" y="310" class="branch-text-left">Unemployed</text>
+  <text x="850" y="310" class="branch-text-right">Employed</text>
+
+
+  <line x1="1570" y1="280" x2="1470" y2="360" stroke="black" stroke-width="2" />
+  <line x1="1570" y1="280" x2="1670" y2="360" stroke="black" stroke-width="2" />
+  <text x="1520" y="310" class="branch-text-left">Bad</text>
+  <text x="1620" y="310" class="branch-text-right">Good or Excellent</text>
+
+
+
+  <rect x="250" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="300" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="500" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="500" y="360" class="node-text">Loan Amount</text>
+
+
+  <rect x="680" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="730" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="890" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="890" y="360" class="node-text">Credit History</text>
+
+
+  <rect x="1420" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1470" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="1670" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1670" y="360" class="node-text">Loan Amount</text>
+
+
+
+  <line x1="500" y1="390" x2="460" y2="470" stroke="black" stroke-width="2" />
+  <line x1="500" y1="390" x2="540" y2="470" stroke="black" stroke-width="2" />
+  <text x="470" y="420" class="branch-text-left">5.000 and more </text>
+  <text x="530" y="420" class="branch-text-right">Below 5.000</text>
+
+
+  <line x1="890" y1="390" x2="800" y2="470" stroke="black" stroke-width="2" />
+  <line x1="890" y1="390" x2="980" y2="470" stroke="black" stroke-width="2" />
+  <text x="840" y="420" class="branch-text-left">Good</text>
+  <text x="940" y="420" class="branch-text-right">Excellent</text>
+
+
+  <line x1="1670" y1="390" x2="1610" y2="470" stroke="black" stroke-width="2" />
+  <line x1="1670" y1="390" x2="1730" y2="470" stroke="black" stroke-width="2" />
+  <text x="1640" y="420" class="branch-text-left">30.000 and more </text>
+  <text x="1700" y="420" class="branch-text-right">Below 30.000</text>
+
+
+
+  <rect x="390" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="440" y="470" class="node-text">Denied</text>
+  <rect x="500" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="550" y="470" class="node-text">Approved</text>
+
+  <rect x="940" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="990" y="470" class="node-text">Approved</text>
+
+  <ellipse cx="820" cy="470" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="820" y="470" class="node-text">Loan Amount</text>
+
+  <line x1="820" y1="500" x2="750" y2="570" stroke="black" stroke-width="2" />
+  <line x1="820" y1="500" x2="890" y2="570" stroke="black" stroke-width="2" />
+  <text x="770" y="535" class="branch-text-left">Below 10.000 </text>
+  <text x="870" y="535" class="branch-text-right">10.000 and more </text>
+  <rect x="700" y="570" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="750" y="595" class="node-text">Approved</text>
+  <rect x="860" y="570" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="910" y="595" class="node-text">Denied</text>
+
+
+  <rect x="1560" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1610" y="470" class="node-text">Denied</text>
+  <rect x="1690" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1740" y="470" class="node-text">Approved</text>
+</svg>
+</body>
+</html>
+      </section>
+      <section class="card">
+        <h2>R</h2>
+        <!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" preserveaspectratio="xMinYMid meet" style="background-color: white;" viewbox="200 0 1620 650">
+  <style>
+    .node-text { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: middle; dominant-baseline: middle; }
+    .branch-text-left { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: end; dominant-baseline: middle; }
+    .branch-text-right { font-size: 1.2em; font-family: Arial; fill: black; text-anchor: start; dominant-baseline: middle; }
+  </style>
+
+  
+  <ellipse cx="960" cy="60" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-root-fill, #ffffff);" />
+  <text x="960" y="60" class="node-text">Loan Amount</text>
+
+  
+  <line x1="960" y1="90" x2="530" y2="150" stroke="black" stroke-width="2" />
+  <line x1="960" y1="90" x2="1390" y2="150" stroke="black" stroke-width="2" />
+  <text x="800" y="100" class="branch-text-left">Below 15.000</text>
+  <text x="1120" y="100" class="branch-text-right">15.000 and more</text>
+
+
+  <ellipse cx="530" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="530" y="150" class="node-text">Credit History</text>
+
+
+  <ellipse cx="1390" cy="150" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1390" y="150" class="node-text">Income</text>
+
+
+  <line x1="530" y1="180" x2="400" y2="250" stroke="black" stroke-width="2" />
+  <line x1="530" y1="180" x2="810" y2="250" stroke="black" stroke-width="2" />
+  <text x="460" y="200" class="branch-text-left">Bad</text>
+  <text x="640" y="200" class="branch-text-right">Good or Excellent</text>
+
+
+  <line x1="1390" y1="180" x2="1230" y2="250" stroke="black" stroke-width="2" />
+  <line x1="1390" y1="180" x2="1570" y2="250" stroke="black" stroke-width="2" />
+  <text x="1325" y="200" class="branch-text-left">Below 50.000</text>
+  <text x="1505" y="200" class="branch-text-right">50.000 and more</text>
+
+
+  <ellipse cx="400" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="400" y="250" class="node-text">Assets</text>
+
+
+  <ellipse cx="810" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="810" y="250" class="node-text">Employment</text>
+
+
+  <ellipse cx="1210" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1210" y="250" class="node-text">Assets</text>
+  <line x1="1210" y1="280" x2="1100" y2="350" stroke="black" stroke-width="2" />
+  <line x1="1210" y1="280" x2="1240" y2="350" stroke="black" stroke-width="2" />
+  <text x="1150" y="310" class="branch-text-left">Below 15.000</text>
+  <text x="1240" y="310" class="branch-text-right">15.000 and more</text>
+
+  <rect x="1050" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1100" y="360" class="node-text">Denied</text>
+
+
+  <ellipse cx="1260" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1260" y="360" class="node-text">Loan Amount</text>
+    <line x1="1260" y1="390" x2="1210" y2="445" stroke="black" stroke-width="2" />
+  <line x1="1260" y1="390" x2="1310" y2="445" stroke="black" stroke-width="2" />
+
+  <text x="1220" y="420" class="branch-text-left">18.000 and more</text>
+  <text x="1300" y="420" class="branch-text-right">Below 18.000</text>
+
+
+  <rect x="1160" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1210" y="470" class="node-text">Denied</text>
+  <rect x="1270" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1320" y="470" class="node-text">Approved</text>
+
+
+
+
+  <ellipse cx="1570" cy="250" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1570" y="250" class="node-text">Credit History</text>
+
+
+
+  <line x1="400" y1="280" x2="300" y2="360" stroke="black" stroke-width="2" />
+  <line x1="400" y1="280" x2="500" y2="360" stroke="black" stroke-width="2" />
+  <text x="340" y="310" class="branch-text-left">Below 6.000</text>
+  <text x="450" y="310" class="branch-text-right">6.000 and more</text>
+
+
+  <line x1="810" y1="280" x2="730" y2="360" stroke="black" stroke-width="2" />
+  <line x1="810" y1="280" x2="890" y2="360" stroke="black" stroke-width="2" />
+  <text x="770" y="310" class="branch-text-left">Unemployed</text>
+  <text x="850" y="310" class="branch-text-right">Employed</text>
+
+
+  <line x1="1570" y1="280" x2="1470" y2="360" stroke="black" stroke-width="2" />
+  <line x1="1570" y1="280" x2="1670" y2="360" stroke="black" stroke-width="2" />
+  <text x="1520" y="310" class="branch-text-left">Bad</text>
+  <text x="1620" y="310" class="branch-text-right">Good or Excellent</text>
+
+
+
+  <rect x="250" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="300" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="500" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="500" y="360" class="node-text">Loan Amount</text>
+
+
+  <rect x="680" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="730" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="890" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="890" y="360" class="node-text">Credit History</text>
+
+
+  <rect x="1420" y="335" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1470" y="360" class="node-text">Denied</text>
+
+  <ellipse cx="1670" cy="360" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="1670" y="360" class="node-text">Loan Amount</text>
+
+
+
+  <line x1="500" y1="390" x2="460" y2="470" stroke="black" stroke-width="2" />
+  <line x1="500" y1="390" x2="540" y2="470" stroke="black" stroke-width="2" />
+  <text x="470" y="420" class="branch-text-left">5.000 and more </text>
+  <text x="530" y="420" class="branch-text-right">Below 5.000</text>
+
+
+  <line x1="890" y1="390" x2="800" y2="470" stroke="black" stroke-width="2" />
+  <line x1="890" y1="390" x2="980" y2="470" stroke="black" stroke-width="2" />
+  <text x="840" y="420" class="branch-text-left">Good</text>
+  <text x="940" y="420" class="branch-text-right">Excellent</text>
+
+
+  <line x1="1670" y1="390" x2="1610" y2="470" stroke="black" stroke-width="2" />
+  <line x1="1670" y1="390" x2="1730" y2="470" stroke="black" stroke-width="2" />
+  <text x="1640" y="420" class="branch-text-left">30.000 and more </text>
+  <text x="1700" y="420" class="branch-text-right">Below 30.000</text>
+
+
+
+  <rect x="390" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="440" y="470" class="node-text">Denied</text>
+  <rect x="500" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="550" y="470" class="node-text">Approved</text>
+
+  <rect x="940" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="990" y="470" class="node-text">Approved</text>
+
+  <ellipse cx="820" cy="470" rx="80" ry="30" stroke="black" stroke-width="2" style="fill: var(--tree-assets-fill, #ffffff);" />
+  <text x="820" y="470" class="node-text">Loan Amount</text>
+
+  <line x1="820" y1="500" x2="750" y2="570" stroke="black" stroke-width="2" />
+  <line x1="820" y1="500" x2="890" y2="570" stroke="black" stroke-width="2" />
+  <text x="770" y="535" class="branch-text-left">Below 10.000 </text>
+  <text x="870" y="535" class="branch-text-right">10.000 and more </text>
+  <rect x="700" y="570" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="750" y="595" class="node-text">Approved</text>
+  <rect x="860" y="570" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="910" y="595" class="node-text">Denied</text>
+
+
+  <rect x="1560" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-denied-fill, #ffffff);" />
+  <text x="1610" y="470" class="node-text">Denied</text>
+  <rect x="1690" y="445" width="100" height="50" stroke="black" stroke-width="2" style="fill: var(--tree-approved-fill, #ffffff);" />
+  <text x="1740" y="470" class="node-text">Approved</text>
+</svg>
+</body>
+</html>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
