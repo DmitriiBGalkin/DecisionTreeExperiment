@@ -70,7 +70,18 @@ def extract_svg(rendered_html: str, source_path: Path) -> str:
     if not match:
         raise ValueError(f"No SVG found in {source_path}")
 
-    return match.group(0)
+    svg = match.group(0)
+
+    # Normalize common lowercase SVG attributes from your files.
+    svg = re.sub(r"\bviewbox=", "viewBox=", svg, flags=re.IGNORECASE)
+    svg = re.sub(
+        r"\bpreserveaspectratio=",
+        "preserveAspectRatio=",
+        svg,
+        flags=re.IGNORECASE,
+    )
+
+    return svg
 
 
 def discover_pairs():
@@ -240,22 +251,51 @@ def crop_png_bottom_whitespace(
                 break
 
         if crop_bottom < height:
-            image.crop((0, 0, width, crop_bottom)).save(png_file)
+            cropped = image.crop((0, 0, width, crop_bottom))
+
+            # Save through a temporary file to avoid Windows file-locking issues.
+            tmp_file = png_file.with_suffix(".tmp.png")
+            cropped.save(tmp_file)
+            tmp_file.replace(png_file)
+
+            print(f"cropped PNG: {png_file.name} {width}x{height} -> {width}x{crop_bottom}")
 
 
-def export_png(browser: Path, html_file: Path, png_file: Path):
+def export_png(
+    browser: Path,
+    html_file: Path,
+    png_file: Path,
+    png_scale: float = 2.0,
+):
+    """
+    Export a high-resolution PNG.
+
+    --window-size controls the CSS layout size.
+    --force-device-scale-factor controls the output pixel density.
+
+    For example:
+      window-size 1800x900 and scale 2 gives about 3600px wide output.
+      window-size 1800x900 and scale 3 gives about 5400px wide output.
+    """
+    if png_file.exists():
+        png_file.unlink()
+
     subprocess.run(
         [
             str(browser),
             "--headless=new",
             "--disable-gpu",
-            # Deliberately tall enough for all trees; we crop the excess below.
+            "--hide-scrollbars",
+            f"--force-device-scale-factor={png_scale}",
             "--window-size=1800,900",
             f"--screenshot={str(png_file)}",
             html_file.as_uri(),
         ],
         check=True,
     )
+
+    if not png_file.exists():
+        raise RuntimeError(f"PNG was not created: {png_file}")
 
     crop_png_bottom_whitespace(png_file)
 
@@ -273,6 +313,13 @@ def main():
     )
 
     parser.add_argument("--outdir", default="updating_tree_exports")
+
+    parser.add_argument(
+        "--png-scale",
+        type=float,
+        default=2.0,
+        help="PNG resolution scale factor. Use 1, 2, or 3. Default: 2.",
+    )
 
     args = parser.parse_args()
 
@@ -317,7 +364,12 @@ def main():
         if "png" in args.format:
             if browser is None:
                 raise RuntimeError("Browser was not initialized.")
-            export_png(browser, html_file, outdir / f"Tree_{idx:02d}_pair.png")
+            export_png(
+                browser,
+                html_file,
+                outdir / f"Tree_{idx:02d}_pair.png",
+                png_scale=args.png_scale,
+            )
 
         print(f"done: Tree {idx}")
 
