@@ -20,51 +20,84 @@ LEXICON_FILES = {
 
 def load_lexicon(lang: str):
     path = LEXICON_FILES[lang]
+
     spec = importlib.util.spec_from_file_location(f"lexicon_{lang}", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Could not load lexicon module from {path}")
+
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+
     return module.Lexicon
 
 
-def find_browser():
+def find_browser() -> Path:
     candidates = [
         Path(r"C:\Program Files\Microsoft\Edge\Application\msedge.exe"),
         Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
         Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
         Path(r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"),
     ]
+
     for path in candidates:
         if path.exists():
             return path
+
     raise FileNotFoundError("Could not find Edge or Chrome.")
 
 
 def render_template(path: Path, context_dict: dict) -> str:
     source = path.read_text(encoding="utf-8")
+
     engine = Engine(debug=False)
     template = engine.from_string(source)
+
     return template.render(Context(context_dict)).strip()
+
+
+def extract_svg(rendered_html: str, source_path: Path) -> str:
+    """
+    The tree files are full HTML documents, but the pair page should only embed
+    the actual <svg>...</svg>. Embedding full HTML inside another HTML document
+    can create unpredictable spacing.
+    """
+    match = re.search(
+        r"<svg\b.*?</svg>",
+        rendered_html,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    if not match:
+        raise ValueError(f"No SVG found in {source_path}")
+
+    return match.group(0)
 
 
 def discover_pairs():
     pairs = {}
+
     for path in UPDATING_DIR.glob("Tree_*[ar].html"):
-        m = re.fullmatch(r"Tree_(\d+)([ar])\.html", path.name)
-        if not m:
+        match = re.fullmatch(r"Tree_(\d+)([ar])\.html", path.name)
+        if not match:
             continue
-        idx = int(m.group(1))
-        side = m.group(2)
+
+        idx = int(match.group(1))
+        side = match.group(2)
+
         pairs.setdefault(idx, {})[side] = path
 
     ordered = []
+
     for idx in sorted(pairs):
         if "a" in pairs[idx] and "r" in pairs[idx]:
             ordered.append((idx, pairs[idx]["a"], pairs[idx]["r"]))
+
     return ordered
 
 
 def pair_html(idx: int, a_svg: str, r_svg: str, lang: str) -> str:
     title = f"Tree {idx}" if lang == "en" else f"Baum {idx}"
+
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -160,11 +193,54 @@ def export_pdf(browser: Path, html_file: Path, pdf_file: Path):
             "--headless=new",
             "--disable-gpu",
             "--no-pdf-header-footer",
-            f"--print-to-pdf={pdf_file}",
+            f"--print-to-pdf={str(pdf_file)}",
             html_file.as_uri(),
         ],
         check=True,
     )
+
+
+def crop_png_bottom_whitespace(
+    png_file: Path,
+    tolerance: int = 6,
+    bottom_padding: int = 16,
+):
+    """
+    Chrome screenshots capture the full viewport height. This removes the empty
+    background area below the rendered page content.
+    """
+    try:
+        from PIL import Image
+    except ImportError as exc:
+        raise ImportError(
+            "PNG cropping requires Pillow. Install it with: pip install pillow"
+        ) from exc
+
+    with Image.open(png_file) as image:
+        rgb = image.convert("RGB")
+        width, height = rgb.size
+        pixels = rgb.load()
+
+        # The bottom-left pixel should be the page background color.
+        background = pixels[0, height - 1]
+
+        def differs_from_background(pixel) -> bool:
+            return any(abs(pixel[i] - background[i]) > tolerance for i in range(3))
+
+        crop_bottom = height
+
+        for y in range(height - 1, -1, -1):
+            row_has_content = any(
+                differs_from_background(pixels[x, y])
+                for x in range(width)
+            )
+
+            if row_has_content:
+                crop_bottom = min(height, y + 1 + bottom_padding)
+                break
+
+        if crop_bottom < height:
+            image.crop((0, 0, width, crop_bottom)).save(png_file)
 
 
 def export_png(browser: Path, html_file: Path, png_file: Path):
@@ -173,32 +249,41 @@ def export_png(browser: Path, html_file: Path, png_file: Path):
             str(browser),
             "--headless=new",
             "--disable-gpu",
+            # Deliberately tall enough for all trees; we crop the excess below.
             "--window-size=1800,900",
-            f"--screenshot={png_file}",
+            f"--screenshot={str(png_file)}",
             html_file.as_uri(),
         ],
         check=True,
     )
 
+    crop_png_bottom_whitespace(png_file)
+
 
 def main():
     parser = argparse.ArgumentParser()
+
     parser.add_argument("--lang", choices=["en", "de"], default="en")
+
     parser.add_argument(
         "--format",
         nargs="+",
         choices=["html", "pdf", "png"],
         default=["html"],
     )
+
     parser.add_argument("--outdir", default="updating_tree_exports")
+
     args = parser.parse_args()
 
     lexicon = load_lexicon(args.lang)
     pairs = discover_pairs()
+
     outdir = ROOT / args.outdir / args.lang
     outdir.mkdir(parents=True, exist_ok=True)
 
     browser = None
+
     if "pdf" in args.format or "png" in args.format:
         browser = find_browser()
 
@@ -213,17 +298,25 @@ def main():
     }
 
     for idx, a_path, r_path in pairs:
-        a_svg = render_template(a_path, context)
-        r_svg = render_template(r_path, context)
+        a_rendered = render_template(a_path, context)
+        r_rendered = render_template(r_path, context)
+
+        a_svg = extract_svg(a_rendered, a_path)
+        r_svg = extract_svg(r_rendered, r_path)
+
         html = pair_html(idx, a_svg, r_svg, args.lang)
 
         html_file = outdir / f"Tree_{idx:02d}_pair.html"
         html_file.write_text(html, encoding="utf-8")
 
         if "pdf" in args.format:
+            if browser is None:
+                raise RuntimeError("Browser was not initialized.")
             export_pdf(browser, html_file, outdir / f"Tree_{idx:02d}_pair.pdf")
 
         if "png" in args.format:
+            if browser is None:
+                raise RuntimeError("Browser was not initialized.")
             export_png(browser, html_file, outdir / f"Tree_{idx:02d}_pair.png")
 
         print(f"done: Tree {idx}")
