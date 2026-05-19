@@ -187,7 +187,7 @@ svg {{
         {a_svg}
       </section>
       <section class="card">
-        <h2>R</h2>
+        <h2>D</h2>
         {r_svg}
       </section>
     </div>
